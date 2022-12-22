@@ -15,7 +15,7 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 
 다음은 NCS 서비스 구성 예시입니다.
 
-![NCS_overview_01.png](https://static.toastoven.net/prod_ncs/20221215/NCS_overview_01.png)
+![NCS_overview_01.png](https://static.toastoven.net/prod_ncs/20221222/D-NCS_overview_01.png)
 
 ### 템플릿
 
