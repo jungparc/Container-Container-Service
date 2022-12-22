@@ -98,8 +98,8 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 템플릿 | 템플릿의 이름<br><ul><li>**템플릿 선택**을 클릭하여 생성된 템플릿 중에서 선택합니다.</li><li>**템플릿 생성**을 클릭하여 새로운 템플릿을 생성하여 선택합니다.</li></ul> |
 | 이름 | 워크로드의 이름. 32자 이내의 영문 소문자와 숫자, 일부 기호(`-`)만 입력할 수 있습니다. |
 | 설명 | 워크로드에 대한 설명. 255자 이내로 입력할 수 있습니다. |
-| 작업 요청 수 | 실행할 템플릿 수. 1\~100 사이의 값을 입력할 수 있습니다. |
-| 로드 밸런서 사용 여부 | 템플릿의 컨테이너 정보에 포트가 지정된 경우에만 사용 버튼이 활성화됩니다. |
+| 작업 요청 수 | 실행할 템플릿 수. 1~100 사이의 값을 입력할 수 있습니다. |
+| 로드 밸런서 사용 여부 | 템플릿의 컨테이너 정보에 포트가 지정된 경우에만 사용 버튼이 활성화됩니다. 로드 밸런서를 사용하는 경우 컨테이너에 추가한 포트만 사용할 수 있습니다. |
 | 플로팅 IP 사용 여부 | 플로팅 IP를 사용하기 위해서는 반드시 인터넷 게이트웨이가 설정된 서브넷에 연결되어 있어야 합니다.<br>외부에서 컨테이너에 접근하기 위해서는 플로팅 IP를 사용해야 합니다.<br>플로팅 IP를 사용하면 domain URL이 추가됩니다. |
 
 필요한 정보를 입력하고 **워크로드 생성**을 클릭하면 템플릿이 생성됩니다.
@@ -132,7 +132,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 워크로드 상태는 포함된 모든 컨테이너와 로드 밸런서의 상태를 고려하여 결정됩니다. 개별 컨테이너의 상태는 **실행 컨테이너** 탭에서 확인할 수 있습니다.
 
 > [참고]
-> 서브넷 생성 직후 1\~2분 동안은 로드 밸런서가 활성화되지 않을 수 있습니다.
+> 서브넷 생성 직후 1~2분 동안은 로드 밸런서가 활성화되지 않을 수 있습니다.
 
 #### **실행 컨테이너**
 
@@ -198,15 +198,16 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 * 템플릿에 기술되는 컨테이너들은 각각 서로 다른 컨테이너 포트를 사용하도록 설정해야 합니다.
 * 컨테이너 포트에 직접 연결하는 경우, 보안 그룹이 잘 설정되어 있는지 확인해야 합니다.
 * 컨테이너 포트를 지정하지 않은 템플릿을 사용하는 경우 로드 밸런서를 생성할 수 없습니다.
+* 로드 밸런서를 사용하는 경우 컨테이너에 추가되지 않은 포트는 보안 그룹에 포트를 추가하여도 사용할 수 없습니다.
 * 프라이빗 레지스트리에 존재하는 컨테이너 이미지를 활용하여 컨테이너를 생성할 수 있습니다. 지원되는 소스 레지스트리 유형과 URL, Access ID, Access Secret은 아래와 같습니다.
 
-| 소스 레지스트리 유형 | URL | Access ID | Access Secret |
-| --- | --- | --- | --- |
-| Azure Container Registry | `https://$REGISTRY_NAME.azurecr.io` | 액세스 키 사용자 이름 | 액세스 키 암호 |
-| Google Cloud Container Registry | `https://$REGION` | \_json\_key | 서비스 계정의 비공개 키(JSON 유형) |
-| Docker Hub | `https://hub.docker.com` | Username | Password |
-| Harbor | `Harbor 주소` | Username | Password |
-| Quay | `https://quay.io` | json\_file | {<br>"account\_name": "$사용자 계정",<br>"docker\_cli\_password": "$Quay에서 생성한 암호화된 Password"<br>} |
+| 소스 레지스트리 유형 | Access ID | Access Secret |
+| --- | --- | --- |
+| Azure Container Registry | 액세스 키 사용자 이름 | 액세스 키 암호 |
+| Google Cloud Container Registry | \_json\_key | 서비스 계정의 비공개 키(JSON 유형) |
+| Docker Hub | Username | Password |
+| Harbor | Username | Password |
+| Quay | json\_file | {<br>"account\_name": "$사용자 계정",<br>"docker\_cli\_password": "$Quay에서 생성한 암호화된 Password"<br>} |
 
 * 컨테이너 이미지 내에서 컨테이너가 서비스를 위해 사용하기로 결정한 포트와 템플릿의 컨테이너 포트는 일치해야 합니다.
     * 80 포트를 서비스하기로 지정된 기본 nginx 컨테이너 이미지를 이용하는 경우 컨테이너 포트에 80을 지정해야 합니다. 컨테이너 이미지의 내용을 변경하여 다른 포트를 서비스하도록 설정한 경우 해당 포트 번호를 지정해야 합니다.
@@ -217,3 +218,12 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 * 자세한 사항은 아래 링크를 참고하십시오.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
+
+## 문제 해결 가이드
+
+NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결하는 방법을 설명합니다.
+
+### 워크로드
+
+* 워크로드가 정상적으로 생성되었고, 컨테이너도 정상적으로 실행 중일 때 **FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs** 타입의 컨테이너 이벤트가 발생하는 현상
+    * 해당 이벤트는 NCS에서 사용하기 위한 Network Interface가 생성 완료되지 않은 경우 발생합니다. 템플릿 생성 직후 워크로드를 생성하거나 워크로드를 대량 생성하는 경우 일시적으로 발생하는 이벤트로 일정 시간이 경과하면 해당 이벤트는 발생하지 않습니다.
