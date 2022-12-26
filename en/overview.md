@@ -15,7 +15,7 @@ You can use this service to run containers without configuring container executi
 
 The following image shows an example of NCS service configuration.
 
-![NCS_overview_01.png](https://static.toastoven.net/prod_ncs/20221215/NCS_overview_01.png)
+![NCS_overview_01.png](https://static.toastoven.net/prod_ncs/20221222/D-NCS_overview_01.png)
 
 ### Template
 
