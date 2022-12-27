@@ -1,4 +1,4 @@
-### December 27, 2022
+### 2022. 12. 27.
 
-#### Release of a New Service
-* You can create and manage containers in the console.
+#### 新規サービスリリース
+* コンソールからコンテナを作成し、管理できます。
