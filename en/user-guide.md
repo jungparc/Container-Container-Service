@@ -13,7 +13,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
 | Descriptions | Template Description, you c |
 | Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
-| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/ko/user-guide/#user-access-keysecret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
+| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#user-access-keysecret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
 | Registry Type | You can select from type of Registry, Public or Private. |
 | Image URL | Information about Container image, can be entered maximum 255 characters of alphabetic characters and numbers, only (`-`, `_`, `.`, `,` `/`, `@`, and `:`. |
 | Registry ID | ID used for Private Registry authentication |
@@ -27,7 +27,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Environment Variables | Environment variables to set in Container |
 | Storage | Storage connected to Container |
 | Storage Name | Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters. |
-| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/ko/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
+| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/en/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
 | Subnet | Subnets defined in VPC that connect to Instances |
 
 Enter the required information and click **Create Template** button to create Template.
