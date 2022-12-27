@@ -1,231 +1,231 @@
-## Container > NHN Container Service(NCS) > User Guide
+## Container > NHN Container Service(NCS) > 使用ガイド
 
-## Template
+## テンプレート
 
-Template is a service that defines resources, such as Containers, Networks, etc., which needed to run Workload.
+テンプレートは、ワークロードの実行に必要なコンテナ、ネットワークなどのリソースを定義するサービスです。
 
-### Create Template
+### テンプレートの作成
 
-You have to create Template before you can use NHN Container Service (NCS). Go to **Container > NHN Container Service (NCS)** page, click **Template** tab, and then click **Create Template** button. The following items are required to create Template.
+NHN Container Service(NCS)を使用するには、先にテンプレートを作成する必要があります。**Container** > **NHN Container Service(NCS)**ページで**テンプレート**タブをクリックし、**テンプレートの作成**をクリックします。テンプレートの作成に必要な項目は次のとおりです。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
-| Descriptions | Template Description, you c |
-| Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
-| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#user-access-keysecret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
-| Registry Type | You can select from type of Registry, Public or Private. |
-| Image URL | Information about Container image, can be entered maximum 255 characters of alphabetic characters and numbers, only (`-`, `_`, `.`, `,` `/`, `@`, and `:`. |
-| Registry ID | ID used for Private Registry authentication |
-| Registry Password | Password used for Private Registry authentication |
-| Memory | Memory to assigned to Container |
-| Port | Ports used in Containers |
-| CPU | Enter the number of CPUs that you want to assign to Container, the number can be entered in units of 0.25 and between 0.25 and 16. |
-| GPU | Enter the number of GPUs you want to assign to Container, the number can be entered in units of 1, and the number between 0 and 2. |
-| Order | Commands to be executed when Container is started, override ENTRYPPOINT specified in the image. |
-| Task Directory | Task Directory of Container takes precedence over the WORKDIR specified in the image. |
-| Environment Variables | Environment variables to set in Container |
-| Storage | Storage connected to Container |
-| Storage Name | Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters. |
-| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/en/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
-| Subnet | Subnets defined in VPC that connect to Instances |
+| テンプレート名 | テンプレートの名前。32文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
+| 説明 | テンプレートの説明。255文字以内で入力できます。|
+| コンテナ名 | コンテナの名前。253文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
+| コンテナレジストリ | コンテナイメージのレジストリ<br><ul><li>NHN Container Registry(NCR)使い方は[NCR使用ガイド](/Container/NCR/ja/user-guide/#user-access-keysecret-key)をご覧ください。</li><li>Docker Hubまたはその他レジストリ使用時レジストリタイプを選択する必要があります。</li></ul> |
+| レジストリタイプ | レジストリのタイプ。パブリックまたはプライベートを選択できます。 |
+| イメージURL | コンテナイメージの情報。255文字以内の英字小文字と数字、一部記号(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)のみ入力できます。|
+| レジストリID | プライベートレジストリ認証に使用されるID |
+| レジストリパスワード | プライベートレジストリ認証に使用されるパスワード |
+| メモリ | コンテナに割り当てるメモリ |
+| ポート | コンテナで使用するポート |
+| CPU | コンテナに割り当てるCPU数。0.25～16の間の数を0.25個単位で入力できます。|
+| GPU | コンテナに割り当てるGPU数。0～2の間の数を1個単位で入力できます。|
+| コマンド | コンテナが起動する時に実行されるコマンド。イメージに指定されたENTRYPOINTより優先されます。|
+| 作業ディレクトリ | コンテナの作業ディレクトリ。イメージに指定されたWORKDIRより優先されます。|
+| 環境変数 | コンテナに設定する環境変数 |
+| ストレージ | コンテナに接続するストレージ |
+| ストレージ名 | ストレージの名前。63文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
+| NASストレージ接続パス | コンテナに接続するストレージの接続情報。ストレージはコンテナの`/mnt/$ストレージ_名前`にマウントされます。<br><ul><li>NASストレージ使用。**Storage** > **NAS**ページで接続するNASストレージの接続情報を入力します。<ul><li>NASストレージの使い方は[NAS使用ガイド](/Storage/NAS/ja/console-guide/)をご覧ください。</li></ul></li><li>別途構築されたNFSサーバー使用。NFSサーバーのマウントポイントを入力します。<ul><li>NFSv3バージョンのみ使用できます。</li></ul></li></ul> |
+| サブネット | VPCに定義されたサブネットのうち、インスタンスに接続するサブネット |
 
-Enter the required information and click **Create Template** button to create Template.
+必要な情報を入力し、**テンプレートの作成**をクリックするとテンプレートが作成されます。
 
-> [Note]
-> When creating Template to run workloads quickly, it creates Network Interface in subnet band in advance.
+> [参考]
+> ワークロードを速く実行できるようにテンプレートを作成すると、サブネット帯域のネットワークインタフェースをあらかじめ作成します。
 
-> [Note]
-> You can add only one port of the same protocol to Template.
+> [参考]
+> テンプレートに同じプロトコルのポートは1つのみ追加できます。
 
-> [Note]
-> Only NAS storage that uses the same VPC as the template can be used.
-> You can connect maximum three Storages.
+> [参考]
+> テンプレートと同じVPCを使用するNASストレージのみ使用できます。
+> ストレージは最大3つ接続できます。
 
-### Retrieve Template
+### テンプレートの照会
 
-You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the total of Container resources.
+作成したテンプレートは **Container** > **NHN Container Service(NCS)** ページの**テンプレート**タブで確認できます。テンプレートリストにはコンテナリソースの合計が表示されます。
 
-### Basic Information
+### 基本情報
 
-You can check specific Template to view details from **Basic Information** tab.
+特定テンプレートをクリックして**基本情報**タブで詳細情報を確認できます。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Name | Template name and ID  |
-| Descriptions | Template Description |
-| Container | Number of Containers defined in Template |
-| CPU | Number of CPUs in Containers defined in the template added |
-| GPU | Number of GPUs in Containers defined in the template added |
-| Date of Creation | Creation date of Template  |
-| VPC | VPC set to Template |
-| Subnet | Subnet set to Template |
+| 名前 | テンプレートの名前とID |
+| 説明 | テンプレートの説明 |
+| コンテナ | テンプレートに定義されたコンテナ数 |
+| CPU | テンプレートに定義されたコンテナのCPU数を加えた数 |
+| GPU | テンプレートに定義されたコンテナのGPU数を加えた数 |
+| 作成日 | テンプレートが作成された日付 |
+| VPC | テンプレートに設定されたVPC |
+| サブネット | テンプレートに設定されたサブネット |
 
-### Container
+### コンテナ
 
-After clicking specific Template, you can go to **Container** tab to check the list of Containers have added to Template. You can select a specific container from the container list to check its details.
+特定テンプレートをクリックした後、**コンテナ**タブに移動してテンプレートに追加したコンテナリストを確認できます。コンテナリストから特定コンテナを選択して詳細情報を確認できます。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Containers Name | Container Name |
-| Image URL | Container Image Information  |
-| Memory | Memory assigned to Container |
-| CPU | Number of CPU assigned to Container |
-| GPU | Number of GPU assigned to Container |
-| Port | Ports used in Containers |
-| Command | Command to run when container starts |
-| Task Directory | Task Directory of Container |
-| Environment Variables | Environment variables set in Container |
-| Storage | Storage connected to Container |
+| コンテナ名 | コンテナの名前 |
+| イメージURL | コンテナイメージの情報 |
+| メモリ | コンテナに割り当てられたメモリ |
+| CPU | コンテナに割り当てられたCPU数 |
+| GPU | コンテナに割り当てられたGPU数 |
+| ポート | コンテナで使用するポート |
+| コマンド | コンテナ起動時に実行されるコマンド |
+| 作業ディレクトリ | コンテナの作業ディレクトリ |
+| 環境変数 | コンテナに設定された環境変数 |
+| ストレージ | コンテナに接続されたストレージ |
 
-### Delete Template
+### テンプレートの削除
 
-Select the template you want to delete and click **Delete Template** button to delete it.
+削除するテンプレートを選択し、**テンプレートの削除**をクリックすると削除されます。
 
-> [Note]
-> You cannot delete Template if there is a workload using the template.
+> [参考]
+> 該当テンプレートを使用するワークロードが存在する場合はテンプレートを削除できません。
 
-## Workload
+## ワークロード
 
-Service that executes containers using the Template that you defined.
+定義したテンプレートを利用してコンテナを実行するサービスです。
 
-### Create Workload
+### ワークロードの作成
 
-Go to **Container > NHN Container Service (NCS) ** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
+**Container** > **NHN Container Service(NCS)** ページで**ワークロード**タブをクリックし、**ワークロードの作成**をクリックします。ワークロードの作成に必要な項目は次のとおりです。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Template | Template Name<br><ul><li>Click **Select Template** button to select from Templates created.</li><li>Click **Create Template** button to create and select new Template.</li></ul> |
-| Name | Workload Name, you can only enter lowercase letters, numbers, and '-' withi maximum 32 characters. |
-| Descriptions | Description of Workload. You can enter maximum 255 characters. |
-| Number of tasks requested.  | Number of templates to run, you can enter values between 1 and 100. |
-| Whether to use Load Balancer or not | The Use button is active only when the port is specified in Container information in Template. |
-| Whether to use Floating IP or not | To use floating IP, Internet Gateway have to be connected to the configured Subnet.<br>Floating IP have to be used to access containers from outside.<br>With floating IP, the domain URL is added. |
+| テンプレート | テンプレートの名前<br><ul><li>**テンプレートの選択**をクリックして作成されたテンプレートの中から選択します。</li><li>**テンプレートの作成**をクリックして新しいテンプレートを作成して選択します。</li></ul> |
+| 名前 | ワークロードの名前。32文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
+| 説明 | ワークロードの説明。255文字以内で入力できます。|
+| 作業リクエスト数 | 実行するテンプレート数。1～100の間の値を入力できます。|
+| ロードバランサーを使用するかどうか | テンプレートのコンテナ情報にポートが指定されている場合にのみ使用ボタンが有効になります。ロードバランサーを使用する場合、コンテナに追加したポートのみ使用できます。|
+| Floating IPを使用するかどうか | Floating IPを使用するには、必ずインターネットゲートウェイが設定されたサブネットに接続されている必要があります。<br>外部からコンテナにアクセスするにはFloating IPを使用する必要があります。<br>Floating IPを使用するとdomain URLが追加されます。 |
 
-Enter the required information and click **Create Workload** button to create Template.
+必要な情報を入力し、**ワークロードの作成**をクリックするとテンプレートが作成されます。
 
-> [Note]
-> Load Balancers are not available in Legacy network environments.
+> [参考]
+> レガシーネットワーク環境ではロードバランサーを使用できません。
 
-### Retrieve Workload
+### ワークロードの照会
 
-You can check Workloads you create on **Workloads** tab on **Container > NHN Container Service (NCS)**.
+作成したワークロードは**Container** > **NHN Container Service(NCS)**ページの**ワークロード**タブで確認できます。
 
-### Basic Information
+### 基本情報
 
-You can click on specific Workload to view details from the **Basic Information** tab.
+特定ワークロードをクリックして**基本情報**タブで詳細情報を確認できます。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Name | Workload name and ID |
-| Descriptions | Workload description |
-| Template | Name of template used |
-| Number of tasks requested.  | Number of Templates to run |
-| Number of tasks executed | Number of Templates executed |
-| Created date | Date of Workload creation |
-| VPC | VPC set to Workload |
-| Subnet | Subnet set to Workload |
-| Security Group | Name of Security Group set to Workload |
-| Load Balancer | Whether to use Load Balancer or not |
+| 名前 | ワークロードの名前とID |
+| 説明 | ワークロードの説明 |
+| テンプレート | 使用されたテンプレートの名前 |
+| 作業リクエスト数 | 実行するテンプレートの数 |
+| 作業実行数 | 実行されたテンプレートの数 |
+| 作成日 | ワークロードが作成された日付 |
+| VPC | ワークロードに設定されたVPC |
+| サブネット | ワークロードに設定されたサブネット |
+| セキュリティグループ | ワークロードに設定されたセキュリティグループの名前 |
+| ロードバランサー | ロードバランサーを使用するかどうか |
 
-> [Note]
-> Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab. 
+> [参考]
+> ワークロードの状態は、含まれているすべてのコンテナとロードバランサーの状態を考慮して決定されます。個別コンテナの状態は**実行コンテナ**タブで確認できます。
 
-> [Note]
-> Load Balancer may not be active for one to two minutes immediately after Subnet creation.
+> [参考]
+> サブネット作成直後、1～2分間はロードバランサーが有効にならないことがあります。
 
-#### **Running Container**
+#### **実行コンテナ**
 
-You can view Container details by clicking a specific workload and then clicking Container on **Running Container** tab.
+特定ワークロードをクリックした後、**実行コンテナ**タブでコンテナをクリックしてコンテナ詳細情報を確認できます。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Containers Name | Container Name |
-| Image URL | Container Image Information  |
-| IP | IP assigned to Container |
-| Status | Status of Container |
-| The number of Restart | The number of time that Container restarted.  |
-| Memory | Memory assigned to Container |
-| CPU | Number of CPU assigned to Container |
-| GPU | Number of GPU assigned to Container |
-| Port | Ports used in Containers |
-| Command | Command to run when container starts |
-| Task Directory | Task Directory of Container |
-| Environment Variables | Environment variables set in Container |
-| Storage | Storage connected to Container |
-| Date of Restart | Date Container restarted |
+| コンテナ名 | コンテナの名前 |
+| イメージURL | コンテナイメージの情報 |
+| IP | コンテナに割り当てられたIPアドレス |
+| 状態 | コンテナの状態 |
+| 再起動回数 | コンテナが再起動した回数 |
+| メモリ | コンテナに割り当てられたメモリ |
+| CPU | コンテナに割り当てられたCPUの数 |
+| GPU | コンテナに割り当てられたGPUの数 |
+| ポート | コンテナで使用するポート |
+| コマンド | コンテナ起動時に実行されるコマンド |
+| 作業ディレクトリ | コンテナの作業ディレクトリ |
+| 環境変数 | コンテナに設定された環境変数 |
+| ストレージ | コンテナに接続されたストレージ |
+| 開始日 | コンテナが起動した日付 |
 
-#### **Event**
+#### **イベント**
 
-After clicking on specific Workload, you can view Event information from Container on **Event** tab. You can view events by status of Events by clicking Select Event Status.
+特定ワークロードをクリックし、**イベント**タブでコンテナにて発生したイベント情報を確認できます。**イベント状態選択**をクリックしてイベントの状態ごとにイベントを確認できます。
 
-| Items | Descriptions |
+| 項目 | 説明 |
 | --- | --- |
-| Status | Status of Event |
-| Type | Type of Event |
-| Descriptions | Event Description |
-| Date of first occurrence of event | Date of first occurrence of event |
-| Date of last occurrence of event | Date of last occurrence of event |
-| Number of occurrences | Number of times event occurred |
+| 状態 | イベントの状態 |
+| タイプ | イベントのタイプ |
+| 説明 | イベントの説明 |
+| イベント最初の発生日時 | イベントの最初の発生日時 |
+| イベント最終発生日時 | イベントの最終発生日時 |
+| 発生数 | イベントが発生した回数 |
 
-> [Note]
-> Events are only kept for maximum 1 hour, so information from 1 hour earlier cannot be checked.
+> [参考]
+> イベントは最大1時間のみ維持され、1時間前の情報は確認できません。
 
-#### **Log**
+#### **ログ**
 
-After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
+特定ワークロードをクリックした後、**ログ**タブでコンテナのログを確認できます。時間を指定しない場合、現在時点から5分前のログが照会されます。
 
-> [Note]
-> Logs are kept for maximum two months.
+> [参考]
+> ログは最大2か月間保存されます。
 
-### Delete Workload
+### ワークロードの削除
 
-Select a workload you want to delete and click **Delete Workload** button to proceed with the deletion.
+削除するワークロードを選択し、**ワークロードの削除**をクリックすると削除されます。
 
-## Other considerations
+## 参考事項
 
-### Region
+### リージョン
 
-* NCS service is only available in KR1 region.
+* NCSサービスはKR1リージョンでのみ使用できます。
 
-### Limitation of Numbers
+### 数の制約
 
-* Template can describe maximum 10 number of containers.
-* Workload can describe maximum 10 number of executions.
+* テンプレートには最大10個のコンテナを記述できます。
+* ワークロードには最大10個の実行数を指定できます。
 
-### Template/Container
+### テンプレート/コンテナ
 
-* Containers described in Template must be configured to use different container ports.
-* If you connect directly to Container Port, make sure that Security Group is well set up.
-* You cannot create Load Balancer if you use Template that does not specify Container Port.
-* You can create containers by utilizing Container images that exist in the following Private Registry.
-* Containers can be created by using container images that exist in private registries. The supported source registry types, URLs, Access IDs, and Access Secrets are as follows.
+* テンプレートに記述されているコンテナは、それぞれ異なるコンテナポートを使用するように設定する必要があります。
+* コンテナポートに直接接続する場合は、セキュリティグループが正しく設定されていることを確認する必要があります。
+* コンテナポートを指定していないテンプレートを使用する場合、ロードバランサーを作成できません。
+* ロードバランサーを使用する場合、コンテナに追加されていないポートはセキュリティグループにポートを追加しても使用できません。
+* プライベートレジストリに存在するコンテナイメージを活用してコンテナを作成できます。サポートされるソースレジストリタイプとURL、Access ID、Access Secretは次のとおりです。
 
-| Source Registry Type | Access ID | Access Secret |
+| ソースレジストリタイプ | Access ID | Access Secret |
 | --- | --- | --- |
-| Azure Container Registry | Access Key User Name | Access Key Password |
-| Google Cloud Container Registry | \_json\_key | Private key of service account (JSON type) |
+| Azure Container Registry | アクセスキーユーザー名 | アクセスキー暗号 |
+| Google Cloud Container Registry | \_json\_key | サービスアカウントの秘密鍵(JSONタイプ) |
 | Docker Hub | Username | Password |
 | Harbor | Username | Password |
-| Quay | json\_file | {<br>"account\_name": "$User account",<br>"docker\_cli\_password": "Encrypted Password generated by $Quay"<br>} |
+| Quay | json\_file | {<br>"account\_name": "$ユーザーアカウント",<br>"docker\_cli\_password": "$Quayで作成した暗号化されたPassword"<br>} |
 
-* Within Container image, you must match Container Port in the Template with the Port that the Container decides to use for service.
-    * If you use default nginx Container image that is designated to serve 80 ports, you have to specify 80 for the Container Port. If you change the content of Container image and set it up to serve another Port, you have to specify that Port number.
+* コンテナイメージ内でコンテナがサービスのために使用することに決定したポートとテンプレートのコンテナポートは一致する必要があります。
+    * 80ポートをサービスすることに指定された基本nginxコンテナイメージを利用する場合、コンテナポートに80を指定する必要があります。コンテナイメージの内容を変更して他のポートをサービスするように設定した場合は、そのポート番号を指定する必要があります。
 
 ### GPU
 
-* Provides MIG(Multi Instance GPU of A100 40GB Card.
-* For details, refer to the following links.
+* A100 40GBカードのMIG (multi instance GPU)を提供します。
+* 詳細については、下記のリンクをご覧ください。
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
 
-## Guide to Problem Solving
+## トラブルシューティング
 
-Explain how to solve various problems that may occur while using the NCS service
+NCSサービスを使用しながら経験する可能性があるさまざまな問題を解決する方法を説明します。
 
-### Workload
+### ワークロード
 
-* A container event with **FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs** type occurs when the workload is created normally, and the container is running properly
-    * This event occurs when Network Interface for use in NCS is not created. This is a temporary event that occurs when a workload is created immediately after template creation or when a workload is created in bulk. The event does not occur after a certain amount of time has elapsed.
-* A container event with **IpAddressGenerationFailure** type occurs when the workload is pending
-    * This event occurs when there are no more IP addresses available in the specified subnet. You must create Template by changing the CIDR of the subnet or using other subnet.
+* ワークロードが正常に作成され、コンテナも正常に実行中の時に**FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs**タイプのコンテナイベントが発生する現象
+    * 当該イベントはNCSで使用するためのNetwork Interfaceが作成完了していない場合に発生します。テンプレート作成直後にワークロードを作成したり、ワークロードを大量作成したりする場合に一時的に発生するイベントで、一定時間が経過すると当該イベントは発生しません。
+* ワークロードがPending状態の時に**IpAddressGenerationFailure**タイプのコンテナイベントが発生する現象
+    * 当該イベントは指定したサブネットに使用できるIPアドレスが存在しない場合に発生します。サブネットのCIDRを変更するか、他のサブネットを使用してテンプレートを作成する必要があります。
