@@ -13,7 +13,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
 | Descriptions | Template Description, you c |
 | Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
-| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#user-access-keysecret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
+| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
 | Registry Type | You can select from type of Registry, Public or Private. |
 | Image URL | Information about Container image, can be entered maximum 255 characters of alphabetic characters and numbers, only (`-`, `_`, `.`, `,` `/`, `@`, and `:`. |
 | Registry ID | ID used for Private Registry authentication |
