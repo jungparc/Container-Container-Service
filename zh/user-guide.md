@@ -13,7 +13,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
 | Descriptions | Template Description, you c |
 | Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
-| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/zh/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
+| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
 | Registry Type | You can select from type of Registry, Public or Private. |
 | Image URL | Information about Container image, can be entered maximum 255 characters of alphabetic characters and numbers, only (`-`, `_`, `.`, `,` `/`, `@`, and `:`. |
 | Registry ID | ID used for Private Registry authentication |
@@ -27,7 +27,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Environment Variables | Environment variables to set in Container |
 | Storage | Storage connected to Container |
 | Storage Name | Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters. |
-| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/zh/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
+| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/en/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
 | Subnet | Subnets defined in VPC that connect to Instances |
 
 Enter the required information and click **Create Template** button to create Template.
@@ -46,7 +46,7 @@ Enter the required information and click **Create Template** button to create Te
 
 You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the total of Container resources.
 
-### Basic Information
+#### Basic Information
 
 You can check specific Template to view details from **Basic Information** tab.
 
@@ -61,7 +61,7 @@ You can check specific Template to view details from **Basic Information** tab.
 | VPC | VPC set to Template |
 | Subnet | Subnet set to Template |
 
-### Container
+#### Container
 
 After clicking specific Template, you can go to **Container** tab to check the list of Containers have added to Template. You can select a specific container from the container list to check its details.
 
@@ -111,7 +111,7 @@ Enter the required information and click **Create Workload** button to create Te
 
 You can check Workloads you create on **Workloads** tab on **Container > NHN Container Service (NCS)**.
 
-### Basic Information
+#### Basic Information
 
 You can click on specific Workload to view details from the **Basic Information** tab.
 
@@ -129,12 +129,12 @@ You can click on specific Workload to view details from the **Basic Information*
 | Load Balancer | Whether to use Load Balancer or not |
 
 > [Note]
-> Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab. 
+> Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
 
 > [Note]
 > Load Balancer may not be active for one to two minutes immediately after Subnet creation.
 
-#### **Running Container**
+#### Running Container
 
 You can view Container details by clicking a specific workload and then clicking Container on **Running Container** tab.
 
@@ -155,7 +155,20 @@ You can view Container details by clicking a specific workload and then clicking
 | Storage | Storage connected to Container |
 | Date of Restart | Date Container restarted |
 
-#### **Event**
+#### Monitoring
+
+After clicking a specific workload, you can find the resource usage of containers on the **Monitoring** tab. Container metrics are collected every 15 seconds and kept for up to 1 year.
+Items provided with monitoring are as follows.
+
+| Item | Unit | Description |
+| --- | --- | --- |
+| CPU Usage | % | Usage is provided based on CPU assigned to containers. |
+| Memory Usage| % | Usage is provided based on Memory assigned to containers. |
+| Network Data Trasmission | bps | Network data trasmission information is provided based on workload operation|
+| Network Data Reception | bps | Network data reception information is provided based on workload operation |
+| Disk Usage | % | Usage of NAS storage added to the container is provided. |
+
+#### Event
 
 After clicking on specific Workload, you can view Event information from Container on **Event** tab. You can view events by status of Events by clicking Select Event Status.
 
@@ -171,7 +184,7 @@ After clicking on specific Workload, you can view Event information from Contain
 > [Note]
 > Events are only kept for maximum 1 hour, so information from 1 hour earlier cannot be checked.
 
-#### **Log**
+#### Log
 
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
 
