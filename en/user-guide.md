@@ -155,6 +155,19 @@ You can view Container details by clicking a specific workload and then clicking
 | Storage | Storage connected to Container |
 | Date of Restart | Date Container restarted |
 
+#### Monitoring
+
+After clicking a specific workload, you can find the resource usage of containers on the **Monitoring** tab. Container metrics are collected every 15 seconds and kept for up to 1 year.
+Items provided with monitoring are as follows.
+
+| Item | Unit | Description |
+| --- | --- | --- |
+| CPU Usage | % | Usage is provided based on CPU assigned to containers. |
+| Memory Usage| % | Usage is provided based on Memory assigned to containers. |
+| Network Data Trasmission | bps | Network data trasmission information is provided based on workload operation|
+| Network Data Reception | bps | Network data reception information is provided based on workload operation |
+| Disk Usage | % | Usage of NAS storage added to the container is provided. |
+
 #### **Event**
 
 After clicking on specific Workload, you can view Event information from Container on **Event** tab. You can view events by status of Events by clicking Select Event Status.
