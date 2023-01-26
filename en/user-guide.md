@@ -46,7 +46,7 @@ Enter the required information and click **Create Template** button to create Te
 
 You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the total of Container resources.
 
-### Basic Information
+#### Basic Information
 
 You can check specific Template to view details from **Basic Information** tab.
 
@@ -61,7 +61,7 @@ You can check specific Template to view details from **Basic Information** tab.
 | VPC | VPC set to Template |
 | Subnet | Subnet set to Template |
 
-### Container
+#### Container
 
 After clicking specific Template, you can go to **Container** tab to check the list of Containers have added to Template. You can select a specific container from the container list to check its details.
 
@@ -111,7 +111,7 @@ Enter the required information and click **Create Workload** button to create Te
 
 You can check Workloads you create on **Workloads** tab on **Container > NHN Container Service (NCS)**.
 
-### Basic Information
+#### Basic Information
 
 You can click on specific Workload to view details from the **Basic Information** tab.
 
@@ -134,7 +134,7 @@ You can click on specific Workload to view details from the **Basic Information*
 > [Note] 
 > Load Balancer may not be active for one to two minutes immediately after Subnet creation.
 
-#### **Running Container**
+#### Running Container
 
 You can view Container details by clicking a specific workload and then clicking Container on **Running Container** tab.
 
@@ -155,7 +155,20 @@ You can view Container details by clicking a specific workload and then clicking
 | Storage | Storage connected to Container |
 | Date of Restart | Date Container restarted |
 
-#### **Event**
+#### Monitoring
+
+After clicking a specific workload, you can find the resource usage of containers on the **Monitoring** tab. Container metrics are collected every 15 seconds and kept for up to 1 year.
+Items provided with monitoring are as follows.
+
+| Item | Unit | Description |
+| --- | --- | --- |
+| CPU Usage | % | Usage is provided based on CPU assigned to containers. |
+| Memory Usage| % | Usage is provided based on Memory assigned to containers. |
+| Network Data Trasmission | bps | Network data trasmission information is provided based on workload operation|
+| Network Data Reception | bps | Network data reception information is provided based on workload operation |
+| Disk Usage | % | Usage of NAS storage added to the container is provided. |
+
+#### Event
 
 After clicking on specific Workload, you can view Event information from Container on **Event** tab. You can view events by status of Events by clicking Select Event Status.
 
@@ -171,7 +184,7 @@ After clicking on specific Workload, you can view Event information from Contain
 > [Note] 
 > Events are only kept for maximum 1 hour, so information from 1 hour earlier cannot be checked.
 
-#### **Log**
+#### Log
 
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
 

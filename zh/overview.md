@@ -10,6 +10,7 @@ You can use this service to run containers without configuring container executi
 * Containers can utilize Online NAS as Volume, or use NFSv3 Mount Points accessible from VPC as Volume.
 * You can configure containers that use GPUs.
 * You can connect Load Balancer to containers. You can expose container services outside through the created Floating IP and Domain.
+* You can monitor the CPU, Memory, network transmission and reception, and storage of containers.
 
 ## Configuration and Terms
 
