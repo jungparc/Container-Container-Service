@@ -254,14 +254,14 @@ NCSを利用するには、次のリソースに対するロールが必要で�
 ### NCS最小ロール付与
 本番環境では必要なロールのみ追加することを推奨します。NCSサービスを利用するための最小限のロールは次のとおりです。
 
-| 機能 | Infrastructrue NCS ADMIN | Infrastructrue NCS Member | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
-| --- | --- | --- | --- | --- | --- |
-| テンプレートの照会 |  | O | O |  |  |
-| テンプレートの作成および変更 | O |  | O | O |  |
-| テンプレートの削除 | O |  |  | O |  |
-| ワークロードの照会 |  | O | O |  |  |
-| ワークロードの作成および変更 | O |  |  | O | O |
-| ワークロードの削除 | O |  |  | O | O |
+| 機能 | Infrastructrue NCS ADMIN | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
+| --- | --- | --- | --- | --- |
+| テンプレートの照会 |  | O |  |  |
+| テンプレートの作成および変更 | O | O | O |  |
+| テンプレートの削除 | O |  | O |  |
+| ワークロードの照会 |  | O |  |  |
+| ワークロードの作成および変更 | O |  | O | O |
+| ワークロードの削除 | O |  | O | O |
 
 ## 参考事項
 
