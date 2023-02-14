@@ -257,7 +257,7 @@ NCSを利用するには、次のリソースに対するロールが必要で�
 | 機能 | Infrastructrue NCS ADMIN | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
 | テンプレートの照会 |  | O |  |  |
-| テンプレートの作成および変更 | O | O | O |  |
+| テンプレートの作成 | O | O | O |  |
 | テンプレートの削除 | O |  | O |  |
 | ワークロードの照会 |  | O |  |  |
 | ワークロードの作成および変更 | O |  | O | O |
