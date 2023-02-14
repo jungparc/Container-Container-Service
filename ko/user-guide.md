@@ -258,7 +258,7 @@ NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
 | 기능 | Infrastructrue NCS ADMIN | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
 | 템플릿 조회 |  | O |  |  |
-| 템플릿 생성 및 변경 | O | O | O |  |
+| 템플릿 생성 | O | O | O |  |
 | 템플릿 삭제 | O |  | O |  |
 | 워크로드 조회 |  | O |  |  |
 | 워크로드 생성 및 변경 | O |  | O | O |
