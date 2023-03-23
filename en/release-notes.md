@@ -1,5 +1,10 @@
 ## Container > NHN Container Service(NCS) > Release Notes
 
+### March 28, 2023
+
+#### Feature Updates
+* Enhanced service reliability by improving the internal structure.
+
 #### February 28, 2023
 
 ### Feature Updates

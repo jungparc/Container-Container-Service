@@ -21,7 +21,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Memory | Memory to assigned to Container |
 | Port | Ports used in Containers |
 | CPU | Enter the number of CPUs that you want to assign to Container, the number can be entered in units of 0.25 and between 0.25 and 16. |
-| GPU | Enter the number of GPUs you want to assign to Container, the number can be entered in units of 1, and the number between 0 and 2. |
+| GPU | Enter the number of GPUs you want to assign to Container, the number can be entered in units of 1, and the number between 0 and 2. (GPUs have a memory unit of 5 GB.) |
 | Order | Commands to be executed when Container is started, override ENTRYPPOINT specified in the image. |
 | Task Directory | Task Directory of Container takes precedence over the WORKDIR specified in the image. |
 | Environment Variables | Environment variables to set in Container |
@@ -189,7 +189,7 @@ After clicking on specific Workload, you can view Event information from Contain
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
 
 > [Note] 
-> Logs are kept for maximum two months.
+> Logs are limited to a maximum size of 5 GB and kept for 2 months.
 
 #### Execution History
 
