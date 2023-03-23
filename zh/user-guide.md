@@ -13,7 +13,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
 | Descriptions | Template Description, you c |
 | Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
-| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/zh/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
+| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
 | Registry Type | You can select from type of Registry, Public or Private. |
 | Image URL | Information about Container image, can be entered maximum 255 characters of alphabetic characters and numbers, only (`-`, `_`, `.`, `,` `/`, `@`, and `:`. |
 | Registry ID | ID used for Private Registry authentication |
@@ -21,13 +21,13 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Memory | Memory to assigned to Container |
 | Port | Ports used in Containers |
 | CPU | Enter the number of CPUs that you want to assign to Container, the number can be entered in units of 0.25 and between 0.25 and 16. |
-| GPU | Enter the number of GPUs you want to assign to Container, the number can be entered in units of 1, and the number between 0 and 2. |
+| GPU | Enter the number of GPUs you want to assign to Container, the number can be entered in units of 1, and the number between 0 and 2. (GPUs have a memory unit of 5 GB.) |
 | Order | Commands to be executed when Container is started, override ENTRYPPOINT specified in the image. |
 | Task Directory | Task Directory of Container takes precedence over the WORKDIR specified in the image. |
 | Environment Variables | Environment variables to set in Container |
 | Storage | Storage connected to Container |
 | Storage Name | Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters. |
-| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/zh/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
+| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/en/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
 | Subnet | Subnets defined in VPC that connect to Instances |
 
 Enter the required information and click **Create Template** button to create Template.
@@ -189,11 +189,80 @@ After clicking on specific Workload, you can view Event information from Contain
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
 
 > [Note]
-> Logs are kept for maximum two months.
+> Logs are limited to a maximum size of 5 GB and kept for 2 months.
+
+#### Execution History
+
+You can check the progress and history of changes to the workload template in the **Execution History** tab by selecting the workload for which you want to view the execution history.
+
+| Items | Descriptions |
+| --- | --- |
+| Template name | Template name that workload is using |
+| Execution time | Deployment start time for workloads using the template |
+| End time | End time for workload using the template |
+| Status | Deployment status<br>succeeded: Deployment completed<br>pending: Deploying<br>terminated: Ended workload |
+
+You can view the **Details of execution history** by clicking the retrieved history information.
+
+> [Note]
+The history of the running workload does not show an end time and the status remains succeeded.
+> [Caution]
+You cannot check the execution history after deleting the workload.
+
+### Change Workload
+
+You can change the running workload by selecting a workload to change and clicking **Change** at the **Basic Information** tab.
+
+| Items | Descriptions |
+| --- | --- |
+| Descriptions | Workload Description |
+| Template | Change the template of a running workload<br>When changing the template, workload is deployed with zero downtime through the rolling update method.<br>Tasks are replaced one by one, so that during deployment, existing and new tasks can be executed at the same time.<br>You can see the results at the `Execution History` tab. |
+| Number of tasks requested. | Change the number of tasks in a running workload<br>Increase tasks requested: Existing tasks are maintained and new tasks are created.<br>Decrease tasks requested: Tasks are ended by the reduced number of tasks. |
+| Load Balancer | Change whether a workload uses a load balancer or not |
+
+> [Caution]
+If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
+> [Note]
+If a workload is in the Pending state, you cannot make changes to the load balancer.
 
 ### Delete Workload
 
 Select a workload you want to delete and click **Delete Workload** button to proceed with the deletion.
+
+## NCS Role
+You can set NCS roles to control which roles can access services and resources.
+For example, you can set an "NCS administrator" to have the ability to create, view, and manage templates and workloads, while an "NCS user" can only have the view role for templates and workloads.
+
+### Add NCS Execution Role
+Set the role to execute NCS in the NHN Cloud Console screen.
+1. Select **Manage Member** in the **Project Management** screen.
+2. Click a member that you want to change the role.
+3. Click **Add Role** to add roles for each service.
+  * Select the basic infrastructure service in the left area, then select the role in the right area.
+4. You can view the selected roles to add or delete them.
+5. Click **Add** to apply the changed roles to the project members.
+6. Once a role is added, you can select a member to view the detailed role history.
+
+For more information on how to use role group, see the console guide.
+
+### Details of Role
+To use NCS, you need roles for the following resources.
+* NCS - Allows you to view, create, and manage resources in the NCS.
+* Infrastructure - Allows NCS users to lookup VPC, Subnet resources. This is required when looking up templates and workloads in NCS.
+* Load Balancer - Allows NCS users to create and manage Infrastructure Load Balancer resources. This is required when using a Load Balancer for a workload in NCS.
+* Security Group - Allows NCS users to create and manage Infrastructure Security Group resources. This is required when using Security Groups for templates in NCS.
+
+### Assign Minimum Roles for NCS
+In a production environment, it is recommended to add only the roles you need. The minimum roles to use the NCS service are as follows.
+
+| Features | Infrastructrue NCS ADMIN | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
+| --- | --- | --- | --- | --- |
+| Retrieve Template |  | O |  |  |
+| Create Template | O |  | O |  |
+| Delete Template | O |  | O |  |
+| Retrieve Workload |  | O |  |  |
+| Create and Change Workload | O |  | O | O |
+| Delete Workload | O |  | O | O |
 
 ## Other considerations
 
@@ -242,3 +311,5 @@ Explain how to solve various problems that may occur while using the NCS service
     * This event occurs when Network Interface for use in NCS is not created. This is a temporary event that occurs when a workload is created immediately after template creation or when a workload is created in bulk. The event does not occur after a certain amount of time has elapsed.
 * A container event with **IpAddressGenerationFailure** type occurs when the workload is pending
     * This event occurs when there are no more IP addresses available in the specified subnet. You must create Template by changing the CIDR of the subnet or using other subnet.
+* Workloads remain pending after changing the workload template
+    * You can check the **Event** of the added task to find why the container is not running.

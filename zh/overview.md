@@ -11,6 +11,7 @@ You can use this service to run containers without configuring container executi
 * You can configure containers that use GPUs.
 * You can connect Load Balancer to containers. You can expose container services outside through the created Floating IP and Domain.
 * You can monitor the CPU, Memory, network transmission and reception, and storage of containers.
+* Zero-downtime deployment is possible through the rolling update method.
 
 ## Configuration and Terms
 
