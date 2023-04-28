@@ -1,5 +1,14 @@
 ## Container > NHN Container Service(NCS) > 릴리스 노트
 
+### 2023. 05. 30.
+#### 기능 추가
+* GPU Flavor기능을 추가하였습니다.
+* NCS 서비스를 위한 Public API가 공개되었습니다.
+  * Public API에 대한 내용은 [API 가이드](Container/NCS/ko/public-api/)를 참고하세요
+
+#### 기능 개선
+* 컨테이너 포트에 HTTP 프로토콜이 추가되었습니다.
+
 ### 2023. 03. 28.
 
 #### 기능 개선
