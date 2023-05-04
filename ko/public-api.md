@@ -84,8 +84,9 @@ GET /ncs/v1.0/appkeys/{appKey}/templates?page=1&size=30
 | templates.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | templates.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | templates.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
-| templates.containers.volumes.name | Body | String | O | 컨테이너 스토리지 이름 |
-| templates.containers.volumes.path | Body | String | O | 컨테이너 스토리지 연결 경로 |
+| templates.containers.volumes.name | Body | String | O | 스토리지 이름 |
+| templates.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
+| templates.containers.volumes.mountPath | Body | String | X | 컨테이너 스토리지 연결 경로 |
 | templates.containers.workDirectory | Body | String | X | 컨테이너의 작업 디렉터리 |
 | templates.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | templates.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
@@ -177,8 +178,9 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 | templates.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | templates.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | templates.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
-| templates.containers.volumes.name | Body | String | O | 컨테이너 스토리지 이름 |
-| templates.containers.volumes.path | Body | String | O | 컨테이너 스토리지 연결 경로 |
+| templates.containers.volumes.name | Body | String | O | 스토리지 이름 |
+| templates.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
+| templates.containers.volumes.mountPath | Body | String | X | 컨테이너 스토리지 연결 경로 |
 | templates.containers.workDirectory | Body | String | X | 컨테이너의 작업 디렉터리 |
 | templates.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | templates.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
@@ -260,8 +262,9 @@ Content-Type: application/json
 | templates.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | templates.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | templates.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
-| templates.containers.volumes.name | Body | String | O | 컨테이너 스토리지 이름 |
-| templates.containers.volumes.path | Body | String | O | 컨테이너 스토리지 연결 경로 |
+| templates.containers.volumes.name | Body | String | O | 스토리지 이름 |
+| templates.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
+| templates.containers.volumes.mountPath | Body | String | X | 컨테이너 스토리지 연결 경로 |
 | templates.containers.workDirectory | Body | String | X | 컨테이너의 작업 디렉터리 |
 | templates.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | templates.networks.vpcId | Body | String | O | 템플릿의 VPC ID<br>VPC에 대한 자세한 내용은 [VPC 목록 보기](Network/VPC/ko/public-api/#vpc_1)를 참고하세요. |
@@ -323,8 +326,9 @@ Content-Type: application/json
 | templates.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | templates.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | templates.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
-| templates.containers.volumes.name | Body | String | O | 컨테이너 스토리지 이름 |
-| templates.containers.volumes.path | Body | String | O | 컨테이너 스토리지 연결 경로 |
+| templates.containers.volumes.name | Body | String | O | 스토리지 이름 |
+| templates.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
+| templates.containers.volumes.mountPath | Body | String | X | 컨테이너 스토리지 연결 경로 |
 | templates.containers.workDirectory | Body | String | X | 컨테이너의 작업 디렉터리 |
 | templates.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | templates.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
@@ -507,8 +511,9 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | workloads.tasks.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | workloads.tasks.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | workloads.tasks.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
-| workloads.tasks.containers.volumes.name | Body | String | O | 컨테이너 스토리지 이름 |
-| workloads.tasks.containers.volumes.path | Body | String | O | 컨테이너 스토리지 연결 경로 |
+| workloads.tasks.containers.volumes.name | Body | String | O | 스토리지 이름 |
+| workloads.tasks.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
+| workloads.tasks.containers.volumes.mountPath | Body | String | X | 컨테이너 스토리지 연결 경로 |
 | workloads.tasks.containers.workDirectory | Body | String | X | 컨테이너의 작업 디렉터리 |
 | workloads.tasks.containers.state | Body | String | O | 컨테이너 상태 |
 | workloads.tasks.containers.startedAt | Body | String | X | 컨테이너 시작 시간 |
@@ -792,8 +797,9 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
 | templates.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | templates.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | templates.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
-| templates.containers.volumes.name | Body | String | O | 컨테이너 스토리지 이름 |
-| templates.containers.volumes.path | Body | String | O | 컨테이너 스토리지 연결 경로 |
+| templates.containers.volumes.name | Body | String | O | 스토리지 이름 |
+| templates.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
+| templates.containers.volumes.mountPath | Body | String | X | 컨테이너 스토리지 연결 경로 |
 | templates.containers.workDirectory | Body | String | X | 컨테이너의 작업 디렉터리 |
 | templates.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | templates.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
