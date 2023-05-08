@@ -43,7 +43,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 스토리지는 최대 3개 연결할 수 있습니다.
 
 > [참고]
->  컨테이너의 ephemeral-storage는 20 GB로 제한됩니다.
+>  컨테이너의 ephemeral-storage는 20 GB로 제한됩니다. 20 GB 이상 사용하게 되는 경우 컨테이너가 재기동되어 ephemeral-storage에 생성된 로그와 데이터는 초기화됩니다.
 
 ### 템플릿 조회
 
