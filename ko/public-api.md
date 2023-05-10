@@ -983,11 +983,11 @@ Content-Type: application/json
 | workloads.id | Body | UUID | O | 워크로드 ID |
 | workloads.name | Body | String | O | 워크로드 이름 |
 | workloads.templateId | Body | String | O | 워크로드의 템플릿 ID |
-| workloads.url | Body | String | X | 워크로드 로드밸런서 URL |
+| workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workloads.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 
 <details><summary>예시</summary>
 
