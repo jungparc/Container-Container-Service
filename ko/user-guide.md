@@ -36,14 +36,14 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > [참고]
 > 템플릿에 동일한 프로토콜의 포트는 1개만 추가할 수 있습니다.
 > TCP와 HTTP는 동일한 포트를 사용할 수 없습니다.
-> HTTP 프로토콜을 사용하면 로드밸런서에서 Client IP를 식별할 수 있는 X-Forwarded-For Header가 추가됩니다.
+> HTTP 프로토콜을 사용하면 로드 밸런서에서 Client IP를 식별할 수 있는 X-Forwarded-For Header가 추가됩니다.
 
 > [참고]
 > 템플릿과 동일한 VPC를 사용하는 NAS 스토리지만 사용할 수 있습니다.
 > 스토리지는 최대 3개 연결할 수 있습니다.
 
 > [참고]
->  컨테이너의 ephemeral-storage는 20 GB로 제한됩니다. 20 GB 이상 사용하게 되는 경우 컨테이너가 재기동되어 ephemeral-storage에 생성된 로그와 데이터는 초기화됩니다.
+>  컨테이너의 ephemeral-storage는 20GB로 제한됩니다. 20GB 이상 사용하게 되는 경우 컨테이너가 재기동되어 ephemeral-storage에 생성된 로그와 데이터는 초기화됩니다.
 
 ### 템플릿 조회
 
@@ -302,7 +302,7 @@ NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
 * 자세한 사항은 아래 링크를 참고하십시오.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
-* GPU CUDA 버전은 11.7 입니다.
+* GPU CUDA 버전은 11.7입니다.
 
 ## 문제 해결 가이드
 

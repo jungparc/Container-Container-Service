@@ -56,7 +56,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates?page=1&size=30
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
 #### 응답
 
@@ -73,7 +73,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates?page=1&size=30
 | templates.containers.image | Body | String | O | 컨테이너 이미지 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpus | Body | Integer | X | 컨테이너의 GPU 사용 여부<br>0: 미사용<br>1: 사용 |
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -167,7 +167,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 | templates.containers.image | Body | String | O | 컨테이너 이미지 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpus | Body | Integer | X | 컨테이너의 GPU 사용 여부<br>0: 미사용<br>1: 사용 |
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -251,7 +251,7 @@ Content-Type: application/json
 | templates.containers.imageRegistryCredentials.password | Body | String | O | Private 레지스트리 비밀번호 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpus | Body | Integer | X | 컨테이너의 GPU 사용 여부<br>0: 미사용<br>1: 사용 |
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -318,7 +318,7 @@ Content-Type: application/json
 | templates.containers.image | Body | String | O | 컨테이너 이미지 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpus | Body | Integer | X | 컨테이너의 GPU 사용 여부<br>0: 미사용<br>1: 사용 |
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | templates.containers.command | Body | String List | X | 컨테이너가 시작될 때 실행될 명령어 |
@@ -415,7 +415,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads?page=1&size=30
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
 #### 응답
 
@@ -427,13 +427,13 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads?page=1&size=30
 | workloads.id | Body | UUID | O | 워크로드 ID |
 | workloads.name | Body | String | O | 워크로드 이름 |
 | workloads.templateId | Body | String | O | 워크로드의 템플릿 ID |
-| workloads.url | Body | String | X | 워크로드 로드밸런서 URL |
+| workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workloads.available | Body | Integer | O | 워크로드 작업 실행 수 |
 | workloads.status | Body | Integer | O | 워크로드 상태 |
-| workloads.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 
 <details><summary>예시</summary>
 
@@ -488,7 +488,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | workloads.id | Body | UUID | O | 워크로드 ID |
 | workloads.name | Body | String | O | 워크로드 이름 |
 | workloads.templateId | Body | String | O | 워크로드의 템플릿 ID |
-| workloads.url | Body | String | X | 워크로드 로드밸런서 URL |
+| workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workloads.available | Body | Integer | O | 워크로드 작업 실행 수 |
 | workloads.status | Body | String | O | 워크로드 상태 |
@@ -500,7 +500,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | workloads.tasks.containers.ip | Body | String | X | 컨테이너 IP |
 | workloads.tasks.containers.cpus | Body | Float | O | 컨테이너에 할당된 CPU 수 |
 | workloads.tasks.containers.memoryLimit | Body | Object | O | 컨테이너에 할당된 메모리 정보 |
-| workloads.tasks.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당된 메모리 (MiB) |
+| workloads.tasks.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당된 메모리(MiB) |
 | workloads.tasks.containers.gpus | Body | Integer | X | 컨테이너의 GPU 사용 여부<br>0: 미사용<br>1: 사용 |
 | workloads.tasks.containers.gpuFlavor | Body | String | X | 컨테이너에 할당된 GPU Flavor 정보 |
 | workloads.tasks.containers.ports | Body | Array | X | 컨테이너의 포트 정보 |
@@ -518,9 +518,9 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | workloads.tasks.containers.state | Body | String | O | 컨테이너 상태 |
 | workloads.tasks.containers.startedAt | Body | String | X | 컨테이너 시작 시간 |
 | workloads.tasks.containers.restartCount | Body | String | O | 컨테이너 재시작 횟수 |
-| workloads.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workloads.loadBalancing.ipAddress | Body | String | X | 워크로드의 IP, 플로팅 IP |
 | workloads.networks | Body | Array | O | 워크로드의 네트워크 정보 |
 | workloads.networks.vpcId | Body | String | O | 워크로드의 VPC ID |
@@ -608,7 +608,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?contai
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | container | Query | String | O | 컨테이너 이름 |
-| limitBytes | Query | Integer | X | 조회하는 최대 로그 사이즈<br>default: 100 KB<br>최대 : 10 MB |
+| limitBytes | Query | Integer | X | 조회하는 최대 로그 사이즈<br>default: 100 KB<br>최대: 10MB |
 | from | Query | String | X | 로그 시작 시간<br>default: 현재로부터 5분전 |
 | to | Query | String | X | 로그 종료 시간<br>default: 현재 시간 |
 
@@ -618,7 +618,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?contai
 | --- | --- | --- | --- | --- |
 | logs | Body | Array | O | 컨테이너 로그 목록 |
 | log | Body | String | O | 로그 내용 |
-| time | Body | String | O | 로그 발생 시간 (UTC) |
+| time | Body | String | O | 로그 발생 시간(UTC) |
 
 <details><summary>예시</summary>
 
@@ -657,7 +657,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events?page
 | type | Query | Integer | X | 이벤트 타입<br>Normal<br>Warning |
 | q | Query | String | X | 이벤트 내용 필터링 |
 | page | Query | String | X | 조회할 페이지 |
-| size | Query | String | X | 조회할 페이지 크기 (default: 10) |
+| size | Query | String | X | 조회할 페이지 크기(default: 10) |
 
 #### 응답
 
@@ -667,8 +667,8 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events?page
 | type | Body | String | O | 이벤트 타입<br>Normal<br>Warning |
 | reason | Body | String | O | 이벤트 발생 원인 |
 | message | Body | String | O | 이벤트 내용 |
-| createTimestamp | Body | String | O | 이벤트 최초 발생 일시 (UTC) |
-| lastTimestamp | Body | String | O | 이벤트 마지막 발생 일시 (UTC) |
+| createTimestamp | Body | String | O | 이벤트 최초 발생 일시(UTC) |
+| lastTimestamp | Body | String | O | 이벤트 마지막 발생 일시(UTC) |
 | count | Body | Integer | O | 이벤트 발생 횟수 |
 
 <details><summary>예시</summary>
@@ -710,7 +710,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history?page=1&size=30
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
 #### 응답
 
@@ -786,7 +786,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
 | templates.containers.image | Body | String | O | 컨테이너 이미지 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpus | Body | Integer | X | 컨테이너의 GPU 사용 여부<br>0: 미사용<br>1: 사용 |
 | templates.containers.gpuFlavor | Body | String | X | 컨테이너에 할당된 GPU Flavor 정보 |
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -904,11 +904,11 @@ Content-Type: application/json
 | workloads.id | Body | UUID | O | 워크로드 ID |
 | workloads.name | Body | String | O | 워크로드 이름 |
 | workloads.templateId | Body | String | O | 워크로드의 템플릿 ID |
-| workloads.url | Body | String | X | 워크로드 로드밸런서 URL |
+| workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workloads.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 
 <details><summary>예시</summary>
 
@@ -1044,11 +1044,11 @@ DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | 200 | SUCCESS | 요청 성공 |
-| 10001 | Authentication error. | 유효하지 않은 AppKey 입니다. |
-| 10002 | Bad Request. | 유효하지 않은 값이 요청 되었습니다. |
+| 10001 | Authentication error. | 유효하지 않은 AppKey입니다. |
+| 10002 | Bad Request. | 유효하지 않은 값이 요청되었습니다. |
 | 10003 | An error occurred while parsing the request body. | 요청 본문을 구문 분석하는 과정에서 오류가 발생했습니다. |
 | 10004 | Internal server error. | 내부 서버 오류입니다. |
-| 10006 | Quota exceeded for resource({{.Resource}}) | 생성 가능한 {{.Resource}} 개수를 초과하였습니다. |
+| 10006 | Quota exceeded for resource({{.Resource}}) | 생성 가능한 {{.Resource}} 수를 초과하였습니다. |
 | 10041 | Could not find the template. | 템플릿을 찾을 수 없습니다. |
 | 10042 | Could not use the ECR. | ECR의 이미지는 사용할 수 없습니다. |
 | 10043 | The network information does not exist. | 네트워크 정보가 존재하지 않습니다. |
