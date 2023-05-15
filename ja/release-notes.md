@@ -1,5 +1,14 @@
 ## Container > NHN Container Service(NCS)  > リリースノート
 
+### 2023. 05. 30.
+#### 機能追加
+* NCSサービスのためのPublic APIが公開されました。
+  * Public APIの詳細については[APIガイド](Container/NCS/ko/public-api/)を参照してください。
+
+#### 機能改善
+* GPUタイプを選択できる機能が追加されました。
+* コンテナポートにHTTPプロトコルが追加されました。
+
 ### 2023. 03. 28.
 
 #### 機能改善
