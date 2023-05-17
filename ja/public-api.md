@@ -1048,14 +1048,14 @@ DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | 10002 | Bad Request. | 有効ではない値がリクエストされました。 |
 | 10003 | An error occurred while parsing the request body. | リクエスト本文を構文分析する過程でエラーが発生しました。 |
 | 10004 | Internal server error. | 内部サーバーエラーです。 |
-| 10006 | Quota exceeded for resource({{.Resource}}) | 作成可能な{{.Resource}}数を超えました。 |
+| 10006 | You have exceeded the maximum number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | 作成可能な{{.Resource}}数を超えました。 |
 | 10041 | Could not find the template. | テンプレートが見つかりません。 |
 | 10042 | Could not use the ECR. | ECRのイメージは使用できません。 |
 | 10043 | The network information does not exist. | ネットワーク情報が存在しません。 |
 | 10044 | The template in use by the workload cannot be deleted. | ワークロードで使用中のテンプレートは削除できません。 |
 | 10045 | Duplicate container port exists in the template. | テンプレートに同じコンテナポートが存在します。 |
 | 10046 | Template with the same name already exists. | 同じ名前のテンプレートがすでに存在します。 |
-| 10047 | GPU Flavor({{.Flavor}}) Resources are not available. | {{.gpuFlavor}}リソースは使用できません。 |
+| 10047 | Resource {{.gpuFlavor}} is not available. If you want to use, please contact the Customer Center. | {{.gpuFlavor}}リソースは使用できません。 |
 | 10061 | Could not find the workload. | ワークロードが見つかりません。 |
 | 10062 | Pod does not exist. | Podが存在しません。 |
 | 10063 | You cannot use the load balancer because the container port is not specified in the template. | テンプレートにコンテナポートが指定されていないためロードバランサーを使用できません。 |
@@ -1064,4 +1064,4 @@ DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | 10066 | Could not create a workload due to insufficient resources. | リソースが不足しているためワークロードを作成できません。 |
 | 10067 | You cannot change the workload name. | ワークロード名は変更できません。 |
 | 10068 | You cannot change to the template that uses a different network. | 他のネットワークを使用するテンプレートに変更できません。 |
-| 10069 | The container port being used by the load balancer is not specified in the template and cannot be changed. | ロードバランサーで使用中のポートと同じコンテナポートがテンプレートに設定されている必要があります。 |
+| 10069 | In the template, you must set the same container port as the port used by the load balancer. | ロードバランサーで使用中のポートと同じコンテナポートがテンプレートに設定されている必要があります。 |
