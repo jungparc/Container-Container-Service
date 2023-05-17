@@ -1048,14 +1048,14 @@ DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | 10002 | Bad Request. | 유효하지 않은 값이 요청되었습니다. |
 | 10003 | An error occurred while parsing the request body. | 요청 본문을 구문 분석하는 과정에서 오류가 발생했습니다. |
 | 10004 | Internal server error. | 내부 서버 오류입니다. |
-| 10006 | Quota exceeded for resource({{.Resource}}) | 생성 가능한 {{.Resource}} 수를 초과하였습니다. |
+| 10006 | You have exceeded the maximum number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | 생성 가능한 {{.Resource}} 수를 초과하였습니다. |
 | 10041 | Could not find the template. | 템플릿을 찾을 수 없습니다. |
 | 10042 | Could not use the ECR. | ECR의 이미지는 사용할 수 없습니다. |
 | 10043 | The network information does not exist. | 네트워크 정보가 존재하지 않습니다. |
 | 10044 | The template in use by the workload cannot be deleted. | 워크로드에서 사용 중인 템플릿은 삭제할 수 없습니다. |
 | 10045 | Duplicate container port exists in the template. | 템플릿에 동일한 컨테이너 포트가 존재합니다. |
 | 10046 | Template with the same name already exists. | 동일한 이름의 템플릿이 이미 존재합니다. |
-| 10047 | GPU Flavor({{.Flavor}}) Resources are not available. | {{.gpuFlavor}} 자원은 가용되지 않고 있습니다. |
+| 10047 | Resource {{.gpuFlavor}} is not available. If you want to use, please contact the Customer Center. | {{.gpuFlavor}} 자원은 가용되지 않고 있습니다. |
 | 10061 | Could not find the workload. | 워크로드를 찾을 수 없습니다. |
 | 10062 | Pod does not exist. | Pod가 존재하지 않습니다. |
 | 10063 | You cannot use the load balancer because the container port is not specified in the template. | 템플릿에 컨테이너 포트가 지정되지 않아 로드 밸런서를 사용할 수 없습니다. |
@@ -1064,4 +1064,4 @@ DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | 10066 | Could not create a workload due to insufficient resources. | 리소스가 부족하여 워크로드를 생성할 수 없습니다. |
 | 10067 | You cannot change the workload name. | 워크로드 이름은 변경할 수 없습니다. |
 | 10068 | You cannot change to the template that uses a different network. | 다른 네트워크를 사용하는 템플릿으로 변경할 수 없습니다. |
-| 10069 | The container port being used by the load balancer is not specified in the template and cannot be changed. | 로드 밸런서에서 사용 중인 포트와 동일한 컨테이너 포트가 템플릿에 설정되어야 합니다. |
+| 10069 | In the template, you must set the same container port as the port used by the load balancer. | 로드 밸런서에서 사용 중인 포트와 동일한 컨테이너 포트가 템플릿에 설정되어야 합니다. |
