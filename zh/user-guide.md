@@ -21,7 +21,8 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Memory | Memory to assigned to Container |
 | Port | Ports used in Containers |
 | CPU | Enter the number of CPUs that you want to assign to Container, the number can be entered in units of 0.25 and between 0.25 and 16. |
-| GPU | Enter the number of GPUs you want to assign to Container, the number can be entered in units of 1, and the number between 0 and 2. (GPUs have a memory unit of 5 GB.) |
+| Whether to use GPU | Decides whether the container uses a GPU. |
+| GPU Type | Decides the type of GPU to assign to a container. |
 | Order | Commands to be executed when Container is started, override ENTRYPPOINT specified in the image. |
 | Task Directory | Task Directory of Container takes precedence over the WORKDIR specified in the image. |
 | Environment Variables | Environment variables to set in Container |
@@ -33,14 +34,16 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 Enter the required information and click **Create Template** button to create Template.
 
 > [Note]
-> When creating Template to run workloads quickly, it creates Network Interface in subnet band in advance.
-
-> [Note]
 > You can add only one port of the same protocol to Template.
+> TCP and HTTP cannot use the same port.
+> Using the HTTP protocol adds an X-Forwarded-For Header that allows the load balancer to identify the Client IP.
 
 > [Note]
 > Only NAS storage that uses the same VPC as the template can be used.
 > You can connect maximum three Storages.
+
+> [Note]
+>  The ephemeral storage of the container is limited to 20 GB. If more than 20GB is used, the container will be restarted and logs and data created in the ephemeral storage will be initialized.
 
 ### Retrieve Template
 
@@ -56,7 +59,6 @@ You can check specific Template to view details from **Basic Information** tab.
 | Descriptions | Template Description |
 | Container | Number of Containers defined in Template |
 | CPU | Number of CPUs in Containers defined in the template added |
-| GPU | Number of GPUs in Containers defined in the template added |
 | Date of Creation | Creation date of Template  |
 | VPC | VPC set to Template |
 | Subnet | Subnet set to Template |
@@ -71,7 +73,7 @@ After clicking specific Template, you can go to **Container** tab to check the l
 | Image URL | Container Image Information  |
 | Memory | Memory assigned to Container |
 | CPU | Number of CPU assigned to Container |
-| GPU | Number of GPU assigned to Container |
+| GPU | Information on GPU assigned to Container |
 | Port | Ports used in Containers |
 | Command | Command to run when container starts |
 | Task Directory | Task Directory of Container |
@@ -147,7 +149,7 @@ You can view Container details by clicking a specific workload and then clicking
 | The number of Restart | The number of time that Container restarted.  |
 | Memory | Memory assigned to Container |
 | CPU | Number of CPU assigned to Container |
-| GPU | Number of GPU assigned to Container |
+| GPU | Information on GPU assigned to Container |
 | Port | Ports used in Containers |
 | Command | Command to run when container starts |
 | Task Directory | Task Directory of Container |
@@ -300,7 +302,7 @@ In a production environment, it is recommended to add only the roles you need. T
 * For details, refer to the following links.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
-
+* GPU CUDA version is 11.7.
 ## Guide to Problem Solving
 
 Explain how to solve various problems that may occur while using the NCS service
