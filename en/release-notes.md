@@ -1,5 +1,10 @@
 ## Container > NHN Container Service(NCS) > Release Notes
 
+### May 30, 2023
+#### Feature Updates
+* Added a feature to select the GPU type.
+* Added HTTP protocols for container ports.
+
 ### March 28, 2023
 
 #### Feature Updates
