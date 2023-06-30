@@ -304,6 +304,7 @@ NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
 * GPU CUDA 버전은 11.7입니다.
+* GPU Driver 버전은 515.86.01입니다.
 * 컨테이너는 1개의 GPU 타입만 사용할 수 있습니다.
 * 제공되는 GPU 타입은 다음과 같습니다.
 
