@@ -1,9 +1,13 @@
 ## Container > NHN Container Service(NCS) > Release Notes
+### July 25, 2023
+#### Feature Updates
+* Raised the maximum resource size for containers.
 
 ### May 30, 2023
 #### Feature Updates
 * Added a feature to select the GPU type.
 * Added HTTP protocols for container ports.
+* Added the Quota feature.
 
 ### March 28, 2023
 
