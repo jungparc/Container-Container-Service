@@ -33,6 +33,9 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 
 Enter the required information and click **Create Template** button to create Template.
 
+> [Caution]
+> When a container (task) is restarted due to an NCS environment check or a temporary error, the created logs and data inside the container are initialized. For data that must be maintained after restart, use NAS storage.
+
 > [Note] 
 > You can add only one port of the same protocol to Template.
 > TCP and HTTP cannot use the same port.
@@ -272,10 +275,8 @@ In a production environment, it is recommended to add only the roles you need. T
 
 * NCS service is only available in KR1 region.
 
-### Limitation of Numbers
-
-* Template can describe maximum 10 number of containers.
-* Workload can describe maximum 10 number of executions.
+### Resource Provision Policy
+* Refer to [ NHN Container Service Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs).
 
 ### Template/Container
 
@@ -303,6 +304,15 @@ In a production environment, it is recommended to add only the roles you need. T
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
 * GPU CUDA version is 11.7.
+* GPU Driver version is 515.86.01.
+* Container can only use one type of GPU.
+* Available GPU types are as follows.
+
+| Category | Type | Name | RAM | Number of GPUs | MIG Profile Name |
+| --- | --- | --- | --- | --- | --- |
+| Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
+| Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
+
 ## Guide to Problem Solving
 
 Explain how to solve various problems that may occur while using the NCS service
@@ -315,3 +325,10 @@ Explain how to solve various problems that may occur while using the NCS service
     * This event occurs when there are no more IP addresses available in the specified subnet. You must create Template by changing the CIDR of the subnet or using other subnet.
 * Workloads remain pending after changing the workload template
     * You can check the **Event** of the added task to find why the container is not running.
+* An event where creating workloads fails due to insufficient resources
+
+| Error Message | Description |
+| --- | --- |
+| {{.Resource}} Could not create a workload due to insufficient resources. | 	
+Could not create a workload due to insufficient resources for NCS environment.<br>Try again after a while or contact the Customer Center. |
+| Exceeded the number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | Exceeded the NCS quota for the project.<br>For more details, refer to [NHN Container Service(NCS) Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs). |

@@ -33,6 +33,9 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 
 필요한 정보를 입력하고 **템플릿 생성**을 클릭하면 템플릿이 생성됩니다.
 
+> [주의]
+> NCS 환경 점검 작업 또는 일시적인 오류로 인하여 컨테이너(task)가 재기동되는 경우 생성된 로그와 컨테이너 내부의 데이터는 초기화됩니다. 재기동되어도 유지가 필요한 데이터는 NAS 스토리지를 사용하세요.
+
 > [참고]
 > 템플릿에 동일한 프로토콜의 포트는 1개만 추가할 수 있습니다.
 > TCP와 HTTP는 동일한 포트를 사용할 수 없습니다.
@@ -272,10 +275,8 @@ NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
 
 * NCS 서비스는 KR1 리전에서만 사용할 수 있습니다.
 
-### 개수 제약
-
-* 템플릿에는 최대 10개의 컨테이너를 기술할 수 있습니다.
-* 워크로드에는 최대 10개의 실행 수를 지정할 수 있습니다.
+### 리소스 제공 정책
+* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요.
 
 ### 템플릿/컨테이너
 
@@ -303,6 +304,14 @@ NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
 * GPU CUDA 버전은 11.7입니다.
+* GPU Driver 버전은 515.86.01입니다.
+* 컨테이너는 1개의 GPU 타입만 사용할 수 있습니다.
+* 제공되는 GPU 타입은 다음과 같습니다.
+
+| 분류 | 타입 | 이름 | RAM | GPU 수 | MIG Profile 이름 |
+| --- | --- | --- | --- | --- | --- |
+| Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
+| Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
 ## 문제 해결 가이드
 
@@ -316,3 +325,9 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
     * 해당 이벤트는 지정한 서브넷에 사용할 수 있는 IP 주소가 더 이상 없는 경우 발생합니다. 서브넷의 CIDR를 변경하거나 다른 서브넷을 사용하여 템플릿을 생성해야 합니다.
 * 워크로드의 템플릿 변경 이후에 계속 pending 상태로 유지되는 현상
     * 추가된 작업의 **이벤트**를 확인하여 컨테이너가 실행되지 않는 원인을 확인할 수 있습니다.
+* 리소스 부족으로 워크로드 생성 실패 현상
+
+| 에러 메시지 | 설명 |
+| --- | --- |
+| {{.Resource}} 리소스가 부족하여 워크로드를 생성할 수 없습니다. | NCS 환경의 리소스가 부족하여 워크로드를 생성할 수 없습니다.<br>잠시 후 다시 시도하거나 고객 센터에 문의하세요. |
+| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요. |

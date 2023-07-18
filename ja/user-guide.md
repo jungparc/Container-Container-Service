@@ -33,6 +33,9 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 
 必要な情報を入力し、**テンプレートの作成**をクリックするとテンプレートが作成されます。
 
+> [注意]
+> NCS環境点検作業または一時的なエラーによりコンテナ(task)が再起動される場合、作成されたログとコンテナ内のデータは初期化されます。再起動されても維持が必要なデータはNASストレージを使用してください。
+
 > [参考]
 > テンプレートに同じプロトコルのポートは1つのみ追加できます。
 > TCPとHTTPは同じポートを使用できません。
@@ -271,10 +274,8 @@ NCSを利用するには、次のリソースに対するロールが必要で�
 
 * NCSサービスはKR1リージョンでのみ使用できます。
 
-### 数の制約
-
-* テンプレートには最大10個のコンテナを記述できます。
-* ワークロードには最大10個の実行数を指定できます。
+### リソース提供ポリシー
+* [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ko/resource-policy/#nhn-container-servicencs)を参照してください。
 
 ### テンプレート/コンテナ
 
@@ -302,6 +303,14 @@ NCSを利用するには、次のリソースに対するロールが必要で�
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
 * GPU CUDAバージョンは11.7です。
+* GPU Driverバージョンは515.86.01です。
+* コンテナは1個のGPUタイプのみ使用できます。
+* 提供されるGPUタイプは次のとおりです。
+
+| 分類 | タイプ | 名前 | RAM | GPU数 | MIG Profile名 |
+| --- | --- | --- | --- | --- | --- |
+| Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
+| Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
 ## トラブルシューティング
 
@@ -315,3 +324,9 @@ NCSサービスを使用しながら経験する可能性があるさまざま�
     * 当該イベントは指定したサブネットに使用できるIPアドレスが存在しない場合に発生します。サブネットのCIDRを変更するか、他のサブネットを使用してテンプレートを作成する必要があります。
 * ワークロードのテンプレート変更後に継続してpending状態が維持される現象
     * 追加された作業の**イベント**を確認してコンテナが実行されない原因を確認できます。
+* リソース不足でワークロード作成失敗現象
+
+| エラーメッセージ | 説明 |
+| --- | --- |
+| {{.Resource}}リソースが不足しているためワークロードを作成できません。 | NCS環境のリソースが不足しているためワークロードを作成できません。<br>しばらくしてから再試行するか、サポートにお問い合わせください。 |
+| 作成可能な{{.Resource}}を超えました。限度を上げるにはサポートにお問い合わせください。 | プロジェクトのNCS Quotaが超過しました。<br>詳細については、 [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ko/resource-policy/#nhn-container-servicencs)を参考してください。 |
