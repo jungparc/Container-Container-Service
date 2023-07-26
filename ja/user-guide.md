@@ -275,7 +275,7 @@ NCSを利用するには、次のリソースに対するロールが必要で�
 * NCSサービスはKR1リージョンでのみ使用できます。
 
 ### リソース提供ポリシー
-* [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ko/resource-policy/#nhn-container-servicencs)を参照してください。
+* [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参照してください。
 
 ### テンプレート/コンテナ
 
@@ -329,4 +329,4 @@ NCSサービスを使用しながら経験する可能性があるさまざま�
 | エラーメッセージ | 説明 |
 | --- | --- |
 | {{.Resource}}リソースが不足しているためワークロードを作成できません。 | NCS環境のリソースが不足しているためワークロードを作成できません。<br>しばらくしてから再試行するか、サポートにお問い合わせください。 |
-| 作成可能な{{.Resource}}を超えました。限度を上げるにはサポートにお問い合わせください。 | プロジェクトのNCS Quotaが超過しました。<br>詳細については、 [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ko/resource-policy/#nhn-container-servicencs)を参考してください。 |
+| 作成可能な{{.Resource}}を超えました。限度を上げるにはサポートにお問い合わせください。 | プロジェクトのNCS Quotaが超過しました。<br>詳細については、 [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参考してください。 |
