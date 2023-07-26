@@ -329,6 +329,5 @@ Explain how to solve various problems that may occur while using the NCS service
 
 | Error Message | Description |
 | --- | --- |
-| {{.Resource}} Could not create a workload due to insufficient resources. | 	
-Could not create a workload due to insufficient resources for NCS environment.<br>Try again after a while or contact the Customer Center. |
+| {{.Resource}} Could not create a workload due to insufficient resources. | Could not create a workload due to insufficient resources for NCS environment.<br>Try again after a while or contact the Customer Center. |
 | Exceeded the number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | Exceeded the NCS quota for the project.<br>For more details, refer to [NHN Container Service(NCS) Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs). |
