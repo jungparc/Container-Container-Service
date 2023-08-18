@@ -36,13 +36,13 @@ Enter the required information and click **Create Template** button to create Te
 > [Caution]
 > When a container (task) is restarted due to an NCS environment check or a temporary error, the created logs and data inside the container are initialized. For data that must be maintained after restart, use NAS storage.
 
-> [Note] 
+> [Note]
 > You can add only one port of the same protocol to Template.
 > TCP and HTTP cannot use the same port.
 > Using the HTTP protocol adds an X-Forwarded-For Header that allows the load balancer to identify the Client IP.
 
-> [Note] 
-> Only NAS storage that uses the same VPC as the template can be used. 
+> [Note]
+> Only NAS storage that uses the same VPC as the template can be used.
 > You can connect maximum three Storages.
 
 > [Note]
@@ -87,7 +87,7 @@ After clicking specific Template, you can go to **Container** tab to check the l
 
 Select the template you want to delete and click **Delete Template** button to delete it.
 
-> [Note] 
+> [Note]
 > You cannot delete Template if there is a workload using the template.
 
 ## Workload
@@ -113,14 +113,14 @@ Go to **Container > NHN Container Service (NCS) ** page, click **Workload** tab,
 
 Enter the required information and click **Create Workload** button to create Template.
 
-> [Note] 
+> [Note]
 > Load Balancers are not available in Legacy network environments.
 > When setting up a schedule, the number of task requests is fixed at 1.
 > The load balancer cannot be activated if the workload execution cycle is less than 10 minutes.
 > When an existing task is replaced by a new task due to the concurrency policy (Replace), the history of the existing task is not left behind.
 
 > [Note]
-> The meaning of each field in cron expression (* * * * \*) for the scheduled execution is as follows.
+> The meaning of each field in cron expression (\* \* \* \* \*) for the scheduled execution is as follows.
 >
 > | Field name | Acceptable range of values | Allowed special characters |
 > | --- | --- | --- |
@@ -151,10 +151,10 @@ You can click on specific Workload to view details from the **Basic Information*
 | Security Group | Name of Security Group set to Workload |
 | Load Balancer | Whether to use Load Balancer or not |
 
-> [Note] 
-> Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab. 
+> [Note]
+> Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
 
-> [Note] 
+> [Note]
 > Load Balancer may not be active for one to two minutes immediately after Subnet creation.
 
 #### Running Container
@@ -204,14 +204,14 @@ After clicking on specific Workload, you can view Event information from Contain
 | Date of last occurrence of event | Date of last occurrence of event |
 | Number of occurrences | Number of times event occurred |
 
-> [Note] 
+> [Note]
 > Events are only kept for maximum 1 hour, so information from 1 hour earlier cannot be checked.
 
 #### Log
 
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
 
-> [Note] 
+> [Note]
 > Logs are limited to a maximum size of 5 GB and kept for 2 months.
 
 #### Workload Execution History
@@ -338,7 +338,7 @@ In a production environment, it is recommended to add only the roles you need. T
 ### GPU
 
 * Provides MIG(Multi Instance GPU of A100 40GB Card.
-* For details, refer to the following links. 
+* For details, refer to the following links.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
 * GPU CUDA version is 11.7.
