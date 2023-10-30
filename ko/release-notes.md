@@ -1,4 +1,22 @@
 ## Container > NHN Container Service(NCS) > 릴리스 노트
+### 2023. 11. 28.
+#### 기능 추가
+* 컨테이너 설정 기능들이 추가되었습니다.
+  * DNS 서버 주소 설정
+  * LivenessProbe, StartupProbe 설정
+  * Lifecycle Hook 설정
+  * ConfigMap, Secret 설정
+  * NAS Mount 경로 설정
+* GPU와 Ephemeral-Storage 모니터링 기능이 추가되었습니다.
+* 워크로드의 보안 그룹을 선택할 수 있습니다.
+* NCS에서 발생한 이벤트를 NHN CloudTrail에서 확인할 수 있습니다.
+
+#### 기능 개선
+* Load Balancer가 제공됩니다.
+   * Load Balancer Instance는 더이상 지원하지 않습니다.
+* 컨테이너 포트에 HTTPS, TERMINATD_HTTPS 프로토콜이 추가되었습니다.
+* 로그 페이지가 개선되었습니다.
+
 ### 2023. 08. 29.
 #### 기능 추가
 * 워크로드 예약 기능을 추가하였습니다.
