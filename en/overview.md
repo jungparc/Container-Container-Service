@@ -13,6 +13,7 @@ You can use this service to run containers without configuring container executi
 * You can monitor the CPU, Memory, network transmission and reception, and storage of containers.
 * Zero-downtime deployment is possible through the rolling update method.
 * You can schedule container execution by setting up a time-based schedule.
+* You can use the files uploaded to Object Storage or confidential data stored in Secure Key Manager by mounting them on container directories.
 
 ## Configuration and Terms
 
