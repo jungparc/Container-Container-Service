@@ -29,7 +29,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | ライフサイクルフック | コンテナの作成、終了時に実行するコマンドを設定できます。<br>作成直後に入力したコマンドが失敗すると、コンテナが再起動されます。 <br>コマンド実行前にコンテナが終了した場合、コマンドが実行されない場合があります。<ul><li>ワークロード作業のGracePeriodSecondsは30秒です。</li></ul>作成直後(postStart)例) bash,-c,curl $URL/postStart <br>終了直前(preStop)例) bash,-c,curl $URL/preStop |
 | ファイル | Object Storageにアップロードしたファイルをコンテナディレクトリにマウントして使用できます。 <ul><li>Appkey:ファイルデータを使用するプロジェクトのObject StorageサービスのAppkeyを入力します。</li><li>User Access Key: Object StorageサービスにアクセスするユーザーのUser Access Keyを入力します。 User Access KeyはNHN Cloudコンソールのアカウント > **APIセキュリティ設定** ページで作成および確認できます。</li><li>User Secret Key: Object StorageサービスにアクセスするユーザーのSecret Access Keyを入力します。 Secret Access KeyはNHN Cloudコンソールのアカウント > **APIセキュリティ設定**ページで作成および確認できます。</li><li>オブジェクトURL:オブジェクトダウンロードURLを入力します。 </li><li>コンテナマウントパス:コンテナのマウントパスを入力します。<ul><li>入力したパスにファイルがマウントされます。</li></ul></li></ul> |
 | 秘密データ | Secure Key Managerに保存した機密データファイルをコンテナディレクトリにマウントして使用することができます。<ul><li>機密データID：Secret Key Managerサービスの機密データIDを入力します。</li><li>コンテナのマウントパス： コンテナのマウントパスを入力します。<ul><li>入力されたパスにファイルがマウントされます。</li></ul></li></ul> |
-| NASストレージ | コンテナに接続するNASストレージを入力します。<ul><li>名前:ストレージ名。 63文字以内の英字小文字と数字、一部記号(-)のみ入力できます。</li><li>NAS接続パス: NASストレージの接続情報を入力します。 <ul><li>NASストレージを使用する場合、**Storage** \> **NAS**ページで接続するNASストレージの接続情報を入力します。使い方は[NAS使用ガイド](/Storage/NAS/ko/console-guide/)を参照してください。</li><li>別途構築されたNFSv3サーバーを使用する場合、NFSサーバーのマウントポイントを入力します。</li></ul></li><li>コンテナ接続パス:コンテナのマウントパスを入力します。<ul><li>`$コンテナ接続パス`/`$ストレージ名`にマウントされます。</li></ul></li></ul>テンプレートと同じVPCを使用するNASストレージのみ使用できます。 |
+| NASストレージ | コンテナに接続するNASストレージを入力します。<ul><li>名前:ストレージ名。 63文字以内の英字小文字と数字、一部記号(-)のみ入力できます。</li><li>NAS接続パス: NASストレージの接続情報を入力します。 <ul><li>NASストレージを使用する場合、**Storage** \> **NAS**ページで接続するNASストレージの接続情報を入力します。使い方は[NAS使用ガイド](/Storage/NAS/ja/console-guide/)を参照してください。</li><li>別途構築されたNFSv3サーバーを使用する場合、NFSサーバーのマウントポイントを入力します。</li></ul></li><li>コンテナ接続パス:コンテナのマウントパスを入力します。<ul><li>`$コンテナ接続パス`/`$ストレージ名`にマウントされます。</li></ul></li></ul>テンプレートと同じVPCを使用するNASストレージのみ使用できます。 |
 | 状態点検 | コンテナの状態を点検するコマンドを構成できます。<ul><li>アクティブかどうか(LivenessProbe):コンテナが動作中かどうかを確認します。</li><li>起動するかどうか(startupProbe):コンテナ内のアプリケーションが起動されたかどうかを確認します。</li></ul>状態点検が失敗した場合はコンテナが再起動されます。 |
 | サブネット | VPCに定義されたサブネットのうち、インスタンスに接続するサブネット |
 | DNS | ワークロードで使用するDNSサーバーを設定します。<br>設定しない場合は8.8.8.8を使用します。 |
@@ -350,8 +350,8 @@ NCSを利用するには、次のリソースに対するロールが必要で�
 
 * A100 40GBカードのMIG (multi instance GPU)を提供します。
 * 詳細については、下記のリンクをご覧ください。
-    * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
-    * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
+    * [https://www.nvidia.com/ja-jp/technologies/multi-instance-gpu/](https://www.nvidia.com/ja-jp/technologies/multi-instance-gpu/)
+    * [https://www.nvidia.com/ja-jp/data-center/a100/](https://www.nvidia.com/ja-jp/data-center/a100/)
 * GPU CUDAバージョンは11.7です。
 * GPU Driverバージョンは515.86.01です。
 * コンテナは1個のGPUタイプのみ使用できます。
