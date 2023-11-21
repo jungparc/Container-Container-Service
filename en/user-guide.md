@@ -116,7 +116,7 @@ Go to **Container > NHN Container Service (NCS) ** page, click **Workload** tab,
 | Load Balancer | <ul><li><ul><li></li></ul></li><li>Health check: The load balancer attempts to check the health of the workload.</li><li>IP access control groups: You can apply access control groups to the load balancer.</li><li>If your container uses the TERMINATED_HTTPS protocol, you must register an SSL certificate.</li><li>The load balancer's ports and protocols use the ports and protocols defined in the template's container.</li></ul>Load Balancers are not available in Legacy network environments. |
 | Security Group | You can specify a security group for your workloads.<br>If you selected a workload security group, you must create security rules for the container ports.<br>If you do not select a workload security group, the security group created by NCS is applied and the security rules for the container ports are automatically created. |
 
-Enter the required information and click **Create Workload** button to create Template.
+Enter the required information and click **Create Workload** button to create Workload.
 
 > [Note]
 > The meaning of each field in cron expression (\* \* \* \* \*) for the scheduled execution is as follows.
