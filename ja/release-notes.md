@@ -2,19 +2,19 @@
 ### 2023. 11. 28.
 #### 機能追加
 * コンテナ設定機能が追加されました。
-  * DNSサーバーアドレス設定
-  * 状態点検(LivenessProbe, StartupProbe)設定
-  * ライフサイクルフック(Lifecycle Hook)設定
-  * ファイル(ConfigMap)設定
-  * 秘密データ(Secret)設定
-  * NASコンテナ接続パス設定
+    * DNSサーバーアドレス設定
+    * 状態点検(LivenessProbe, StartupProbe)設定
+    * ライフサイクルフック(Lifecycle Hook)設定
+    * ファイル(ConfigMap)設定
+    * 秘密データ(Secret)設定
+    * NASコンテナ接続パス設定
 * GPUと臨時ストレージモニタリング機能が追加されました。
 * ワークロード作成時にセキュリティグループを選択できます。
 * NCS で発生したイベントを NHN CloudTrail で確認できます。
 
 #### 機能改善
 * Load Balancerが提供されます。
-   * Load Balancer Instanceはサポートしません。
+    * Load Balancer Instanceはサポートしません。
 * コンテナポートにHTTPS, TERMINATED_HTTPSプロトコルが追加されました。
 * ログタブが改善されました。
 * コンテナの現在と最後の状態についての詳細な理由をイベントタブで確認できるように改善されました。
