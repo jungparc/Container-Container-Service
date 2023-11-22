@@ -26,10 +26,13 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Order | Commands to be executed when Container is started, override ENTRYPPOINT specified in the image. |
 | Task Directory | Task Directory of Container takes precedence over the WORKDIR specified in the image. |
 | Environment Variables | Environment variables to set in Container |
-| Storage | Storage connected to Container |
-| Storage Name | Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters. |
-| NAS Storage Connection Path | Connection information to be connected to Container, Storage is to be mounted on Container.  `/mnt/$Storage_name`.<br><ul><li>Use of NAS Storage, from page **Storage> NAS**, enter Connection Information for NAS storage to connect to.<ul><li>For instructions on How to use NAS storage, refer to [NAS Usage Guide](/Storage/NAS/zh/console-guide/).</li></ul></li><li>Use separately established NFS server, enter Mount point for NFS server.<ul><li>You can use NFS v3 version only. </li></ul></li></ul> |
+| Life Cycle Hook | You can set commands to run when the container is created and terminated.<br>If the command entered immediately after creation fails, the container is restarted.<br>If the container exits before the command runs, the command might not run.<ul><li>The GracePeriodSeconds for the workload job is 30 seconds.</li></ul>Immediately after creation (postStart) Example) bash,-c,curl $URL/postStart <br>Just before exit (preStop) Example) bash,-c,curl $URL/preStop |
+| File | Files uploaded to Object Storage are available by mounting them in the container directory. <ul><li>Appkey: Enter the appkey for the Object Storage service in your project that will use the file data.</li><li>User Access Key: Enter the user access key of the user accessing the Object Storage service. You can create and check the User Access Key on the Account > **API Security Settings** page of NHN Cloud Console.</li><li>User Secret Key: Enter the secret access key of the user accessing the Object Storage service. You can create and check the Secret Access Key on the Account > **API Security Settings** page of NHN Cloud Console.</li><li>Object URL: Enter the URL to download the object. </li><li>Container mount path: Enter the mount path for the container.<ul><li>The file will be mounted at the path you entered.</li></ul></li></ul> |
+| Confidential Data | You can use the confidential data files you store in Secure Key Manager by mounting them in a container directory. <ul><li>Confidential data ID: Enter the confidential data ID for the Secret Key Manager service.</li><li>Container mount path: Enter the mount path for the container.<ul><li>The file will be mounted at the path you entered.</li></ul></li></ul> |
+| NAS Storage | Enter the NAS storage you want to connect to the container.<ul><li>Name: Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters.</li><li>NAS connection path: Enter the connection information of the NAS storage. <ul><li>If you're using NAS storage, go to **Storage** > **NAS** page, enter the connection information for the NAS storage you want to connect to. For instructions, see the [NAS User Guide](/Storage/NAS/zh/console-guide/).</li><li>If you're using a separately deployed NFSv3 server, enter the mount point of the NFS server.</li></ul></li><li>Container connection path: Enter the mount path for the container.<ul><li>Mounted to `$container connection path`/`$storage name`.</li></ul></li></ul>Only NAS storage that uses the same VPC as the template can be used. |
+| Health Check | You can configure commands to check the health of a container.<ul><li>Activated or not (LivenessProbe): Determines whether the container is working.</li><li>Started or not (startupProbe): Determines whether the application inside the container has started.</li></ul>If the health check fails, the container is restarted. |
 | Subnet | Subnets defined in VPC that connect to Instances |
+| DNS | Set the DNS servers used by the workload.<br>If not set, use 8.8.8.8. |
 
 Enter the required information and click **Create Template** button to create Template.
 
@@ -38,15 +41,16 @@ Enter the required information and click **Create Template** button to create Te
 
 > [Note]
 > You can add only one port of the same protocol to Template.
-> TCP and HTTP cannot use the same port.
-> Using the HTTP protocol adds an X-Forwarded-For Header that allows the load balancer to identify the Client IP.
+> TCP and HTTP, HTTPS, and TERMINATED_HTTPS cannot use the same port.
+> Using the HTTP and TERMINATED_HTTPS protocols adds an X-Forwarded-For Header that allows the load balancer to identify the Client IP.
 
 > [Note]
-> Only NAS storage that uses the same VPC as the template can be used.
-> You can connect maximum three Storages.
+> Each container is provided with 20 GB of ephemeral storage. If you exceed the provided usage, the container is restarted and the ephemeral storage is reset.
 
 > [Note]
->  The ephemeral storage of the container is limited to 20 GB. If more than 20GB is used, the container will be restarted and logs and data created in the ephemeral storage will be initialized.
+> The file and confidential data use the information from when the template was created. If the original file or secret data is modified, the information in the already created template is not affected.
+> Files are only accessible to the project Object Storage within the same organization. 
+> Confidential data utilizes Secure Key Manager in the same project. To use confidential data, you must first enable the Secure Key Manager service.
 
 ### Retrieve Template
 
@@ -82,6 +86,10 @@ After clicking specific Template, you can go to **Container** tab to check the l
 | Task Directory | Task Directory of Container |
 | Environment Variables | Environment variables set in Container |
 | Storage | Storage connected to Container |
+| Life Cycle Hook | Lifecycle hooks set on a container |
+| File | Object files and mount paths associated with the container |
+| Confidential Data | Confidential data associated with a container and its mount path |
+| Health Check | Check on the health of a container |
 
 ### Delete Template
 
@@ -103,21 +111,12 @@ Go to **Container > NHN Container Service (NCS) ** page, click **Workload** tab,
 | Template | Template Name<br><ul><li>Click **Select Template** button to select from Templates created.</li><li>Click **Create Template** button to create and select new Template.</li></ul> |
 | Name | Workload Name, you can only enter lowercase letters, numbers, and '-' withi maximum 32 characters. |
 | Descriptions | Description of Workload. You can enter maximum 255 characters. |
-| Number of tasks requested.  | Number of templates to run, you can enter values between 1 and 100. |
-| Base time | Specify a time zone for the scheduled task start time. |
-| Cron expression | You can enter the scheduled repeat cycle as a cron expression. |
-| Number of scheduled execution history | Enter the maximum number of scheduled tasks to keep that have ended.<br>You can check logs, events, and container information of archived tasks. |
-| Concurrency policy | Specify a concurrency policy for tasks generated by task repeat cycles.<br>Forbid: Do not run a new task unless the existing task completes.<br>Replace: The existing task is replaced with a new task. |
-| Whether to use Load Balancer or not | The Use button is active only when the port is specified in Container information in Template. |
-| Whether to use Floating IP or not | To use floating IP, Internet Gateway have to be connected to the configured Subnet.<br>Floating IP have to be used to access containers from outside.<br>With floating IP, the domain URL is added. |
+| Number of tasks requested. | Number of templates to run, you can enter values between 1 and 100. |
+| Scheduled execution | You can set up time-based schedules to schedule workload execution.<ul><li>Base time: Specify the timezone for the scheduled task time.</li><li>Cron expression: You can enter the scheduled repeat cycle as a cron expression.</li><li>Number of scheduled execution histories: Enter the maximum number of archived ended scheduled tasks. Archived tasks can check logs, events, and container information.</li><li>Concurrency policy: Specify a concurrency policy for tasks generated by task repeat cycles.<ul><li>Forbid: Do not run a new task unless the existing task completes.</li><li>Replace: The existing task is replaced with a new task. When replaced, no history of the existing task is left behind.</li></ul></li></ul>When you schedule workloads, the number of task requests is fixed at 1.<br>If the workload execution interval is 10 minutes or less, you cannot enable the load balancer. |
+| Load Balancer | The Enable button is enabled only if a port is specified in the template's container information.<ul><li>Floating IP: To use floating IP, Internet Gateway have to be connected to the configured Subnet.<ul><li>To access your container from the outside, you need to use a floating IP. Using a floating IP adds a domain URL.</li></ul></li><li>Health check: The load balancer attempts to check the health of the workload.</li><li>IP access control groups: You can apply access control groups to the load balancer.</li><li>If your container uses the TERMINATED_HTTPS protocol, you must register an SSL certificate.</li><li>The load balancer's ports and protocols use the ports and protocols defined in the template's container.</li></ul>Load Balancers are not available in Legacy network environments. |
+| Security Group | You can specify a security group for your workloads.<br>If you selected a workload security group, you must create security rules for the container ports.<br>If you do not select a workload security group, the security group created by NCS is applied and the security rules for the container ports are automatically created. |
 
-Enter the required information and click **Create Workload** button to create Template.
-
-> [Note]
-> Load Balancers are not available in Legacy network environments.
-> When setting up a schedule, the number of task requests is fixed at 1.
-> The load balancer cannot be activated if the workload execution cycle is less than 10 minutes.
-> When an existing task is replaced by a new task due to the concurrency policy (Replace), the history of the existing task is not left behind.
+Enter the required information and click **Create Workload** button to create Workload.
 
 > [Note]
 > The meaning of each field in cron expression (\* \* \* \* \*) for the scheduled execution is as follows.
@@ -154,9 +153,6 @@ You can click on specific Workload to view details from the **Basic Information*
 > [Note]
 > Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
 
-> [Note]
-> Load Balancer may not be active for one to two minutes immediately after Subnet creation.
-
 #### Running Container
 
 You can view Container details by clicking a specific workload and then clicking Container on **Running Container** tab.
@@ -176,6 +172,10 @@ You can view Container details by clicking a specific workload and then clicking
 | Task Directory | Task Directory of Container |
 | Environment Variables | Environment variables set in Container |
 | Storage | Storage connected to Container |
+| Life Cycle Hook | Lifecycle hooks set on a container |
+| File | Object files and mount paths associated with the container |
+| Confidential Data | Confidential data associated with a container and its mount path |
+| Health Check | Check on the health of a container |
 | Date of Restart | Date Container restarted |
 
 #### Monitoring
@@ -190,6 +190,7 @@ Items provided with monitoring are as follows.
 | Network Data Trasmission | bps | Network data trasmission information is provided based on workload operation|
 | Network Data Reception | bps | Network data reception information is provided based on workload operation |
 | Disk Usage | % | Usage of NAS storage added to the container is provided. |
+| Ephemeral Storage Usage | % | Temporary storage utilization is provided on a per-job basis for workloads. |
 
 #### Event
 
@@ -206,13 +207,14 @@ After clicking on specific Workload, you can view Event information from Contain
 
 > [Note]
 > Events are only kept for maximum 1 hour, so information from 1 hour earlier cannot be checked.
+> Detailed reasons for the current and last state of the container can also be found in the events.
 
 #### Log
 
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
 
 > [Note]
-> Logs are limited to a maximum size of 5 GB and kept for 2 months.
+> Logs are kept for 2 months.
 
 #### Workload Execution History
 
@@ -255,9 +257,10 @@ You can change the running workload by selecting a workload to change and clicki
 | Load Balancer | Change whether a workload uses a load balancer or not |
 
 > [Caution]
-If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
+> If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
 > [Note]
-If a workload is in the Pending state, you cannot make changes to the load balancer.
+> If a workload is in the Pending state, you cannot make changes to the load balancer.
+> If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
 
 ### Stop/Restart Workload
 If you stop a workload, all tasks in the workload will end.
@@ -265,7 +268,7 @@ If you stop a workload, all tasks in the workload will end.
 If you restart a workload, the container IP and load balancer IP are changed while the floating IP and URL are maintained.
 
 > [Caution]
-> Logs, events, and ephemeral-storage are initialized when the workload is stopped.
+> Logs, events, and ephemeral storage are initialized when the workload is stopped.
 > Even if you stop the workload, the scheduled execution history is deleted during the task repeat cycle.
 
 ### Delete Workload
@@ -311,7 +314,7 @@ In a production environment, it is recommended to add only the roles you need. T
 
 ### Region
 
-* NCS service is only available in KR1 region.
+* NCS service is only available in Korea (Pangyo) and Korea (Gwangju) regions.
 
 ### Resource Provision Policy
 * Refer to [ NHN Container Service Resource Provision Policy](/nhncloud/zh/resource-policy/#nhn-container-servicencs).
@@ -334,13 +337,15 @@ In a production environment, it is recommended to add only the roles you need. T
 
 * Within Container image, you must match Container Port in the Template with the Port that the Container decides to use for service.
     * If you use default nginx Container image that is designated to serve 80 ports, you have to specify 80 for the Container Port. If you change the content of Container image and set it up to serve another Port, you have to specify that Port number.
+* The file and confidential data use the information from when the template was created. If the original file or confidential data is modified, the information in the already created template is not affected.
+    * To update the contents of a file or confidential data and reflect those changes, you need to create a new template and run the workload.
 
 ### GPU
 
 * Provides MIG(Multi Instance GPU of A100 40GB Card.
 * For details, refer to the following links.
-    * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
-    * [https://www.nvidia.com/ko-kr/data-center/a100/](https://www.nvidia.com/ko-kr/data-center/a100/)
+    * [https://www.nvidia.cn/technologies/multi-instance-gpu/](https://www.nvidia.cn/technologies/multi-instance-gpu/)
+    * [https://www.nvidia.cn/data-center/a100/](https://www.nvidia.cn/data-center/a100/)
 * GPU CUDA version is 11.7.
 * GPU Driver version is 515.86.01.
 * Container can only use one type of GPU.
