@@ -254,7 +254,7 @@ You can change the running workload by selecting a workload to change and clicki
 | Template | Change the template of a running workload<br>When changing the template, workload is deployed with zero downtime through the rolling update method.<br>Tasks are replaced one by one, so that during deployment, existing and new tasks can be executed at the same time.<br>You can see the results at the `Workload Execution History` tab. |
 | Number of tasks requested. | Change the number of tasks in a running workload<br>Increase tasks requested: Existing tasks are maintained and new tasks are created.<br>Decrease tasks requested: Tasks are ended by the reduced number of tasks. |
 | Scheduled execution | Change scheduled execution information<br>The number of scheduled execution history is set from the time of change, and the number of history and setting values may not match until all tasks executed before the change are deleted. |
-| Load Balancer | Change whether a workload uses a load balancer or not |
+| Load Balancer | Change whether a workload uses a load balancer, floating IP, health check, SSL certificate or not |
 
 > [Caution]
 > If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
