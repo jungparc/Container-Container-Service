@@ -23,7 +23,7 @@ The following image shows an example of NCS service configuration.
 
 ### Template
 
-Define which specification of the container to configure  in `Template`. 
+Define which specification of the container to configure in `Template`. 
 `Template` describes the template name, description, VPC to connect to, and one or more container specifications.
 Container specifications include a registry URL containing the Container image to run, resource specifications such as CPU, GPU, and Memory to be used, the port used by the container, and NAS storage to be connected.
 

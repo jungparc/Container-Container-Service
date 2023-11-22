@@ -62,11 +62,11 @@ You can check specific Template to view details from **Basic Information** tab.
 
 | Items | Descriptions |
 | --- | --- |
-| Name | Template name and ID  |
+| Name | Template name and ID |
 | Descriptions | Template Description |
 | Container | Number of Containers defined in Template |
 | CPU | Number of CPUs in Containers defined in the template added |
-| Date of Creation | Creation date of Template  |
+| Date of Creation | Creation date of Template |
 | VPC | VPC set to Template |
 | Subnet | Subnet set to Template |
 
@@ -77,7 +77,7 @@ After clicking specific Template, you can go to **Container** tab to check the l
 | Items | Descriptions |
 | --- | --- |
 | Containers Name | Container Name |
-| Image URL | Container Image Information  |
+| Image URL | Container Image Information |
 | Memory | Memory assigned to Container |
 | CPU | Number of CPU assigned to Container |
 | GPU | Information on GPU assigned to Container |
@@ -142,7 +142,7 @@ You can click on specific Workload to view details from the **Basic Information*
 | Name | Workload name and ID |
 | Descriptions | Workload description |
 | Template | Name of template used |
-| Number of tasks requested.  | Number of Templates to run |
+| Number of tasks requested. | Number of Templates to run |
 | Number of tasks executed | Number of Templates executed |
 | Created date | Date of Workload creation |
 | VPC | VPC set to Workload |
@@ -160,10 +160,10 @@ You can view Container details by clicking a specific workload and then clicking
 | Items | Descriptions |
 | --- | --- |
 | Containers Name | Container Name |
-| Image URL | Container Image Information  |
+| Image URL | Container Image Information |
 | IP | IP assigned to Container |
 | Status | Status of Container |
-| The number of Restart | The number of time that Container restarted.  |
+| The number of Restart | The number of time that Container restarted. |
 | Memory | Memory assigned to Container |
 | CPU | Number of CPU assigned to Container |
 | GPU | Information on GPU assigned to Container |
@@ -284,7 +284,7 @@ Set the role to execute NCS in the NHN Cloud Console screen.
 1. Select **Manage Member** in the **Project Management** screen.
 2. Click a member that you want to change the role.
 3. Click **Add Role** to add roles for each service.
-  * Select the basic infrastructure service in the left area, then select the role in the right area.
+    * Select the basic infrastructure service in the left area, then select the role in the right area.
 4. You can view the selected roles to add or delete them.
 5. Click **Add** to apply the changed roles to the project members.
 6. Once a role is added, you can select a member to view the detailed role history.
