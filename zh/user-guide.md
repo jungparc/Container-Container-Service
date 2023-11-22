@@ -148,7 +148,7 @@ You can click on specific Workload to view details from the **Basic Information*
 | VPC | VPC set to Workload |
 | Subnet | Subnet set to Workload |
 | Security Group | Name of Security Group set to Workload |
-| Load Balancer | Whether to use Load Balancer or not |
+| Load Balancer | Change whether a workload uses a load balancer, floating IP, health check, SSL certificate or not |
 
 > [Note]
 > Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
