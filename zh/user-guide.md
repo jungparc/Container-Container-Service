@@ -124,7 +124,7 @@ Enter the required information and click **Create Workload** button to create Wo
 > | Field name | Acceptable range of values | Allowed special characters |
 > | --- | --- | --- |
 > | Minute | 0-59 | `*` `/` `,` `-` |
-> | Hour | 0-59 | `*` `/` `,` `-` |
+> | Hour | 0-23 | `*` `/` `,` `-` |
 > | Day | 1-31 | `*` `/` `,` `?` |
 > | Month | 1-12<br>JAN-DEC | `*` `/` `,` `-` |
 > | Day of the week | 0-6<br>SUN-SAT | `*` `/` `,` `?` |
