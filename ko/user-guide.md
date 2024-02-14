@@ -412,7 +412,7 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 
 FluentBit에 대한 자세한 내용은 [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/)을 참고하세요.
 Logstash에 대한 자세한 내용은 [Logstash Reference](https://www.elastic.co/guide/en/logstash/current/index.html)를 참고하세요.
-Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드](Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고하세요.
+Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고하세요.
 
 > [참고]
 > 컨테이너 간 임시 공유 스토리지에 로그를 파일로 생성하는 방법으로 기술하였습니다.
