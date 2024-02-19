@@ -416,14 +416,14 @@ NCSサービスを使用しながら経験する可能性があるさまざま�
 
 FluentBitの詳細は[Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/)を参照してください。
 Logstashの詳細は[Logstash Reference](https://www.elastic.co/guide/en/logstash/current/index.html)を参照してください。
-Log & Crash Search使い方は[Log & Crash Searchコンソール使用ガイド](Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)を参照してください。
+Log & Crash Search使い方は[Log & Crash Searchコンソール使用ガイド](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ja/console-guide/)を参照してください。
 
 > [参考]
 > コンテナ間の一時的な共有ストレージにログをファイルとして作成する方法について説明しました。
 > コンテナのログをファイルで作成する場合、ワークロードのログタブではログ照会ができません。
 #### FluentBitを利用して連動
 
-1. FluentBitでL&Cと連動するためには設定ファイルを作成する必要があります。下記のように設定ファイルを作成してObject Storageにアップロードします。
+* FluentBitでL&Cと連動するためには設定ファイルを作成する必要があります。下記のように設定ファイルを作成してObject Storageにアップロードします。
 
 ```ini
 [SERVICE]
@@ -462,7 +462,7 @@ Log & Crash Search使い方は[Log & Crash Searchコンソール使用ガイド]
     Add logLevel       {ログレベル}
 ```
 
-2. テンプレートに下記のようにコンテナを追加して作成します。
+* テンプレートに下記のようにコンテナを追加して作成します。
 
 | 項目 | alpine(ログ作成) | fluentbit(ログ送信) |
 | --- | -------------- | ----------------- |
@@ -471,11 +471,11 @@ Log & Crash Search使い方は[Log & Crash Searchコンソール使用ガイド]
 | コマンド | ログをファイルに残すために下記のように入力します。<ul><li>sh,-c,while true; do echo "hello world" >> /var/{ワークロード名}/{ログファイル名}; sleep 1; done</li></ul> |  |
 | コンフィグマップ |  | Object Storageにアップロードしたfluentbit設定ファイルをインポートできる情報を追加します。<br>>コンテナのマウントパスは下記のように入力します。<ul><li>/fluent-bit/etc/fluent-bit.conf</li></ul> |
 
-3. 該当テンプレートでワークロードを作成すると、alpineで作成したログをL&Cで検索して照会できます。
+* 該当テンプレートでワークロードを作成すると、alpineで作成したログをL&Cで検索して照会できます。
 
 #### Logstashを利用して連動
 
-1. LogstashでL&Cと連動するためには設定ファイルの作成が必要です。下記のように設定ファイルを作成してObject Storageにアップロードします。
+* LogstashでL&Cと連動するためには設定ファイルの作成が必要です。下記のように設定ファイルを作成してObject Storageにアップロードします。
 
 ```ini
 input {
@@ -511,7 +511,7 @@ output {
   }
 }
 ```
-2. テンプレートに下記のようにコンテナを追加して作成します。
+* テンプレートに下記のようにコンテナを追加して作成します。
 | 項目 | alpine(ログ作成) | logstash(ログ送信) |
 | --- | -------------- | ---------------- |
 | コンテナ名 | alpine | logstash |
@@ -520,4 +520,4 @@ output {
 | コマンド | ログをファイルに残すために下記のように入力します。<ul><li>sh,-c,while true; do echo "hello world" >> /var/{ワークロード名}/{ログファイル名}; sleep 1; done</li></ul> |  |
 | 環境変数 |  | XPACK\_MONITORING\_ENABLED : false |
 | コンフィグマップ |  | Object Storageにアップロードしたlogstash設定ファイルをインポートできる情報を追加します。<br>コンテナのマウントパスは下記のように入力します。<ul><li>/usr/share/logstash/pipeline/logstash.conf</li></ul> |
-3. 該当テンプレートでワークロードを作成すると、alpineで作成したログをL&Cで検索して照会できます。
+* 該当テンプレートでワークロードを作成すると、alpineで作成したログをL&Cで検索して照会できます。

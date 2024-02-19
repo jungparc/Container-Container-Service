@@ -420,7 +420,7 @@ Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드]
 
 #### FluentBit을 이용하여 연동
 
-1. FluentBit에서 L&C와 연동하기 위해서는 설정 파일 작성이 필요합니다. 아래와 같이 설정 파일을 작성하여 Object Storage에 업로드합니다.
+* FluentBit에서 L&C와 연동하기 위해서는 설정 파일 작성이 필요합니다. 아래와 같이 설정 파일을 작성하여 Object Storage에 업로드합니다.
 
 ```ini
 [SERVICE]
@@ -459,7 +459,7 @@ Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드]
     Add logLevel       {로그 레벨}
 ```
 
-2. 템플릿에 아래와 같이 컨테이너를 추가하여 생성합니다.
+* 템플릿에 아래와 같이 컨테이너를 추가하여 생성합니다.
 
 | 항목 | alpine(로그 생성) | fluentbit(로그 전송) |
 | --- | -------------- | ----------------- |
@@ -468,11 +468,11 @@ Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드]
 | 명령 | 로그를 파일에 남기기 위해서 아래와 같이 입력합니다.<ul><li>sh,-c,while true; do echo "hello world" >> /var/{워크로드 이름}/{로그 파일명}; sleep 1; done</li></ul> |  |
 | 컨피그맵 |  | Object Storage에 업로드한 fluentbit 설정 파일을 가져올 수 있는 정보를 추가합니다.<br>컨테이너 마운트 경로는 아래와 같이 입력합니다.<ul><li>/fluent-bit/etc/fluent-bit.conf</li></ul> |
 
-3. 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
+* 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
 
 #### Logstash를 이용하여 연동
 
-1. Logstash에서 L&C와 연동하기 위해서는 설정 파일 작성이 필요합니다. 아래와 같이 설정 파일을 작성하여 Object Storage에 업로드합니다.
+* Logstash에서 L&C와 연동하기 위해서는 설정 파일 작성이 필요합니다. 아래와 같이 설정 파일을 작성하여 Object Storage에 업로드합니다.
 
 ```ini
 input {
@@ -511,7 +511,7 @@ output {
 }
 ```
 
-2. 템플릿에 아래와 같이 컨테이너를 추가하여 생성합니다.
+* 템플릿에 아래와 같이 컨테이너를 추가하여 생성합니다.
 
 | 항목 | alpine(로그 생성) | logstash(로그 전송) |
 | --- | -------------- | ---------------- |
@@ -522,4 +522,4 @@ output {
 | 환경 변수 |  | XPACK\_MONITORING\_ENABLED : false |
 | 컨피그맵 |  | Object Storage에 업로드한 logstash 설정 파일을 가져올 수 있는 정보를 추가합니다.<br>컨테이너 마운트 경로는 아래와 같이 입력합니다.<ul><li>/usr/share/logstash/pipeline/logstash.conf</li></ul> |
 
-3. 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
+* 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
