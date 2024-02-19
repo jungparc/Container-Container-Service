@@ -373,8 +373,8 @@ In a production environment, it is recommended to add only the roles you need. T
 
 * Provides MIG(Multi Instance GPU of A100 40GB Card.
 * For details, refer to the following links.
-    * [https://www.nvidia.com/en-us/technologies/multi-instance-gpu/](https://www.nvidia.com/en-us/technologies/multi-instance-gpu/)
-    * [https://www.nvidia.com/en-us/data-center/a100/](https://www.nvidia.com/en-us/data-center/a100/)
+    * [https://www.nvidia.cn/technologies/multi-instance-gpu/](https://www.nvidia.cn/technologies/multi-instance-gpu/)
+    * [https://www.nvidia.cn/data-center/a100/](https://www.nvidia.cn/data-center/a100/)
 * GPU CUDA version is 11.7.
 * GPU Driver version is 515.86.01.
 * Container can only use one type of GPU.
