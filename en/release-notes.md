@@ -1,4 +1,14 @@
 ## Container > NHN Container Service(NCS) > Release Notes
+### February 27, 2024
+#### Added Features
+* Added the feature to set container arguments (Args).
+* Added the feature to select a workload deployment controller.
+* Added the internal load balancer feature.
+* Added the feature to integrate with Private DNS for workloads.
+
+#### Feature Updates
+* Temporary shared storage is provided between containers.
+
 ### November 28, 2023
 #### Added Features
 * Added container settings features.

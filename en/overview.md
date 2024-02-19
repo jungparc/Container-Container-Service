@@ -14,6 +14,8 @@ You can use this service to run containers without configuring container executi
 * Zero-downtime deployment is possible through the rolling update method.
 * You can schedule container execution by setting up a time-based schedule.
 * You can use the files uploaded to Object Storage or confidential data stored in Secure Key Manager by mounting them on container directories.
+* An internal load balancer that is only available in NCS is provided.
+* You can auto-register container IPs to Private DNS.
 
 ## Configuration and Terms
 
