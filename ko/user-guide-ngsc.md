@@ -311,7 +311,7 @@ NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
 ### NCS 최소 역할 부여
 프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 서비스를 이용하기 위한 최소 역할은 다음과 같습니다.
 
-| 기능 | Infrastructrue NCS ADMIN | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
+| 기능 | Infrastructure NCS ADMIN | Infrastructure MEMBER | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
 | 템플릿 조회 |  | O |  |  |
 | 템플릿 생성 | O |  | O |  |
