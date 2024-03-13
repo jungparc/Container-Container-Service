@@ -330,7 +330,7 @@ To use NCS, you need roles for the following resources.
 ### Assign Minimum Roles for NCS
 In a production environment, it is recommended to add only the roles you need. The minimum roles to use the NCS service are as follows.
 
-| Features | Infrastructrue NCS ADMIN | Infrastructrue MEMBER | Infrastructrue Security Group ADMIN | Infrastructrue Load Balancer ADMIN |
+| Features | Infrastructure NCS ADMIN | Infrastructure MEMBER | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
 | Retrieve Template |  | O |  |  |
 | Create Template | O |  | O |  |
