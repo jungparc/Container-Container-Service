@@ -356,40 +356,45 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 
 삭제할 워크로드를 선택하고 **워크로드 삭제**를 클릭하면 삭제됩니다.
 
-## NCS 역할
-NCS 역할을 설정하여 서비스 및 리소스에 액세스할 수 있는 역할을 제어할 수 있습니다.
-예를 들어 'NCS 관리자'는 템플릿과 워크로드에 대한 생성, 조회 및 관리할 수 있는 역할을 가지며, 'NCS 사용자'는 템플릿과 워크로드에 대한 조회 역할만 갖도록 설정할 수 있습니다.
+## NCS 서비스 이용 역할
+역할을 설정하여 NCS 서비스 및 리소스에 액세스할 수 있는 역할을 제어할 수 있습니다.
 
-### NCS 실행 역할 추가
+### NCS 서비스 이용 역할 수정
 NCS에 대한 실행 역할은 NHN Cloud Console 화면에서 설정합니다.
-1. **프로젝트 관리** 화면에서 **멤버 관리** 메뉴를 선택합니다.
-2. 역할을 변경할 멤버를 클릭합니다.
-3. **역할 추가**를 선택하여, 서비스별 역할을 추가합니다.
+1. **프로젝트** 화면에서 **멤버 관리** 탭을 클릭합니다.
+2. 역할을 변경할 멤버를 선택합니다.
+3. 하단의 **역할 수정**를 클릭하여, 서비스별 역할을 추가합니다.
     * 왼쪽 영역에서 기본 인프라 서비스를 선택한 후, 오른쪽 영역에서 역할을 선택합니다.
-4. 선택된 역할을 확인하여 추가하거나 삭제할 수 있습니다.
-5. **추가**를 클릭하여 프로젝트 멤버에 변경된 역할을 적용합니다.
-6. 역할이 추가되면 멤버를 선택하여 상세 역할 내역을 확인할 수 있습니다.
+4. **완료**를 클릭하여 프로젝트 멤버에 변경된 역할을 적용합니다.
 
-역할 그룹에 대한 사용 가이드는 콘솔 가이드를 참고하세요.
+역할에 대한 자세한 내용은 [멤버 관리](/nhncloud/ko/console-guide/#_22)를 참고하세요.
 
-### 역할 세부 정보
-NCS를 이용하기 위해 다음 리소스에 대한 역할이 필요합니다.
-* NCS - NCS의 리소스를 조회, 생성 및 관리하도록 허용합니다.
-* Infrastructure - NCS 사용자는 VPC, Subnet 리소스를 조회하도록 허용합니다. 이는 NCS에서 템플릿과 워크로드를 조회할 때 필요합니다.
-* Load Balancer - NCS 사용자는 Infrastructure Load Balancer 리소스를 생성, 관리하도록 허용합니다. 이는 NCS에서 워크로드의 Load Balancer를 사용할 때 필요합니다.
-* Security Group - NCS 사용자는 Infrastructure Security Group 리소스를 생성, 관리하도록 허용합니다. 이는 NCS에서 템플릿에 대한 Security Group을 사용할 때 필요합니다.
+### 역할 세부 정리
+NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
+
+| 역할 | 권한 |
+| --- | --- |
+| Infrastructure MEMBER | 기본 인프라 서비스 Read(읽기) |
+| Infrastructure NCS ADMIN | NCS Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure Security Group ADMIN | Load Balancer Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+| Infrastructure Load Balancer ADMIN | Security Group Create(생성), Read(읽기), Update(갱신), Delete(삭제) |
+
+> [참고]
+> Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, Infrastructure Security Group ADMIN 역할은 Infrastructure MEMBER 역할을 포함합니다.
+> Infrastructure ADMIN은 기본 인프라 서비스의 모든 역할을 포함합니다. 
+
 
 ### NCS 최소 역할 부여
-프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 서비스를 이용하기 위한 최소 역할은 다음과 같습니다.
+프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할**은 다음과 같습니다.
 
-| 기능 | Infrastructure NCS ADMIN | Infrastructure MEMBER | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
+| 기능 | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
-| 템플릿 조회 |  | O |  |  |
-| 템플릿 생성 | O |  | O |  |
-| 템플릿 삭제 | O |  | O |  |
-| 워크로드 조회 |  | O |  |  |
-| 워크로드 생성 및 변경 | O |  | O | O |
-| 워크로드 삭제 | O |  | O | O |
+| 템플릿 조회 | O |  |  |  |
+| 템플릿 생성 |  | O | O |  |
+| 템플릿 삭제 |  | O | O |  |
+| 워크로드 조회 | O |  |  |  |
+| 워크로드 생성 및 변경 |  | O | O | O |
+| 워크로드 삭제 |  | O | O | O |
 
 ## 참고 사항
 
