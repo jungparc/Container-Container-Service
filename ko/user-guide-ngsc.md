@@ -367,7 +367,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 
 ### NCS 최소 역할 부여
-프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할**은 다음과 같습니다.
+프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할들**은 다음과 같습니다.
 
 | 기능 | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
@@ -377,6 +377,10 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 | 워크로드 조회 | O |  |  |  |
 | 워크로드 생성 및 변경 |  | O | O | O |
 | 워크로드 삭제 |  | O | O | O |
+
+> [참고]
+> 템플릿을 생성하기 위해서는 Infrastructure NCS ADMIN과 Infrastructure Security Group ADMIN 권한이 필요합니다.
+> Infrastructure NCS ADMIN 권한만으로는 조회만 가능합니다.
 
 ## 참고 사항
 
