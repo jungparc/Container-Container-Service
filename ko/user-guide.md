@@ -82,7 +82,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | CPU | 템플릿의 최신 버전에 정의된 컨테이너들의 CPU 수를 더한 수 |
 | GPU | 템플릿의 최신 버전에 정의된 컨테이너들의 GPU 수를 더한 수 |
 | 생성일 | 템플릿이 생성된 날짜 |
-| VPC | 템플릿에 설정된 VPC 뒤|
+| VPC | 템플릿에 설정된 VPC |
 | 서브넷 | 템플릿에 설정된 서브넷 |
 | DNS | 템플릿에 설정된 DNS Server 정보 |
 | HostAliases | 템플릿에 설정된 HostAliases 정보 |

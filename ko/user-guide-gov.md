@@ -14,7 +14,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 템플릿 설명 | 템플릿에 대한 설명. 255자 이내로 입력할 수 있습니다. |
 | 컨테이너 이름 | 컨테이너의 이름. 253자 이내의 영문 소문자와 숫자, 일부 기호(`-`)만 입력할 수 있습니다. |
 | 컨테이너 유형 | 컨테이너의 유형<br><ul><li>일반: 실행 상태가 유지되어야 하는 컨테이너</li><li>초기화: 일반 컨테이너 실행 전 완료되어야 하는 컨테이너</li></ul>|
-| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/user-guide/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
+| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/gov-user-guide/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
 | 레지스트리 유형 | 레지스트리의 유형. 퍼블릭 또는 프라이빗을 선택할 수 있습니다. |
 | 이미지 URL | 컨테이너 이미지의 정보. 255자 이내의 영문 소문자와 숫자, 일부 기호(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)만 입력할 수 있습니다. |
 | 레지스트리 아이디 | 프라이빗 레지스트리 인증에 사용되는 아이디 |
@@ -29,7 +29,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 수명 주기 훅 | 컨테이너의 생성, 종료 시점에 실행할 커맨드를 설정할 수 있습니다.<br>생성 직후에 입력한 커맨드가 실패한다면 컨테이너가 재시작됩니다.<br>커맨드 실행 전에 컨테이너가 종료되는 경우 커맨드가 실행되지 않을 수 있습니다.<ul><li>워크로드 작업의 GracePeriodSeconds는 30초입니다.</li></ul>생성 직후(postStart) 예) bash,-c,curl $URL/postStart <br>종료 직전(preStop) 예) bash,-c,curl $URL/preStop |
 | 컨피그맵 | Object Storage에 업로드한 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다. <ul><li>Appkey: 파일 데이터를 사용할 프로젝트의 Object Storage 서비스의 Appkey를 입력합니다.</li><li>User Access Key: Object Storage 서비스에 접근하는 사용자의 User Access Key를 입력합니다. User Access Key는 NHN Cloud 콘솔의 계정 > **API 보안 설정** 페이지에서 생성 및 확인할 수 있습니다.</li><li>User Secret Key: Object Storage 서비스에 접근하는 사용자의 Secret Access Key를 입력합니다. Secret Access Key는 NHN Cloud 콘솔의 계정 > **API 보안 설정** 페이지에서 생성 및 확인할 수 있습니다.</li><li>오브젝트 URL: 오브젝트 다운로드 URL을 입력합니다. </li><li>컨테이너 마운트 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>입력한 경로에 파일이 마운트됩니다.</li></ul></li></ul> |
 | 시크릿 | Secure Key Manager에 저장한 기밀 데이터 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다. <ul><li>키 아이디: Secret Key Manager 서비스의 기밀 데이터 유형의 아이디를 입력합니다.</li><li>컨테이너 마운트 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>입력한 경로에 파일이 마운트됩니다.</li></ul></li></ul> |
-| NAS 스토리지 연결 | 컨테이너에 연결할 NAS 스토리지를 입력합니다.<ul><li>이름: 스토리지 이름. 63자 이내의 영문 소문자와 숫자, 일부 기호(-)만 입력할 수 있습니다.</li><li>NAS 연결 경로: NAS 스토리지의 연결 정보를 입력합니다. <ul><li>NAS 스토리지를 사용하는 경우 **Storage** \> **NAS** 페이지에서 연결할 NAS 스토리지의 연결 정보를 입력합니다. 사용 방법은 [NAS 사용 가이드](/Storage/NAS/ko/console-guide/)를 참고하세요.</li><li>별도 구축된 NFSv3 서버를 사용하는 경우 NFS 서버의 마운트 포인트를 입력합니다.</li></ul></li><li>컨테이너 연결 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>`$컨테이너 연결 경로`/`$스토리지 이름`에 마운트됩니다.</li></ul></li></ul>템플릿과 동일한 VPC를 사용하는 NAS 스토리지만 사용할 수 있습니다. |
+| NAS 스토리지 연결 | 컨테이너에 연결할 NAS 스토리지를 입력합니다.<ul><li>이름: 스토리지 이름. 63자 이내의 영문 소문자와 숫자, 일부 기호(-)만 입력할 수 있습니다.</li><li>NAS 연결 경로: NAS 스토리지의 연결 정보를 입력합니다. <ul><li>NAS 스토리지를 사용하는 경우 **Storage** \> **NAS** 페이지에서 연결할 NAS 스토리지의 연결 정보를 입력합니다. 사용 방법은 [NAS 사용 가이드](/Storage/NAS/ko/console-guide-gov/)를 참고하세요.</li><li>별도 구축된 NFSv3 서버를 사용하는 경우 NFS 서버의 마운트 포인트를 입력합니다.</li></ul></li><li>컨테이너 연결 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>`$컨테이너 연결 경로`/`$스토리지 이름`에 마운트됩니다.</li></ul></li></ul>템플릿과 동일한 VPC를 사용하는 NAS 스토리지만 사용할 수 있습니다. |
 | 상태 점검 | 컨테이너의 상태를 점검하는 명령을 구성할 수 있습니다.<ul><li>활성 여부(LivenessProbe): 컨테이너가 동작 중인지 여부를 확인합니다.</li><li>시작 여부(startupProbe): 컨테이너 내의 애플리케이션이 시작되었는지 여부를 확인합니다.</li></ul>만약 상태 점검이 실패한다면 컨테이너가 재시작됩니다. |
 | 실행 제한 시간 | 초기화 컨테이너만 실행 제한을 설정할 수 있습니다.<br>설정하지 않는 경우 30초로 자동 설정됩니다.<br>실행 제한 시간을 초과하는 경우 워크로드는 Failed 상태로 변경됩니다. |
 | 네트워크 | VPC에 정의된 서브넷 중 워크로드에 연결할 서브넷 |
@@ -358,7 +358,7 @@ NCS에 대한 실행 역할은 NHN Cloud Console 화면에서 설정합니다.
     * 왼쪽 영역에서 기본 인프라 서비스를 선택한 후, 오른쪽 영역에서 역할을 선택합니다.
 4. **완료**를 클릭하여 프로젝트 멤버에 변경된 역할을 적용합니다.
 
-역할에 대한 자세한 내용은 [멤버 관리](/nhncloud/ko/console-guide/#_22)를 참고하세요.
+역할에 대한 자세한 내용은 [멤버 관리](/nhncloud/ko/console-guide-gov/#_23)를 참고하세요.
 
 ### 역할 세부 정리
 NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
@@ -394,7 +394,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 * NCS 서비스는 한국(판교), 한국(광주) 리전에서만 사용할 수 있습니다.
 
 ### 리소스 제공 정책
-* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요.
+* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy-gov/#nhn-container-servicencs)을 참고하세요.
 
 ### 템플릿/컨테이너
 
@@ -434,7 +434,7 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 | 에러 메시지 | 설명 |
 | --- | --- |
 | {{.Resource}} 리소스가 부족하여 워크로드를 생성할 수 없습니다. | NCS 환경의 리소스가 부족하여 워크로드를 생성할 수 없습니다.<br>잠시 후 다시 시도하거나 고객 센터에 문의하세요. |
-| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요. |
+| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy-gov/#nhn-container-servicencs)을 참고하세요. |
 
 ## NHN Cloud 서비스 연동
 
@@ -446,7 +446,7 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 
 FluentBit에 대한 자세한 내용은 [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/)을 참고하세요.
 Logstash에 대한 자세한 내용은 [Logstash Reference](https://www.elastic.co/guide/en/logstash/current/index.html)를 참고하세요.
-Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고하세요.
+Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/gov-console-guide/)를 참고하세요.
 
 > [참고]
 > 컨테이너 간 임시 공유 스토리지에 로그를 파일로 생성하는 방법으로 기술하였습니다.
