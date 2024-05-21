@@ -49,22 +49,22 @@ Enter the required information and click **Create Template** button to create Te
 Temporary shared storage between containers is provided` in the path /var/${workload name}`.
 
 > [Note]
-You can add only one port of the same protocol to Template.
-TCP and HTTP, HTTPS, and TERMINATED_HTTPS cannot use the same port.
-Using the HTTP and TERMINATED_HTTPS protocols adds an X-Forwarded-For Header that allows the load balancer to identify the Client IP.
+> You can add only one port of the same protocol to Template.
+> TCP and HTTP, HTTPS, and TERMINATED_HTTPS cannot use the same port.
+> Using the HTTP and TERMINATED_HTTPS protocols adds an X-Forwarded-For Header that allows the load balancer to identify the Client IP.
 
 > [Note]
-Each container is provided with 20 GB of ephemeral storage. If you exceed the provided usage, the container is restarted and the ephemeral storage is reset.
+> Each container is provided with 20 GB of ephemeral storage. If you exceed the provided usage, the container is restarted and the ephemeral storage is reset.
 
 > [Note]
-The Configmaps and secrets use the information from when the template was created. If the original file or secret data is modified, the information in the already created template is not affected.
-Files are only accessible to the project Object Storage within the same organization.
-Confidential data utilizes Secure Key Manager in the same project. To use confidential data, you must first enable the Secure Key Manager service.
+> The Configmaps and secrets use the information from when the template was created. If the original file or secret data is modified, the information in the already created template is not affected.
+> Files are only accessible to the project Object Storage within the same organization.
+> Confidential data utilizes Secure Key Manager in the same project. To use confidential data, you must first enable the Secure Key Manager service.
 
 > [Note]
-Init containers can only use TCP, UDP protocols.
-Init containers cannot use lifecycle hooks, health checks.
-Init containers are not included in load balancers.
+> Init containers can only use TCP, UDP protocols.
+> Init containers cannot use lifecycle hooks, health checks.
+> Init containers are not included in load balancers.
 
 ### Retrieve Template
 
@@ -132,7 +132,7 @@ After clicking a specific version, you can go to **Container** tab to check the 
 | CPU | Number of CPU assigned to Container |
 | GPU | Information on GPU assigned to Container |
 | Port | Ports used in Containers |
-| Order | Command to run when container starts |
+| Command | Command to run when container starts |
 | Argument | Arguments to be passed when the container is started |
 | Task Directory | Task Directory of Container |
 | Environment Variables | Environment variables set in Container |
@@ -151,7 +151,7 @@ You can click a specific version and then go to the **Workload in Use** tab to s
 Select the version you want to delete and click **Delete Version** button to delete it.
 
 > [Note]
-You cannot delete a version if there is a workload using the version.
+> You cannot delete a version if there is a workload using the version.
 
 ## Workload
 
@@ -159,7 +159,7 @@ Service that executes containers using the Template that you defined.
 
 ### Create Workload
 
-Go to \*\*Container > NHN Container Service (NCS) \** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
+Go to **Container > NHN Container Service (NCS)** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
 
 | Items | Descriptions |
 | --- | --- |
@@ -178,7 +178,7 @@ Go to \*\*Container > NHN Container Service (NCS) \** page, click **Workload** t
 Enter the required information and click **Create Workload** button to create Workload.
 
 > [Note]
-The meaning of each field in cron expression (* * * * \*) for the scheduled execution is as follows.
+> The meaning of each field in cron expression (* * * * \*) for the scheduled execution is as follows.
 >
 > | Field name | Acceptable range of values | Allowed special characters |
 > | --- | --- | --- |
@@ -219,7 +219,7 @@ You can click on specific Workload to view details from the **Basic Information*
 | Internal Load Balancer | Internal load balancer information |
 
 > [Note]
-Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
+> Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
 
 #### Running Container
 
@@ -237,7 +237,7 @@ You can view Container details by clicking a specific workload and then clicking
 | CPU | Number of CPU assigned to Container |
 | GPU | Information on GPU assigned to Container |
 | Port | Ports used in Containers |
-| Order | Command to run when container starts |
+| Command | Command to run when container starts |
 | Argument | Arguments to be passed when the container is started |
 | Task Directory | Task Directory of Container |
 | Environment Variables | Environment variables set in Container |
@@ -280,8 +280,8 @@ After clicking on specific Workload, you can view Event information from Contain
 | Number of occurrences | Number of times event occurred |
 
 > [Note]
-Events are only kept for maximum 30 days, so information older than 30 days cannot be checked.
-Detailed reasons for the current and last state of the container can also be found in the events.
+> Events are only kept for maximum 30 days, so information older than 30 days cannot be checked.
+> Detailed reasons for the current and last state of the container can also be found in the events.
 
 #### Log
 
@@ -289,7 +289,7 @@ After clicking a specific workload, you can view logs in Container from **Log** 
 If a lot of logs occurred during the time you want to view, you might only see some of them. If you don't see all the logs, reduce the time range and try again.
 
 > [Note]
-Logs are kept for 2 months.
+> Logs are kept for 2 months.
 
 #### Workload Execution History
 
@@ -306,7 +306,7 @@ You can view the **Details of workload execution history** by clicking the retri
 
 > [Note]
 The history of the running workload does not show a termination time and the status remains succeeded.
-[Caution]
+> [Caution]
 You cannot check the workload execution history after deleting the workload.
 
 #### Scheduled Execution History
@@ -337,8 +337,8 @@ You can change the running workload by selecting a workload to change and clicki
 If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
 
 > [Note]
-If a workload is in the Pending, Suspended, or Terminated state, you cannot make changes to the load balancer.
-If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
+> If a workload is in the Pending, Suspended, or Terminated state, you cannot make changes to the load balancer.
+> If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
 
 ### Stop/Restart Workload
 If you stop a workload, all tasks in the workload will be terminated.
@@ -346,11 +346,11 @@ If you stop a workload, all tasks in the workload will be terminated.
 If you restart a workload, load balancer IP is changed.
 
 > [Note]
-Depending on your deployment controller, running a workload stop/restart might cause the container IP to change.
+> Depending on your deployment controller, running a workload stop/restart might cause the container IP to change.
 
 > [Caution]
-Logs, events, and ephemeral storage are initialized when the workload is stopped.
-Even if you stop the workload, the scheduled execution history is deleted during the task repeat cycle.
+> Logs, events, and ephemeral storage are initialized when the workload is stopped.
+> Even if you stop the workload, the scheduled execution history is deleted during the task repeat cycle.
 
 ### Delete Workload
 
@@ -478,8 +478,8 @@ For more information about [Logstash](https://www.elastic.co/guide/en/logstash/c
 To learn how to use Log & Crash Search, see the [Log & Crash Search Console User Guide](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/).
 
 > [Note]
-We've described how to create logs as a file on temporary shared storage between containers.
-If you generate container logs as files, you cannot view them in the Logs tab of the workload.
+> We've described how to create logs as a file on temporary shared storage between containers.
+> If you generate container logs as files, you cannot view them in the Logs tab of the workload.
 
 #### Integration through FluentBit
 
