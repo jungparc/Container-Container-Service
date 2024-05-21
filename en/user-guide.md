@@ -11,7 +11,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Items | Descriptions |
 | --- | --- |
 | Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
-| Template Description | Template Description, you c |
+| Template Description | Template Description |
 | Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
 | Container Type | Type of container<br><ul><li>General: Containers that must remain running</li><li>Init: Containers that must be completed before running a normal container</li></ul>|
 | Container Registry | Registry of Container Image<br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/en/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
@@ -178,7 +178,7 @@ Go to **Container > NHN Container Service (NCS)** page, click **Workload** tab, 
 Enter the required information and click **Create Workload** button to create Workload.
 
 > [Note]
-> The meaning of each field in cron expression (* * * * \*) for the scheduled execution is as follows.
+> The meaning of each field in cron expression (\* \* \* \* \*) for the scheduled execution is as follows.
 >
 > | Field name | Acceptable range of values | Allowed special characters |
 > | --- | --- | --- |
@@ -473,9 +473,9 @@ When workloads are deleted or restarted, logs are deleted and cannot be viewed. 
 
 The following describes how to create a logging agent (FluentBit, Logstash) as a sidecar container and integrate it with L&C.
 
-For more information about [FluentBit](https://docs.fluentbit.io/manual/), see [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/).
-For more information about [Logstash](https://www.elastic.co/guide/en/logstash/current/index.html), see [Logstash Reference](https://www.elastic.co/guide/en/logstash/current/index.html).
-To learn how to use Log & Crash Search, see the [Log & Crash Search Console User Guide](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/).
+For more information about FluentBit, see [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/).
+For more information about Logstash, see [Logstash Reference](https://www.elastic.co/guide/en/logstash/current/index.html).
+To learn how to use Log & Crash Search, see the [Log & Crash Search Console User Guide](/Data%20&%20Analytics/Log%20&%20Crash%20Search/en/console-guide/).
 
 > [Note]
 > We've described how to create logs as a file on temporary shared storage between containers.
