@@ -11,9 +11,10 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Items | Descriptions |
 | --- | --- |
 | Template Name | Template Name, you can only enter the name of Template, lowercase letters within maximum 32 characters, numbers, and '-' . |
-| Descriptions | Template Description, you c |
+| Template Description | Template Description |
 | Containers Name | Containers Name. You can enter lowercase letters, numbers, and '-' within maximum 253 characters. |
-| Container Registry | Registry of Container Image <br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/zh/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
+| Container Type | Type of container<br><ul><li>General: Containers that must remain running</li><li>Init: Containers that must be completed before running a normal container</li></ul>|
+| Container Registry | Registry of Container Image<br><ul><li>For how to use NHN Container Registry (NCR), refer to [NCR Usage Guide](/Container/NCR/zh/user-guide/#check-the-user-access-key-and-secret-key).</li><li>When using Docker Hub or other Registry, you have to select Registry Type.</li></ul> |
 | Registry Type | You can select from type of Registry, Public or Private. |
 | Image URL | Information about Container image, can be entered maximum 255 characters of alphabetic characters and numbers, only (`-`, `_`, `.`, `,` `/`, `@`, and `:`. |
 | Registry ID | ID used for Private Registry authentication |
@@ -28,12 +29,16 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Task Directory | Task Directory of Container takes precedence over the WORKDIR specified in the image. |
 | Environment Variables | Environment variables to set in Container |
 | Life Cycle Hook | You can set commands to run when the container is created and terminated.<br>If the command entered immediately after creation fails, the container is restarted.<br>If the container exits before the command runs, the command might not run.<ul><li>The GracePeriodSeconds for the workload job is 30 seconds.</li></ul>Immediately after creation (postStart) Example) bash,-c,curl $URL/postStart <br>Just before exit (preStop) Example) bash,-c,curl $URL/preStop |
-| File | Files uploaded to Object Storage are available by mounting them in the container directory. <ul><li>Appkey: Enter the appkey for the Object Storage service in your project that will use the file data.</li><li>User Access Key: Enter the user access key of the user accessing the Object Storage service. You can create and check the User Access Key on the Account > **API Security Settings** page of NHN Cloud Console.</li><li>User Secret Key: Enter the secret access key of the user accessing the Object Storage service. You can create and check the Secret Access Key on the Account > **API Security Settings** page of NHN Cloud Console.</li><li>Object URL: Enter the URL to download the object. </li><li>Container mount path: Enter the mount path for the container.<ul><li>The file will be mounted at the path you entered.</li></ul></li></ul> |
-| Confidential Data | You can use the confidential data files you store in Secure Key Manager by mounting them in a container directory. <ul><li>Confidential data ID: Enter the confidential data ID for the Secret Key Manager service.</li><li>Container mount path: Enter the mount path for the container.<ul><li>The file will be mounted at the path you entered.</li></ul></li></ul> |
-| NAS Storage | Enter the NAS storage you want to connect to the container.<ul><li>Name: Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters.</li><li>NAS connection path: Enter the connection information of the NAS storage. <ul><li>If you're using NAS storage, go to **Storage** > **NAS** page, enter the connection information for the NAS storage you want to connect to. For instructions, see the [NAS User Guide](/Storage/NAS/zh/console-guide/).</li><li>If you're using a separately deployed NFSv3 server, enter the mount point of the NFS server.</li></ul></li><li>Container connection path: Enter the mount path for the container.<ul><li>Mounted to `$container connection path`/`$storage name`.</li></ul></li></ul>Only NAS storage that uses the same VPC as the template can be used. |
+| ConfigMap | Files uploaded to Object Storage are available by mounting them in the container directory. <ul><li>Appkey: Enter the appkey for the Object Storage service in your project that will use the file data.</li><li>User Access Key: Enter the user access key of the user accessing the Object Storage service. You can create and check the User Access Key on the Account > **API Security Settings** page of NHN Cloud Console.</li><li>User Secret Key: Enter the secret access key of the user accessing the Object Storage service. You can create and check the Secret Access Key on the Account > **API Security Settings** page of NHN Cloud Console.</li><li>Object URL: Enter the URL to download the object. </li><li>Container mount path: Enter the mount path for the container.<ul><li>The file will be mounted at the path you entered.</li></ul></li></ul> |
+| Secret | You can use the confidential data files you store in Secure Key Manager by mounting them in a container directory. <ul><li>Key ID: Enter the ID of the confidential data type for the Secret Key Manager service.</li><li>Container mount path: Enter the mount path for the container.<ul><li>The file will be mounted at the path you entered.</li></ul></li></ul> |
+| Connecting NAS storage | Enter the NAS storage you want to connect to the container.<ul><li>Name: Storage Name, which can be entered lowercase letters, numbers, and '-' maximum 63 characters.</li><li>NAS connection path: Enter the connection information of the NAS storage. <ul><li>If you're using NAS storage, go to **Storage** > **NAS** page, enter the connection information for the NAS storage you want to connect to. For instructions, see the [NAS User Guide](/Storage/NAS/zh/console-guide/).</li><li>If you're using a separately deployed NFSv3 server, enter the mount point of the NFS server.</li></ul></li><li>Container connection path: Enter the mount path for the container.<ul><li>Mounted to `$container connection path`/`$storage name`.</li></ul></li></ul>Only NAS storage that uses the same VPC as the template can be used. |
 | Health Check | You can configure commands to check the health of a container.<ul><li>Activated or not (LivenessProbe): Determines whether the container is working.</li><li>Started or not (startupProbe): Determines whether the application inside the container has started.</li></ul>If the health check fails, the container is restarted. |
-| Subnet | Subnets defined in VPC that connect to Instances |
-| DNS | Set the DNS servers used by the workload.<br>If not set, use 8.8.8.8.<br>If you need Private DNS integration, enter the Private DNS Server IP.  |
+| Execution timeout | Only init containers can set execution timeout.<br>If not set, it is automatically set to 30 seconds.<br>If the execution timeout is exceeded, the workload changes to the Failed state. |
+| Network | Subnets defined in VPC that connect to workload |
+| Template version name | Template version name, you can only enter the name of Template, lowercase letters within maximum 16 characters, numbers, and `-`.|
+| Template version description | Description of the template version, which can be no more than 255 characters.|
+| DNS | Set the DNS servers used by the workload.<br>If not set, use 8.8.8.8.<br>If you need Private DNS integration, enter the Private DNS Server IP. |
+| HostAliases | Set the hostname to the IP address. |
 
 Enter the required information and click **Create Template** button to create Template.
 
@@ -52,13 +57,18 @@ Temporary shared storage between containers is provided` in the path /var/${work
 > Each container is provided with 20 GB of ephemeral storage. If you exceed the provided usage, the container is restarted and the ephemeral storage is reset.
 
 > [Note]
-> The file and confidential data use the information from when the template was created. If the original file or secret data is modified, the information in the already created template is not affected.
-> Files are only accessible to the project Object Storage within the same organization. 
+> The Configmaps and secrets use the information from when the template was created. If the original file or secret data is modified, the information in the already created template is not affected.
+> Files are only accessible to the project Object Storage within the same organization.
 > Confidential data utilizes Secure Key Manager in the same project. To use confidential data, you must first enable the Secure Key Manager service.
+
+> [Note]
+> Init containers can only use TCP, UDP protocols.
+> Init containers cannot use lifecycle hooks, health checks.
+> Init containers are not included in load balancers.
 
 ### Retrieve Template
 
-You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the total of Container resources.
+You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the number of workloads in use, the latest template version, and the number of template versions.
 
 #### Basic Information
 
@@ -67,41 +77,81 @@ You can check specific Template to view details from **Basic Information** tab.
 | Items | Descriptions |
 | --- | --- |
 | Name | Template name and ID |
-| Descriptions | Template Description |
-| Container | Number of Containers defined in Template |
-| CPU | Number of CPUs in Containers defined in the template added |
+| Descriptions | Template description |
+| Container | The number of containers defined in the latest version of the template. |
+| CPU | The CPU count of the containers defined in the latest version of the template plus the number of CPUs |
+| GPU | The number of GPUs in the containers defined in the latest version of the template plus the number of GPUs |
 | Date of Creation | Creation date of Template |
 | VPC | VPC set to Template |
 | Subnet | Subnet set to Template |
+| DNS | DNS server information set in the template |
+| HostAliases | Information on HostAliases set in the template |
+| Latest template version | The latest version created in the template |
+| Number of template versions | Number of versions created for the template |
+| Number of workloads in use | Number of workloads using the template |
 
-#### Container
+#### Workloads in use
 
-After clicking specific Template, you can go to **Container** tab to check the list of Containers have added to Template. You can select a specific container from the container list to check its details.
-
-| Items | Descriptions |
-| --- | --- |
-| Containers Name | Container Name |
-| Image URL | Container Image Information |
-| Memory | Memory assigned to Container |
-| CPU | Number of CPU assigned to Container |
-| GPU | Information on GPU assigned to Container |
-| Port | Ports used in Containers |
-| Command | Command to run when container starts |
-| Task Directory | Task Directory of Container |
-| Argument | Arguments to be passed when the container is started |
-| Environment Variables | Environment variables set in Container |
-| Storage | Storage connected to Container |
-| Life Cycle Hook | Lifecycle hooks set on a container |
-| File | Object files and mount paths associated with the container |
-| Confidential Data | Confidential data associated with a container and its mount path |
-| Health Check | Check on the health of a container |
+You can see a list of workloads that are using the template by clicking a specific template and then going to the **Workload in use** tab.
 
 ### Delete Template
 
 Select the template you want to delete and click **Delete Template** button to delete it.
 
 > [Note]
-> You cannot delete Template if there is a workload using the template.
+You cannot delete Template if there is a workload using the template.
+
+### Create Version
+
+In the list of templates, click **View Version**, and then click **Create Version**. The differences between creating a template and creating a version are shown below.
+
+| Items | Descriptions |
+| --- | --- |
+| Template version | Select the new version of the baseline template. |
+| Modify Container | The information set in the baseline template version is automatically added. For the AppKey, User Access Key, and User Secret Key information for registry accounts and configmaps, you can choose to use existing information or not. |
+| Immediate deployment | You can choose whether to apply the new version of the template immediately to workloads that are using the baseline template version. If you enable immediate deployment, the template on the workload changes on a rolling update basis. |
+| Network | You can't select the subnet to connect to your workload in Create Version; it uses the subnet you selected in Create Template. |
+
+### View Version
+
+You can view the version list by clicking **View Version**in the template list. The version list shows the total number of container resources.
+
+#### Basic Information
+You can click a specific version to view details from the **Basic Information** tab.
+
+#### Container
+
+After clicking a specific version, you can go to **Container** tab to check the list of Containers have added to the version. You can select a specific container from the container list to check its details.
+
+| Items | Descriptions |
+| --- | --- |
+| Containers Name | Container Name |
+| Type | Container Type |
+| Image URL | Container Image Information |
+| Memory | Memory assigned to Container |
+| CPU | Number of CPU assigned to Container |
+| GPU | Information on GPU assigned to Container |
+| Port | Ports used in Containers |
+| Command | Command to run when container starts |
+| Argument | Arguments to be passed when the container is started |
+| Task Directory | Task Directory of Container |
+| Environment Variables | Environment variables set in Container |
+| Storage | Storage connected to Container |
+| Life Cycle Hook | Lifecycle hooks set on a container |
+| ConfigMap | Object files and mount paths associated with the container |
+| Secret | Confidential data associated with a container and its mount path |
+| Health Check | Check on the health of a container |
+
+#### Workloads in use
+
+You can click a specific version and then go to the **Workload in Use** tab to see a list of workloads that are using that version.
+
+### Delete Version
+
+Select the version you want to delete and click **Delete Version** button to delete it.
+
+> [Note]
+> You cannot delete a version if there is a workload using the version.
 
 ## Workload
 
@@ -109,16 +159,17 @@ Service that executes containers using the Template that you defined.
 
 ### Create Workload
 
-Go to **Container > NHN Container Service (NCS) ** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
+Go to **Container > NHN Container Service (NCS)** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
 
 | Items | Descriptions |
 | --- | --- |
-| Template | Template Name<br><ul><li>Click **Select Template** button to select from Templates created.</li><li>Click **Create Template** button to create and select new Template.</li></ul> |
+| Template | Template Name<br><ul><li>Click **Select Template** button to select from Templates created.</li><li>Click **Select Template Version** button to select from versions created in the template.</li><li>Click **Manage Template** to create a new template.</li></ul> |
 | Name | Workload Name, you can only enter lowercase letters, numbers, and '-' withi maximum 32 characters. |
 | Descriptions | Description of Workload. You can enter maximum 255 characters. |
 | Number of tasks requested. | Number of templates to run, you can enter values between 1 and 100. |
 | Deployment controller| You can select a deployment controller for the workload job.<br><ul><li>Deployment: In a stateless manner, container IPs are fluid and tasks run in parallel.</li><li>StatefulSet: In a stateful manner, container IPs are fixed and tasks run sequentially.</li></ul> |
 | Scheduled execution | You can set up time-based schedules to schedule workload execution.<ul><li>Base time: Specify the timezone for the scheduled task time.</li><li>Cron expression: You can enter the scheduled repeat cycle as a cron expression.</li><li>Number of scheduled execution histories: Enter the maximum number of archived ended scheduled tasks. Archived tasks can check logs, events, and container information.</li><li>Concurrency policy: Specify a concurrency policy for tasks generated by task repeat cycles.<ul><li>Forbid: Do not run a new task unless the existing task completes.</li><li>Replace: The existing task is replaced with a new task. When replaced, no history of the existing task is left behind.</li></ul></li></ul>When you schedule workloads, the number of task request is 1 and the deployment controller is fixed as deployment,<br>If the workload execution interval is 10 minutes or less, you cannot enable the load balancer.|
+| Schedule Termination | You can set a scheduled termination time for your workloads. <ul><li>Base time: Specify the timezone for the scheduled termination time of the task.</li><li>End date: You can enter a time when the task is terminated.</li></ul>At the scheduled termination time, all tasks are terminated and all resources, including FIPs and domains, are deleted. |
 | Load Balancer | The Enable button is enabled only if a port is specified in the template's container information.<ul><li>Floating IP: To use floating IP, Internet Gateway have to be connected to the configured Subnet.<ul><li>To access your container from the outside, you need to use a floating IP. Using a floating IP adds a domain URL.</li></ul></li><li>Health check: The load balancer attempts to check the health of the workload.</li><li>IP access control groups: You can apply access control groups to the load balancer.</li><li>If your container uses the TERMINATED_HTTPS protocol, you must register an SSL certificate.</li><li>The load balancer's ports and protocols use the ports and protocols defined in the template's container.</li></ul>Load Balancers are not available in Legacy network environments. |
 | Internal Load Balancer | You can use communicable load balancers only within NCS. The Enable button is enabled only if a port is specified in the container information of the template.<br><ul><li>IP: Specify the IP of the load balancer.<br><ul><li>Auto-assigned: Use an IP assigned from the workload's subnet.</li><li>Specify: Use a specific IP. If you enter an IP that is in use by another resource, the workload cannot integrate with the other resource with that IP.</li></ul><li>The internal load balancer only supports TCP, UDP protocols. If HTTP, HTTPS, or TERMINATED_HTTPS is specified, it is created after being changed to TCP.</li></li></ul>|
 | Private DNS | You can use any accessible domain within the VPC.<ul><li>Private DNS Zone: Select the zone for which you want to create the recordset.</li><li>TTL: Enter the update period by the unit of second for record set information on the name server.</li></ul>|
@@ -159,8 +210,8 @@ You can click on specific Workload to view details from the **Basic Information*
 | Deployment controller | Deployment controller for workload |
 | Number of tasks requested. | Number of Templates to run |
 | Number of tasks executed | Number of Templates executed |
-| Created date | Date of Workload creation |
-| VPC | VPC set to Workload |
+| Date of Creation | Date of Workload creation |
+| VPC | VPCs set to Workload|
 | Subnet | Subnet set to Workload |
 | Security Group | Name of Security Group set to Workload |
 | Private DNS | Private DNS information set up for workload |
@@ -177,6 +228,7 @@ You can view Container details by clicking a specific workload and then clicking
 | Items | Descriptions |
 | --- | --- |
 | Containers Name | Container Name |
+| Type | Container Type |
 | Image URL | Container Image Information |
 | IP | IP assigned to Container |
 | Status | Status of Container |
@@ -191,8 +243,8 @@ You can view Container details by clicking a specific workload and then clicking
 | Environment Variables | Environment variables set in Container |
 | Storage | Storage connected to Container |
 | Life Cycle Hook | Lifecycle hooks set on a container |
-| File | Object files and mount paths associated with the container |
-| Confidential Data | Confidential data associated with a container and its mount path |
+| ConfigMap | Object files and mount paths associated with the container |
+| Secret | Confidential data associated with a container and its mount path |
 | Health Check | Check on the health of a container |
 | Date of Restart | Date Container restarted |
 
@@ -201,11 +253,11 @@ You can view Container details by clicking a specific workload and then clicking
 After clicking a specific workload, you can find the resource usage of containers on the **Monitoring** tab. Container metrics are collected every 15 seconds and kept for up to 1 year.
 Items provided with monitoring are as follows.
 
-| Item | Unit | Description |
+| Items | Unit | Descriptions |
 | --- | --- | --- |
 | CPU Usage | % | Usage is provided based on CPU assigned to containers. |
-| Memory Usage| % | Usage is provided based on Memory assigned to containers. |
-| Network Data Trasmission | bps | Network data trasmission information is provided based on workload operation|
+| Memory Usage | % | Usage is provided based on Memory assigned to containers. |
+| Network Data Trasmission | bps | Network data trasmission information is provided based on workload operation |
 | Network Data Reception | bps | Network data reception information is provided based on workload operation |
 | Disk Usage | % | Usage of NAS storage added to the container is provided. |
 | Ephemeral Storage Usage | % | Temporary storage utilization is provided on a per-job basis for workloads. |
@@ -228,7 +280,7 @@ After clicking on specific Workload, you can view Event information from Contain
 | Number of occurrences | Number of times event occurred |
 
 > [Note]
-> Events are only kept for maximum 1 hour, so information from 1 hour earlier cannot be checked.
+> Events are only kept for maximum 30 days, so information older than 30 days cannot be checked.
 > Detailed reasons for the current and last state of the container can also be found in the events.
 
 #### Log
@@ -245,15 +297,15 @@ You can check the progress and history of changes to the workload template in th
 
 | Items | Descriptions |
 | --- | --- |
-| Template name | Template name that workload is using |
+| Template Name | Template name that workload is using |
 | Execution time | Deployment start time for workloads using the template |
-| End time | End time for workload using the template |
+| Termination Time | Termination time for workload using the template |
 | Status | Deployment status<br>succeeded: Deployment completed<br>pending: Deploying<br>terminated: Ended workload |
 
 You can view the **Details of workload execution history** by clicking the retrieved history information.
 
 > [Note]
-The history of the running workload does not show an end time and the status remains succeeded.
+The history of the running workload does not show a termination time and the status remains succeeded.
 > [Caution]
 You cannot check the workload execution history after deleting the workload.
 
@@ -264,8 +316,8 @@ You can check the list of executed tasks in the **Scheduled Execution History** 
 | --- | --- |
 | Task ID | Scheduled task ID that was executed |
 | Execution time | Execution time for scheduled task |
-| End time | End time for scheduled task |
-| Status | Scheduled task status<br>waiting: Preparing schedule<br>running: Scheduled task running<br>completed: Scheduled task normally ended<br>error: Scheduled task abnormally ended |
+| Termination Time | Termination time for scheduled task |
+| Status | Scheduled task status<br>waiting: Preparing schedule<br>running: Scheduled task running<br>completed: Scheduled task normally terminated<br>error: Scheduled task abnormally terminated |
 
 ### Change Workload
 
@@ -275,26 +327,26 @@ You can change the running workload by selecting a workload to change and clicki
 | --- | --- |
 | Descriptions | Workload Description |
 | Template | Change the template of a running workload<br>When changing the template, workload is deployed with zero downtime through the rolling update method.<br>Tasks are replaced one by one, so that during deployment, existing and new tasks can be executed at the same time.<br>You can see the results at the `Workload Execution History` tab. |
-| Number of tasks requested. | Change the number of tasks in a running workload<br>Increase tasks requested: Existing tasks are maintained and new tasks are created.<br>Decrease tasks requested: Tasks are ended by the reduced number of tasks. |
+| Number of tasks requested. | Change the number of tasks in a running workload<br>Increase tasks requested: Existing tasks are maintained and new tasks are created.<br>Decrease tasks requested: Tasks are terminated by the reduced number of tasks. |
+| Schedule Termination | Change the termination scheduling settings for a workload job |
 | Scheduled execution | Change scheduled execution information<br>The number of scheduled execution history is set from the time of change, and the number of history and setting values may not match until all tasks executed before the change are deleted. |
 | Load Balancer | Change whether a workload uses a load balancer, floating IP, health check, SSL certificate or not |
 | Internal Load Balancer | Change whether a workload uses an internal load balancer or not, and change IPs |
 
 > [Caution]
-> If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
+If you use a load balancer to make changes to the template while the workload is in service, downtime may occur.
+
 > [Note]
-> If a workload is in the Pending state, you cannot make changes to the load balancer.
+> If a workload is in the Pending, Suspended, or Terminated state, you cannot make changes to the load balancer.
 > If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
 
 ### Stop/Restart Workload
-If you stop a workload, all tasks in the workload will end.
+If you stop a workload, all tasks in the workload will be terminated.
 
 If you restart a workload, load balancer IP is changed.
 
 > [Note]
 > Depending on your deployment controller, running a workload stop/restart might cause the container IP to change.
-
-If you restart a workload, the container IP and load balancer IP are changed while the floating IP and URL are maintained.
 
 > [Caution]
 > Logs, events, and ephemeral storage are initialized when the workload is stopped.
@@ -304,40 +356,49 @@ If you restart a workload, the container IP and load balancer IP are changed whi
 
 Select a workload you want to delete and click **Delete Workload** button to proceed with the deletion.
 
-## NCS Role
-You can set NCS roles to control which roles can access services and resources.
-For example, you can set an "NCS administrator" to have the ability to create, view, and manage templates and workloads, while an "NCS user" can only have the view role for templates and workloads.
+## Roles for NCS
+You can set roles to control which roles can access NCS service and resources.
 
-### Add NCS Execution Role
+### Modify NCS Roles
 Set the role to execute NCS in the NHN Cloud Console screen.
-1. Select **Manage Member** in the **Project Management** screen.
-2. Click a member that you want to change the role.
-3. Click **Add Role** to add roles for each service.
+1. Select **Manage Member** in the **Project** screen.
+2. Select the member whose role you want to change.
+3. Click **Modify Role** to add roles for each service.
     * Select the basic infrastructure service in the left area, then select the role in the right area.
-4. You can view the selected roles to add or delete them.
-5. Click **Add** to apply the changed roles to the project members.
-6. Once a role is added, you can select a member to view the detailed role history.
+4. Click **Complete** to apply the changed roles to the project members.
 
-For more information on how to use role group, see the console guide.
+For more information about roles, see [Manage members](/nhncloud/ko/console-guide/#_22).
 
-### Details of Role
-To use NCS, you need roles for the following resources.
-* NCS - Allows you to view, create, and manage resources in the NCS.
-* Infrastructure - Allows NCS users to lookup VPC, Subnet resources. This is required when looking up templates and workloads in NCS.
-* Load Balancer - Allows NCS users to create and manage Infrastructure Load Balancer resources. This is required when using a Load Balancer for a workload in NCS.
-* Security Group - Allows NCS users to create and manage Infrastructure Security Group resources. This is required when using Security Groups for templates in NCS.
+### Details of Roles
+To use NCS, you need the following roles.
+
+| Role | Permission |
+| --- | --- |
+| Infrastructure MEMBER | Basic Infrastructure Service Read |
+| Infrastructure NCS ADMIN | Create/Read/Update/Delete NCS |
+| Infrastructure Security Group ADMIN | Create/Read/Update/Delete Load Balancer |
+| Infrastructure Load Balancer ADMIN | Create, Read, Update, Delete Security Group |
+
+> [Note]
+The Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, and Infrastructure Security Group ADMIN roles include the Infrastructure MEMBER role.
+Infrastructure ADMIN includes all roles in the underlying infrastructure services.
+
 
 ### Assign Minimum Roles for NCS
-In a production environment, it is recommended to add only the roles you need. The minimum roles to use the NCS service are as follows.
+In a production environment, it is recommended to add only the roles you need. **The minimum roles** to use the NCS service are as follows.
 
-| Features | Infrastructure NCS ADMIN | Infrastructure MEMBER | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
+| Features | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
 | --- | --- | --- | --- | --- |
-| Retrieve Template |  | O |  |  |
-| Create Template | O |  | O |  |
-| Delete Template | O |  | O |  |
-| Retrieve Workload |  | O |  |  |
-| Create and Change Workload | O |  | O | O |
-| Delete Workload | O |  | O | O |
+| Retrieve Template | O |  |  |  |
+| Create Template |  | O | O |  |
+| Delete Template |  | O | O |  |
+| Retrieve Workload | O |  |  |  |
+| Create and Change Workload |  | O | O | O |
+| Delete Workload |  | O | O | O |
+
+> [Note]
+Infrastructure NCS ADMIN and Infrastructure Security Group ADMIN permissions are required to create templates.
+Infrastructure NCS ADMIN permissions alone are only for viewing.
 
 ## Other considerations
 
@@ -359,15 +420,15 @@ In a production environment, it is recommended to add only the roles you need. T
 | Source Registry Type | Access ID | Access Secret |
 | --- | --- | --- |
 | Azure Container Registry | Access Key User Name | Access Key Password |
-| Google Cloud Container Registry | \_json\_key | Private key of service account (JSON type) |
+| Google Cloud Container Registry | \_json_key | Private key of service account (JSON type) |
 | Docker Hub | Username | Password |
 | Harbor | Username | Password |
-| Quay | json\_file | {<br>"account\_name": "$User account",<br>"docker\_cli\_password": "Encrypted Password generated by $Quay"<br>} |
+| Quay | json_file | {<br>"account_name": "$User account",<br>"docker_cli_password": "Encrypted Password generated by $Quay"<br>} |
 
 * Within Container image, you must match Container Port in the Template with the Port that the Container decides to use for service.
     * If you use default nginx Container image that is designated to serve 80 ports, you have to specify 80 for the Container Port. If you change the content of Container image and set it up to serve another Port, you have to specify that Port number.
-* The file and confidential data use the information from when the template was created. If the original file or confidential data is modified, the information in the already created template is not affected.
-    * To update the contents of a file or confidential data and reflect those changes, you need to create a new template and run the workload.
+* Configmaps and secrets use the information from when the template was created. If the original file or confidential data is modified, the information in the already created template is not affected.
+    * To update the contents of Configmaps and secrets and reflect those changes, you need to create a new template or version and run the workload.
 
 ### GPU
 
@@ -399,7 +460,7 @@ Explain how to solve various problems that may occur while using the NCS service
     * You can check the **Event** of the added task to find why the container is not running.
 * An event where creating workloads fails due to insufficient resources
 
-| Error Message | Description |
+| Error Message | Descriptions |
 | --- | --- |
 | {{.Resource}} Could not create a workload due to insufficient resources. | Could not create a workload due to insufficient resources for NCS environment.<br>Try again after a while or contact the Customer Center. |
 | Exceeded the number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | Exceeded the NCS quota for the project.<br>For more details, refer to [NHN Container Service(NCS) Resource Provision Policy](/nhncloud/zh/resource-policy/#nhn-container-servicencs). |
@@ -412,8 +473,8 @@ When workloads are deleted or restarted, logs are deleted and cannot be viewed. 
 
 The following describes how to create a logging agent (FluentBit, Logstash) as a sidecar container and integrate it with L&C.
 
-For more information about [FluentBit](https://docs.fluentbit.io/manual/), see [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/).
-For more information about [Logstash](https://www.elastic.co/guide/zh/logstash/current/index.html), see [Logstash Reference](https://www.elastic.co/guide/zh/logstash/current/index.html).
+For more information about FluentBit, see [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/).
+For more information about Logstash, see [Logstash Reference](https://www.elastic.co/guide/zh/logstash/current/index.html).
 To learn how to use Log & Crash Search, see the [Log & Crash Search Console User Guide](/Data%20&%20Analytics/Log%20&%20Crash%20Search/zh/console-guide/).
 
 > [Note]
