@@ -16,6 +16,7 @@ You can use this service to run containers without configuring container executi
 * You can use the files uploaded to Object Storage or confidential data stored in Secure Key Manager by mounting them on container directories.
 * An internal load balancer that is only available in NCS is provided.
 * You can auto-register container IPs to Private DNS.
+* You can schedule the termination time for containers.
 
 ## Configuration and Terms
 
