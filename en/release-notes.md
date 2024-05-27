@@ -1,4 +1,12 @@
 ## Container > NHN Container Service(NCS) > Release Notes
+### May 28, 2024
+#### Added Features
+* You can set a scheduled termination time for your workloads.
+* Added a feature to manage template versions.
+* Added initialization container feature.
+* Increased the event lookup period to 30 days.
+* You can set HostAliases.
+
 ### February 27, 2024
 #### Added Features
 * Added the feature to set container arguments (Args).
