@@ -436,8 +436,8 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
 * For details, refer to the following links.
     * [https://www.nvidia.com/en-us/technologies/multi-instance-gpu/](https://www.nvidia.com/en-us/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/en-us/data-center/a100/](https://www.nvidia.com/en-us/data-center/a100/)
-* GPU CUDA version is 11.7.
-* GPU Driver version is 515.86.01.
+* GPU CUDA version is 12.2.
+* GPU Driver version is 535.161.08.
 * Container can only use one type of GPU.
 * Available GPU types are as follows.
 
