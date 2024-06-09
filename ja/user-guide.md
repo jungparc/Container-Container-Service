@@ -437,8 +437,8 @@ NCSサービスを利用するためには、次のロールが必要です。
 * 詳細については、下記のリンクをご覧ください。
     * [https://www.nvidia.com/ja-jp/technologies/multi-instance-gpu/](https://www.nvidia.com/ja-jp/technologies/multi-instance-gpu/)
     * [https://www.nvidia.com/ja-jp/data-center/a100/](https://www.nvidia.com/ja-jp/data-center/a100/)
-* GPU CUDAバージョンは11.7です。
-* GPU Driverバージョンは515.86.01です。
+* GPU CUDAバージョンは12.2です。
+* GPU Driverバージョンは535.161.08です。
 * コンテナは1個のGPUタイプのみ使用できます。
 * 提供されるGPUタイプは次のとおりです。
 
