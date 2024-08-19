@@ -17,7 +17,6 @@ You can use this service to run containers without configuring container executi
 * An internal load balancer that is only available in NCS is provided.
 * You can auto-register container IPs to Private DNS.
 * You can schedule the termination time for containers.
-* You can access running containers 
 
 ## Configuration and Terms
 

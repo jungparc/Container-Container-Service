@@ -1,7 +1,6 @@
 ## Container > NHN Container Service(NCS) > Release Notes
 ### August 27, 2024
 #### Added Features
-* You can access running containers.
 * You can check the events occurred in the NCS from Resource Watcher.
 
 ### May 28, 2024

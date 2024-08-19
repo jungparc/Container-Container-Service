@@ -248,14 +248,6 @@ You can view Container details by clicking a specific workload and then clicking
 | Health Check | Check on the health of a container |
 | Date of Restart | Date Container restarted |
 
-#### Access Container
-You can access a container by clicking on a specific workload and then **Access Container** on the **Running Containers** tab.
-To access the container, you must have a shell, such as bash or sh, installed on the image.
-
-> [Note]
-> After 3 minutes of inactivity after connecting to a container, the connection is terminated.
-> Depending on the container's locale setting, other languages may not be entered.
-
 #### Monitoring
 
 After clicking a specific workload, you can find the resource usage of containers on the **Monitoring** tab. Container metrics are collected every 15 seconds and kept for up to 1 year.

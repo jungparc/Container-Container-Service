@@ -1,7 +1,6 @@
 ## Container > NHN Container Service(NCS)  > リリースノート
 ### 2024. 08. 27.
 #### 機能追加
-* 実行中のコンテナに接続できます。
 * NCSで発生したイベントをResource Watcherで確認できます。
 
 ### 2024. 05. 28.
