@@ -1,4 +1,8 @@
 ## Container > NHN Container Service(NCS) > Release Notes
+### August 27, 2024
+#### Added Features
+* You can check the events occurred in the NCS from Resource Watcher.
+
 ### May 28, 2024
 #### Added Features
 * You can set a scheduled termination time for your workloads.

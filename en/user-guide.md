@@ -223,7 +223,7 @@ You can click on specific Workload to view details from the **Basic Information*
 
 #### Running Container
 
-You can view Container details by clicking a specific workload and then clicking Container on **Running Container** tab.
+You can view Container details by clicking a specific workload and then clicking **View Details** on the **Running Container** tab.
 
 | Items | Descriptions |
 | --- | --- |
