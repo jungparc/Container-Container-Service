@@ -37,7 +37,7 @@ You have to create Template before you can use NHN Container Service (NCS). Go t
 | Network | Subnets defined in VPC that connect to workload |
 | Template version name | Template version name, you can only enter the name of Template, lowercase letters within maximum 16 characters, numbers, and `-`.| 
 | Template version description | Description of the template version, which can be no more than 255 characters.| 
-| DNS | Set the DNS servers used by the workload.<br>If not set, use 8.8.8.8.<br>If you need Private DNS integration, enter the Private DNS Server IP. |
+| DNS | Set the DNS servers used by the workload.<br>If you need Private DNS integration, enter the Private DNS Server IP. |
 | HostAliases | Set the hostname to the IP address. | 
 
 Enter the required information and click **Create Template** button to create Template.
