@@ -1,107 +1,13 @@
 ## Container > NHN Container Service(NCS) > API 가이드
 
 워크로드와 템플릿을 구성하기 위한 API를 기술합니다.
-API를 사용하려면 API 토큰이 필요합니다.
+API를 사용하려면 API 엔드포인트와 토큰이 필요합니다. [API 호출 및 인증](ko/nhncloud/ko/public-api/api-authentication)을 참고하여 API 사용에 토큰을 준비합니다.
 
-## NCS API 공통 정보
-
-### API 엔드포인트
-NCS API를 호출하기 위한 도메인은 다음과 같습니다.
+API 엔드포인트는 다음과 같습니다.
 
 | 리전 | 도메인 |
 | --- | --- |
 | 한국(판교) 리전 | [http://kr1-ncs.api.nhncloudservice.com](http://kr1-ncs.api.nhncloudservice.com) |
-
-### 인증 및 권한
-
-API를 사용하려면 서비스 AppKey와 인증 헤더가 필요합니다.
-서비스 Appkey는 콘솔 상단 <strong>URL \& AppKey</strong>메뉴에서 확인이 가능합니다.
-
-인증 헤더는 다음과 같습니다.
-
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-| --- | --- | --- | --- | --- |
-| x-nhn-authorization | Header | String | O | 발급받은 NHN Cloud Token<br>${token_type} ${token} |
-
-### API 토큰 발급
-
-토큰 발급을 위한 API 도메인은 리전에 관계 없이 `https://oauth.api.nhncloudservice.com` 입니다.
-
-토큰을 발급하기 위해서는 User Access Key/Secret Key를 먼저 생성해야 합니다. `NHN Cloud Console 계정 > API 보안 설정` 페이지에서 생성할 수 있습니다.
-
-```bash
-POST /oauth2/token/create
-```
-
-#### 요청
-
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-| --- | --- | --- | --- | --- |
-| Content-Type | Header | String | O | application/x-www-form-urlencoded |
-| Authorization | Header | String | O | userAccessKey:userSecretKey를 base64로 encoding한 결과를 Basic 뒤에 추가<br>`Basic base64(userAccesssKey:userSecretKey)` |
-| grant_type | Body | String | O | client_credentials |
-
-<details>
-  <summary>예시</summary>
-
-```bash
-curl --request POST 'https://oauth.api.nhncloudservice.com/oauth2/token/create' \
-   -H 'Content-Type: application/x-www-form-urlencoded' \
-   -u 'userAccessKey:userSecretKey' \
-   -d 'grant_type=client_credentials'
-```
-
-</details>
-
-#### 응답
-
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-| --- | --- | --- | --- | --- |
-| access\_token | Body | String | O | 발급된 토큰 |
-| token\_type | Body | String | O | 토큰 타입 |
-| expire\_in | Body | String | O | 토큰 만료까지 남은 시간(초) |
-
-<details>
-  <summary>예시</summary>
-
-```bash
-{
-   "access_token": "ivvYiU3yFMymq5x2K_pqhksgc-x6mEG6vN2S3RTrej5bg9AI1GJcsPVsHfz6XjIh7ItRDH62Ascat0zkNB0N859d0ZnQ_oUjwge8kl2trDfH43MiGO7cEEYkqBX8zuQ9",
-   "token_type": "Bearer",
-   "expires_in": 86400
-}
-```
-
-</details>
-
-### API 토큰 만료
-
-API 토큰을 더이상 사용하지 않는 경우 토큰 만료 처리할 수 있습니다.
-
-```bash
-POST /oauth2/token/revoke
-```
-
-#### 요청
-
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-| --- | --- | --- | --- | --- |
-| Content-Type | Header | String | O | application/x-www-form-urlencoded |
-| Authorization | Header | String | O | userAccessKey:userSecretKey를 base64로 encoding한 결과를 Basic 뒤에 추가<br>`Basic base64(userAccesssKey:userSecretKey)` |
-| token | Body | String | O | 발급받은 토큰 |
-
-<details>
-  <summary>예시</summary>
-
-```bash
-curl --request POST 'https://oauth.api.nhncloudservice.com/oauth2/token/create' \
-   -H 'Content-Type: application/x-www-form-urlencoded' \
-   -u 'userAccessKey:userSecretKey' \
-   -d 'token=ivvYiU3yFMymq5x2K_pqhksgc-x6mEG6vN2S3RTrej5bg9AI1GJcsPVsHfz6XjIh7ItRDH62Ascat0zkNB0N859d0ZnQ_oUjwge8kl2trDfH43MiGO7cEEYkqBX8zuQ9'
-```
-
-</details>
-
 
 ### API 응답 공통 정보
 
@@ -140,6 +46,7 @@ curl --request POST 'https://oauth.api.nhncloudservice.com/oauth2/token/create' 
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -149,6 +56,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
 | disable\_containers | Query | Boolean | X | true: 컨테이너는 제외하여 조회 <br>false: 컨테이너도 포함하여 조회 (default) |
@@ -320,6 +228,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -330,6 +239,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 
@@ -456,11 +366,13 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates
 Content-Type: application/json
+x-nhn-authorization {token}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Array | O | 템플릿 목록 |
 | template.id | Body | UUID | O | 템플릿 ID |
 | template.version | Body | String | O | 템플릿 버전 |
@@ -682,6 +594,7 @@ Content-Type: application/json
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -692,6 +605,7 @@ DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 
@@ -701,6 +615,7 @@ DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -711,6 +626,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | Path | String | O | 템플릿 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | q | Query | String | X | 검색 매개변수 |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
@@ -911,6 +827,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -922,6 +839,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
 | version | URL | String | O | 템플릿 버전 |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 
@@ -1074,12 +992,14 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
+x-nhn-authorization {token}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | 템플릿 정보 |
 | template.version | Body | String | O | 템플릿 버전 |
 | template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
@@ -1303,6 +1223,7 @@ POST /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1314,6 +1235,7 @@ DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
 | version | URL | String | O | 템플릿 버전 |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 
@@ -1326,7 +1248,8 @@ DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
 워크로드 목록을 조회합니다.
 
 ```bash
-GET /ncs/v1.0/appkeys/{appKey}/workloads?page=1&size=30
+GET /ncs/v1.0/appkeys/{appKey}/workloads
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1336,6 +1259,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads?page=1&size=30
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | q | Query | String | X | 워크로드 이름과 템플릿 ID, 템플릿 버전으로 필터링<br>e.x) q=templateId=${템플릿 ID}<br>       q=${워크로드 이름)<br>       q=templateId=${템플릿 ID}\&version=${템플릿 버전} |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
@@ -1468,6 +1392,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads?page=1&size=30
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1478,6 +1403,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 
@@ -1713,6 +1639,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?container={ContainerName}&from={YYYY-MM-DDThh:mm:ssZ}&to={YYYY-MM-DDThh:mm:ssZ}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1724,6 +1651,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?contai
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | taskId | URL | String | O | 작업 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | containerName | Query | String | O | 컨테이너 이름 |
 | from | Query | String | X | 로그 시작 시간<br>default: 현재로부터 5분전 |
 | to | Query | String | X | 로그 종료 시간<br>default: 현재 시간 |
@@ -1768,7 +1696,8 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?contai
 워크로드의 이벤트를 조회합니다.
 
 ```bash
-GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events?page=1&size=30
+GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1780,6 +1709,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events?page
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | taskId | URL | String | O | 작업 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | type | Query | Integer | X | 이벤트 타입<br>Normal<br>Warning |
 | q | Query | String | X | 이벤트 내용 필터링 |
 | page | Query | String | X | 조회할 페이지 |
@@ -1829,7 +1759,8 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events?page
 워크로드 실행 히스토리 목록을 조회합니다.
 
 ```bash
-GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history?page=1&size=30
+GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1840,6 +1771,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history?page=1&size=30
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
 | sort | Query | String | X | 정렬 기준이 될 필드 명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예) `sort=-id` |
@@ -1890,6 +1822,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history?page=1&size=30
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -1901,6 +1834,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | historyId | URL | Integer | O | 히스토리 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 
@@ -2066,6 +2000,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -2076,6 +2011,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
 
@@ -2120,6 +2056,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads
 Content-Type: application/json
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -2127,6 +2064,7 @@ Content-Type: application/json
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | workload | Body | Object | O | 워크로드 정보 |
 | workload.name | Body | String | O | 워크로드 이름 |
 | workload.type | Body | String | X | 배포 컨트롤러 (default:deployment)<br>\* deployment<br>\* statefulset |
@@ -2316,6 +2254,7 @@ Content-Type: application/json
 ```bash
 PUT /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -2324,6 +2263,7 @@ Content-Type: application/json
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | workload | Body | Object | O | 워크로드 정보 |
 | workload.name | Body | String | O | 워크로드 이름 |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
@@ -2515,15 +2455,17 @@ Content-Type: application/json
 
 * 이 API를 사용하는 경우 Content-Type은 application/json-patch+json으로 설정해야 합니다.
 
-```
+```bash
 PATCH /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json-patch+json
+x-nhn-authorization {token}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | op | Body | String | O | Operation<br>\* Add<br>\* Remove<br>\* Replace<br>\* Copy<br>\* Move<br>\* Test |
 | path | Body | String | O | 변경하는 데이터 경로 |
 | value | Body | String | X | 변경 값 |
@@ -2655,6 +2597,7 @@ Content-Type: application/json-patch+json
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -2665,6 +2608,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 템플릿 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 이 API는 공통 정보만 응답합니다.
@@ -2674,6 +2618,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -2684,6 +2629,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 이 API는 공통 정보만 응답합니다.
@@ -2693,6 +2639,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/restart
+x-nhn-authorization {token}
 ```
 
 #### 요청
@@ -2704,6 +2651,77 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/restart
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | taskId | URL | String | O | 작업 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 #### 응답
 이 API는 공통 정보만 응답합니다.
+
+### 워크로드 삭제하기
+
+워크로드를 삭제합니다.
+
+```bash
+DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
+x-nhn-authorization {token}
+```
+
+#### 요청
+
+이 API는 요청 본문을 요구하지 않습니다.
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | 서비스 Appkey |
+| workloadId | URL | String | O | 워크로드 ID |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+
+#### 응답
+
+이 API는 공통 정보만 응답합니다.
+
+
+## 응답 코드
+| resultCode | resultMessage | 설명 |
+| --- | --- | --- |
+| 200 | SUCCESS | 요청 성공 |
+| 10001 | Authentication error. | 유효하지 않은 AppKey입니다. |
+| 10002 | Bad Request. | 유효하지 않은 값이 요청되었습니다. |
+| 10003 | An error occurred while parsing the request body. | 요청 본문을 구문 분석하는 과정에서 오류가 발생했습니다. |
+| 10004 | Internal server error. | 내부 서버 오류입니다. |
+| 10005 | No permissions. | 권한이 없습니다. |
+| 10006 | You have exceeded the maximum number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | 생성 가능한 {{.Resource}} 수를 초과하였습니다. |
+| 10041 | Could not find the template. | 템플릿을 찾을 수 없습니다. |
+| 10042 | Could not use the ECR. | ECR의 이미지는 사용할 수 없습니다. |
+| 10043 | The network information does not exist. | 네트워크 정보가 존재하지 않습니다. |
+| 10044 | The template in use by the workload cannot be deleted. | 워크로드에서 사용 중인 템플릿은 삭제할 수 없습니다. |
+| 10045 | Duplicate container port exists in the template. | 템플릿에 동일한 컨테이너 포트가 존재합니다. |
+| 10046 | Template with the same name already exists. | 동일한 이름의 템플릿이 이미 존재합니다. |
+| 10047 | Resource {{.gpuFlavor}} is not available. If you want to use, please contact the Customer Center. | {{.gpuFlavor}} 자원은 가용되지 않고 있습니다. |
+| 10048 | Failed to download ConfigMaps. | 컨피그맵 다운로드에 실패하였습니다. |
+| 10049 | ConfigMaps can only use the object storage from the same organization. | 컨피그맵은 동일한 조직의 Object Storage만 사용할 수 있습니다. |
+| 10050 | The total size of the template's ConfigMap cannot exceed 1 MiB. | 템플릿의 컨피그맵 총 크기는 1MiB를 초과할 수 없습니다. |
+| 10051 | Failed to download secrets from Secure Key Manager. | Secure Key Manager에서 시크릿 다운로드에 실패하였습니다. |
+| 10052 | Could not create a template that consists only of init containers. | 초기화 컨테이너로만 구성된 템플릿은 생성할 수 없습니다. |
+| 10053 | The {{.Resource}} of an init container must be less than the sum of the normal containers. | 초기화 컨테이너의 {{.Resource}}는 일반 컨테이너의 합보다 작아야 합니다. |
+| 10054 | Could not set the GPU type of an init container differently than a regular container. | 초기화 컨테이너의 GPU 타입을 일반 컨테이너와 다르게 설정할 수 없습니다. |
+| 10061 | Could not find the workload. | 워크로드를 찾을 수 없습니다. |
+| 10062 | Task does not exist. | 작업이 존재하지 않습니다. |
+| 10063 | You cannot use the load balancer because the container port is not specified in the template. | 템플릿에 컨테이너 포트가 지정되지 않아 로드 밸런서를 사용할 수 없습니다. |
+| 10064 | A workload with the same name already exists. | 동일한 이름의 워크로드가 이미 존재합니다. |
+| 10065 | Invalid container specifications in the template. | 템플릿의 컨테이너 사양이 유효하지 않습니다. |
+| 10066 | Could not create a workload due to insufficient resources. | 리소스가 부족하여 워크로드를 생성할 수 없습니다. |
+| 10067 | You cannot change the workload name. | 워크로드 이름은 변경할 수 없습니다. |
+| 10068 | You cannot change to the template that uses a different network. | 다른 네트워크를 사용하는 템플릿으로 변경할 수 없습니다. |
+| 10069 | In the template, you must set the same container port as the port used by the load balancer. | 로드 밸런서에서 사용 중인 포트와 동일한 컨테이너 포트가 템플릿에 설정되어야 합니다. |
+|	10070 | You cannot use the load balancer in legacy network environments. | 레거시 네트워크 환경에서는 로드 밸런서를 사용할 수 없습니다. |
+|	10071 | UDP protocol cannot use load balancer. | UDP 프로토콜은 로드 밸런서를 사용할 수 없습니다. |
+|	10072 | If the workload runs less than {{.Minutes}} minutes, you cannot use the load balancer. | 워크로드 실행 주기가 {{.Minutes}}분 이하인 경우 로드 밸런서를 이용할 수 없습니다. |
+|	10073 | Invalid cron expression. | 유효하지 않은 cron 표현식입니다. |
+|	10074 | Invalid time zone. | 유효하지 않은 Timezone입니다. |
+|	10075 | You cannot change the load balancer to Use while the workload is stopped. | 워크로드 중지 상태에서는 로드 밸런서를 사용으로 변경할 수 없습니다. |
+|	10076 | The certificate and private key are invalid. To use TERMINATED_HTTPS, you must register a valid certificate and private key. | 인증서와 개인 키가 올바르지 않습니다. TERMINATED_HTTPS를 사용하려면 유효한 인증서와 개인 키를 등록해야 합니다. |
+|	10077 | Only one security group can be used. | 하나의 Security Groups만 사용할 수 있습니다. |
+|	10078 | The actions of all groups must be the same. | 그룹들의 action은 모두 동일해야 합니다. |
+|	10079 | Invalid Private DNS zone. | 유효하지 않은 Private DNS zone입니다. |
+|	10080 | Could not change the load balancer to Enabled while the workload is terminated. | 워크로드 종료 상태에서는 로드 밸런서를 사용으로 변경할 수 없습니다.  |
+|	10081 | not running task. | 작업이 재시작 가능한 상태가 아닙니다. |
