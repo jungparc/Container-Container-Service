@@ -78,8 +78,8 @@ x-nhn-authorization {token}
 | templates.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | templates.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | templates.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| templates.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| templates.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
+| templates.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| templates.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | templates.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
 | templates.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
 | templates.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
@@ -121,7 +121,7 @@ x-nhn-authorization {token}
 | templates.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | templates.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| templates.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| templates.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -251,14 +251,14 @@ x-nhn-authorization {token}
 | template.name | Body | String | O | 템플릿 이름 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| template.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| template.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
+| template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | template.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
 | template.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
@@ -300,7 +300,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -373,23 +373,21 @@ x-nhn-authorization {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| template | Body | Array | O | 템플릿 목록 |
-| template.id | Body | UUID | O | 템플릿 ID |
-| template.version | Body | String | O | 템플릿 버전 |
+| template | Body | Array | O | 템플릿 정보 |
 | template.name | Body | String | O | 템플릿 이름 |
-| template.createdAt | Body | String | O | 생성 시간(UTC) |
+| template.version | Body | String | X | 템플릿 버전 |
 | template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | template.dnsConfig | Body | String List | X | 컨테이너에서 사용하는 DNS Server 정보 (최대 3개 설정 가능) |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정하는 정보 |
-| template.hostAliases.ip | Body | String | X | hostnames에서 사용하는 IP 정보 |
-| template.hostAliases.hostnames | Body | String List | X | hostnames에서 사용하는 hostㄴ 정보 |
+| template.hostAliases.ip | Body | String | O | hostnames에서 사용하는 IP 정보 |
+| template.hostAliases.hostnames | Body | String List | O | hostnames에서 사용하는 hostㄴ 정보 |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
-| template.containers.type | Body | String | O | 컨테이너 유형 (default: normal)<br>\* normal: 일반<br>\* init: 초기화 |
+| template.containers.type | Body | String | X | 컨테이너 유형 (default: normal)<br>\* normal: 일반<br>\* init: 초기화 |
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.imageRegistryCredentials | Body | Object | X | Private 레지스트리에 접근 가능한 정보 |
 | template.containers.imageRegistryCredentials.username | Body | String | O | Private 레지스트리 아이디 |
@@ -432,7 +430,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격<br>timeoutSeconds보다 작은값이 설정되어야 합니다. |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간<br>periodSeconds보다 큰값이 설정되어야 합니다. |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초)<br>\* 30 \~ 120 (default: 30)|
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초)<br>\* 30 \~ 120 (default: 30)|
 
 
 <details>
@@ -478,20 +476,18 @@ x-nhn-authorization {token}
 | --- | --- | --- | --- | --- |
 | template | Body | Object | O | 템플릿 정보 |
 | template.id | Body | UUID | O | 템플릿 ID |
-| template.version | Body | String | O | 템플릿 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
+| template.version | Body | String | O | 템플릿 버전 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| template.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| template.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
-| template.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
-| template.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
+| template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
 | template.containers.type | Body | String | O | 컨테이너 유형<br>\* normal: 일반<br>\* init: 초기화 |
@@ -531,7 +527,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -636,22 +632,22 @@ x-nhn-authorization {token}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
-| X-Total-Count | Header | Integer | O | Appkey에 생성되어 있는 템플릿 전체 수 |
-| templates | Body | Array | O | 템플릿 목록 |
+| X-Total-Count | Header | Integer | O | 템플릿의 버전 개수 |
+| templates | Body | Array | O | 템플릿 버전 목록 |
 | templates.id | Body | UUID | O | 템플릿 ID |
 | templates.version | Body | String | O | 템플릿 버전 |
 | templates.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | templates.name | Body | String | O | 템플릿 이름 |
 | templates.createdAt | Body | String | O | 생성 시간(UTC) |
 | templates.description | Body | String | X | 템플릿 설명 |
-| templates.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| templates.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | templates.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | templates.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | templates.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | templates.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | templates.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| templates.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| templates.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
+| templates.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| templates.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | templates.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
 | templates.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
 | templates.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
@@ -693,7 +689,7 @@ x-nhn-authorization {token}
 | templates.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | templates.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| templates.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| templates.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -847,21 +843,21 @@ x-nhn-authorization {token}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
-| template | Body | Object | O | 템플릿 정보 |
+| template | Body | Object | O | 템플릿 버전 정보 |
 | template.id | Body | UUID | O | 템플릿 ID |
 | template.version | Body | String | O | 템플릿 버전 |
 | template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| template.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| template.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
+| template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | template.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
 | template.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
@@ -903,7 +899,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -1000,21 +996,16 @@ x-nhn-authorization {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| template | Body | Object | O | 템플릿 정보 |
+| template | Body | Object | O | 템플릿 버전 정보 |
 | template.version | Body | String | O | 템플릿 버전 |
 | template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
-| template.createdAt | Body | String | O | 생성 시간(UTC) |
-| template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
-| template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
-| template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
-| template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| template.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| template.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
-| template.applyImmediately | Body | Boolean | X | true: 즉시 배포 사용, false: 즉시 배포 사용 안함 |
+| template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
+| template.applyImmediately | Body | Boolean | X | true: 즉시 배포 사용, false: 즉시 배포 사용 안함 (default: false) |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
 | template.containers.type | Body | String | O | 컨테이너 유형<br>\* normal: 일반<br>\* init: 초기화 |
@@ -1064,7 +1055,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -1112,16 +1103,14 @@ x-nhn-authorization {token}
 | template.name | Body | String | O | 템플릿 이름 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| template.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| template.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
-| template.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
-| template.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
+| template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
 | template.containers.type | Body | String | O | 컨테이너 유형<br>\* normal: 일반<br>\* init: 초기화 |
@@ -1161,7 +1150,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -1272,7 +1261,7 @@ x-nhn-authorization {token}
 | workloads | Body | Array | O | 워크로드 목록 |
 | workloads.id | Body | UUID | O | 워크로드 ID |
 | workloads.name | Body | String | O | 워크로드 이름 |
-| workloads.type | Body | String | X | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
+| workloads.type | Body | String | O | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
 | workloads.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workloads.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workloads.createdAt | Body | String | O | 생성 시간(UTC) |
@@ -1284,18 +1273,18 @@ x-nhn-authorization {token}
 | workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
 | workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
 | workloads.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
-| workloads.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
-| workloads.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
-| workloads.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 최대 재시도 횟수 |
+| workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
+| workloads.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
+| workloads.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 최대 재시도 횟수 |
 | workloads.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workloads.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workloads.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workloads.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workloads.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workloads.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workloads.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workloads.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workloads.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workloads.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workloads.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workloads.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workloads.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workloads.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
@@ -1317,20 +1306,20 @@ x-nhn-authorization {token}
 | workloads.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workloads.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workloads.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workloads.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workloads.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workloads.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workloads.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workloads.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workloads.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workloads.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workloads.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workloads.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workloads.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workloads.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workloads.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workloads.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workloads.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workloads.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workloads.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workloads.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workloads.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workloads.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workloads.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workloads.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workloads.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workloads.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workloads.securityGroups.id | Body | String | O | SecurityGroup ID |
 
@@ -1409,10 +1398,10 @@ x-nhn-authorization {token}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
-| workload | Body | Array | O | 워크로드 목록 |
+| workload | Body | Array | O | 워크로드 정보 |
 | workload.id | Body | UUID | O | 워크로드 ID |
 | workload.name | Body | String | O | 워크로드 이름 |
-| workload.type | Body | String | X | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | O | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
@@ -1424,18 +1413,18 @@ x-nhn-authorization {token}
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
-| workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
-| workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
-| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 최대 재시도 횟수 |
+| workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
+| workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
+| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 최대 재시도 횟수 |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
@@ -1457,20 +1446,20 @@ x-nhn-authorization {token}
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workload.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workload.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workload.securityGroups.id | Body | String | O | SecurityGroup ID |
 | workload.tasks | Body | Array | O | 워크로드의 작업 목록 |
@@ -1515,11 +1504,11 @@ x-nhn-authorization {token}
 | workload.tasks.containers.probe.periodSeconds | Body | String | O | Probe 실행 j간격 |
 | workload.tasks.containers.probe.timeoutSeconds | Body | String | O | Probe 실행 제한 시간 |
 | workload.tasks.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| workload.tasks.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| workload.tasks.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | workload.tasks.containers.state | Body | String | O | 컨테이너 상태 |
-| workload.tasks.containers.startedAt | Body | String | X | 컨테이너 시작 시간 |
+| workload.tasks.containers.startedAt | Body | String | O | 컨테이너 시작 시간 |
+| workload.tasks.containers.finishedAt | Body | String | X | 초기화 컨테이너 완료 시간 |
 | workload.tasks.containers.restartCount | Body | String | O | 컨테이너 재시작 횟수 |
-| workload.tasks.containers.finishedAt | Body | String | O | 초기화 컨테이너 완료 시간 |
 
 <details>
   <summary>예시</summary>
@@ -1853,16 +1842,14 @@ x-nhn-authorization {token}
 | template.name | Body | String | O | 템플릿 이름 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
-| template.versionDescription | Body | String | O | 템플릿 버전 설명 |
+| template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
-| template.hostAliases.ip | Body | String | X | 컨테이너에 설정된 hostnames의 IP |
-| template.hostAliases.hostnames | Body | String List | X | 컨테이너에 설정된 IP의 hostnames |
-| template.versionCount | Body | Integer | O | 템플릿의 버전 개수 |
-| template.workloadCount | Body | Integer | O | 템플릿을 사용 중인 워크로드 개수 |
+| template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
+| template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
 | template.containers.type | Body | String | O | 컨테이너 유형<br>\* normal: 일반<br>\* init: 초기화 |
@@ -1902,7 +1889,7 @@ x-nhn-authorization {token}
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격 |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
-| template.containers.stopTimeout | Body | Integer | O | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 
 <details>
   <summary>예시</summary>
@@ -2020,10 +2007,10 @@ x-nhn-authorization {token}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | schedulehistory | Body | List | O | 예약 실행 히스토리 목록 |
-| schedulehistory[0].id | Body | String | O | 작업 ID |
-| schedulehistory[0].createdAt | Body | String | O | 시작 시간 |
-| schedulehistory[0].finishedAt | Body | Object | O | 종료 시간 |
-| schedulehistory[0].status | Body | String | O | 예약 작업 상태<br>\* Error<br>\* Completed <br>\* Waiting <br>\* Running |
+| schedulehistory.id | Body | String | O | 작업 ID |
+| schedulehistory.createdAt | Body | String | O | 시작 시간 |
+| schedulehistory.finishedAt | Body | Object | O | 종료 시간 |
+| schedulehistory.status | Body | String | O | 예약 작업 상태<br>\* Error<br>\* Completed <br>\* Waiting <br>\* Running |
 
 <details>
   <summary>예시</summary>
@@ -2069,30 +2056,29 @@ x-nhn-authorization {token}
 | workload.name | Body | String | O | 워크로드 이름 |
 | workload.type | Body | String | X | 배포 컨트롤러 (default:deployment)<br>\* deployment<br>\* statefulset |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
-| workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
+| workload.templateVersion | Body | String | X | 워크로드의 템플릿 버전 (default: 최신 버전) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
-| workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
-| workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
-| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 최대 재시도 횟수 |
+| workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
+| workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
+| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 최대 재시도 횟수 |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
-| workload.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
 | workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
 | workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
@@ -2108,20 +2094,20 @@ x-nhn-authorization {token}
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workload.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workload.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workload.securityGroups.id | Body | String | O | SecurityGroup ID |
 
@@ -2163,18 +2149,18 @@ x-nhn-authorization {token}
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
-| workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
-| workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
-| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 최대 재시도 횟수 |
+| workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
+| workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
+| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 최대 재시도 횟수 |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
@@ -2196,20 +2182,20 @@ x-nhn-authorization {token}
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workload.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workload.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workload.securityGroups.id | Body | String | O | SecurityGroup ID |
 
@@ -2273,24 +2259,23 @@ x-nhn-authorization {token}
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
-| workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
-| workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
-| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 최대 재시도 횟수 |
+| workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
+| workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
+| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 최대 재시도 횟수 |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
-| workload.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
 | workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
 | workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
@@ -2302,20 +2287,20 @@ x-nhn-authorization {token}
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workload.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workload.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workload.securityGroups.id | Body | String | O | SecurityGroup ID |
 
@@ -2348,7 +2333,7 @@ x-nhn-authorization {token}
 | workloads | Body | Object | O | 워크로드 정보 |
 | workload.id | Body | UUID | O | 워크로드 ID |
 | workload.name | Body | String | O | 워크로드 이름 |
-| workload.type | Body | String | X | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | O | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
@@ -2357,18 +2342,18 @@ x-nhn-authorization {token}
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
-| workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
-| workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
-| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 최대 재시도 횟수 |
+| workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
+| workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
+| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 최대 재시도 횟수 |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
@@ -2390,20 +2375,20 @@ x-nhn-authorization {token}
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workload.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workload.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workload.securityGroups.id | Body | String | O | SecurityGroup ID |
 
@@ -2493,7 +2478,7 @@ x-nhn-authorization {token}
 | workloads | Body | Object | O | 워크로드 정보 |
 | workload.id | Body | UUID | O | 워크로드 ID |
 | workload.name | Body | String | O | 워크로드 이름 |
-| workload.type | Body | String | X | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | O | 배포 컨트롤러<br>\* deployment<br>\* statefulset |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
@@ -2511,9 +2496,9 @@ x-nhn-authorization {token}
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
-| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | X | IP 접근 제어 그룹 ID |
+| workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
 | workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
@@ -2535,20 +2520,20 @@ x-nhn-authorization {token}
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut 정보 |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOut 사용 여부 |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | O | 오토 스케일링 최대 작업 수 |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | O | 증설 후 대기 시간 |
-| workload.autoScaler.scaleOut.condition | Body | List | O | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | O | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | O | 증설 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | O | 증설 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
+| workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | O | 오토 스케일링 최소 작업 수 |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | O | 감축 후 대기 시간 |
-| workload.autoScaler.scaleIn.condition | Body | List | O | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | O | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | O | 감축 조건 리소스 사용량 (1~100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | O | 감축 조건 리소스 사용량 유지 시간(분) |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
+| workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
 | workload.securityGroups.id | Body | String | O | SecurityGroup ID |
 
