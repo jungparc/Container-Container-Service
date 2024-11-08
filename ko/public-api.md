@@ -46,7 +46,7 @@ API 엔드포인트는 다음과 같습니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -58,8 +58,8 @@ x-nhn-authorization {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
-| disable\_containers | Query | Boolean | X | true: 컨테이너는 제외하여 조회 <br>false: 컨테이너도 포함하여 조회 (default) |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
+| disable\_containers | Query | Boolean | X | true: 컨테이너는 제외하여 조회 <br>false: 컨테이너도 포함하여 조회(default) |
 
 #### 응답
 
@@ -88,7 +88,7 @@ x-nhn-authorization {token}
 | templates.containers.image | Body | String | O | 컨테이너 이미지 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | templates.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -228,7 +228,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -267,7 +267,7 @@ x-nhn-authorization {token}
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -279,7 +279,7 @@ x-nhn-authorization {token}
 | template.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | template.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | template.containers.postStart | Body | String List | X | 컨테이너 생성 직후 실행되는 명령어 |
-| template.containers.preStop | Body | String List | X | 컨테이너 종료되기 직전 실행되는 명령어 |
+| template.containers.preStop | Body | String List | X | 컨테이너 종료 직전 실행되는 명령어 |
 | template.containers.configs | Body | List | X | 컨테이너에서 사용하는 ConfigMap 정보 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | ConfigMap 정보를 가져오는 service type<br>obs: Object Storage |
@@ -366,7 +366,7 @@ x-nhn-authorization {token}
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates
 Content-Type: application/json
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -381,10 +381,10 @@ x-nhn-authorization {token}
 | template.networks | Body | Array | O | 템플릿의 네트워크 정보 |
 | template.networks.vpcId | Body | String | O | 템플릿의 VPC ID |
 | template.networks.subnetId | Body | String | O | 템플릿의 Subnet ID |
-| template.dnsConfig | Body | String List | X | 컨테이너에서 사용하는 DNS Server 정보 (최대 3개 설정 가능) |
+| template.dnsConfig | Body | String List | X | 컨테이너에서 사용하는 DNS Server 정보(최대 3개 설정 가능) |
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정하는 정보 |
 | template.hostAliases.ip | Body | String | O | hostnames에서 사용하는 IP 정보 |
-| template.hostAliases.hostnames | Body | String List | O | hostnames에서 사용하는 hostㄴ 정보 |
+| template.hostAliases.hostnames | Body | String List | O | hostnames에서 사용하는 host 정보 |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
 | template.containers.type | Body | String | X | 컨테이너 유형 (default: normal)<br>\* normal: 일반<br>\* init: 초기화 |
@@ -394,7 +394,7 @@ x-nhn-authorization {token}
 | template.containers.imageRegistryCredentials.password | Body | String | O | Private 레지스트리 비밀번호 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -422,13 +422,13 @@ x-nhn-authorization {token}
 | template.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 NAS 스토리지 정보 |
 | template.containers.volumes.name | Body | String | O | 스토리지 이름 |
 | template.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
-| template.containers.volumes.mountPath | body | String | X | 컨테이너의 연결 경로 (default: /mnt) |
+| template.containers.volumes.mountPath | body | String | X | 컨테이너의 연결 경로(default: /mnt) |
 | template.containers.probe | Body | List | X | 컨테이너 Probe 설정 |
 | template.containers.probe.type | Body | String | O | 컨테이너 Probe 타입<br>\* startup<br>\* liveness |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probe 실패 기준 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe 시작 대기 시간 |
-| template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격<br>timeoutSeconds보다 작은값이 설정되어야 합니다. |
-| template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간<br>periodSeconds보다 큰값이 설정되어야 합니다. |
+| template.containers.probe.periodSeconds | Body | Integer | O | Probe 실행 간격<br>timeoutSeconds보다 작은 값이 설정되어야 합니다. |
+| template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간<br>periodSeconds보다 큰 값이 설정되어야 합니다. |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초)<br>\* 30 \~ 120 (default: 30)|
 
@@ -494,7 +494,7 @@ x-nhn-authorization {token}
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -590,7 +590,7 @@ x-nhn-authorization {token}
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -611,7 +611,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -625,8 +625,8 @@ x-nhn-authorization {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | q | Query | String | X | 검색 매개변수 |
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
-| sort | Query | String | X | 정렬 기준이 될 필드 명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예) `sort=-name` |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
+| sort | Query | String | X | 정렬 기준이 될 필드명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예) `sort=-name` |
 
 #### 응답
 
@@ -656,7 +656,7 @@ x-nhn-authorization {token}
 | templates.containers.image | Body | String | O | 컨테이너 이미지 |
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | templates.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -823,7 +823,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -866,7 +866,7 @@ x-nhn-authorization {token}
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -988,7 +988,7 @@ x-nhn-authorization {token}
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1005,18 +1005,18 @@ x-nhn-authorization {token}
 | template.hostAliases | Body | List | X | 컨테이너 `/etc/hosts`에 설정된 정보 |
 | template.hostAliases.ip | Body | String | O | 컨테이너에 설정된 hostnames의 IP |
 | template.hostAliases.hostnames | Body | String List | O | 컨테이너에 설정된 IP의 hostnames |
-| template.applyImmediately | Body | Boolean | X | true: 즉시 배포 사용, false: 즉시 배포 사용 안함 (default: false) |
+| template.applyImmediately | Body | Boolean | X | true: 즉시 배포 사용, false: 즉시 배포 사용 안 함(default: false) |
 | template.containers | Body | Array | O | 템플릿의 컨테이너 목록 |
 | template.containers.name | Body | String | O | 컨테이너 이름 |
 | template.containers.type | Body | String | O | 컨테이너 유형<br>\* normal: 일반<br>\* init: 초기화 |
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.imageRegistryCredentials | Body | Object | X | Private 레지스트리에 접근 가능한 정보 |
-| template.containers.imageRegistryCredentials.changed | Body | Boolean | X | 기존 계정 사용 여부(default: false)<br>\* false: 기존 계정 사용<br>\* true: 신규 계정 사용 (username, password가 필수로 전달되어야함) |
+| template.containers.imageRegistryCredentials.changed | Body | Boolean | X | 기존 계정 사용 여부(default: false)<br>\* false: 기존 계정 사용<br>\* true: 신규 계정 사용(username, password가 필수로 전달되어야 함) |
 | template.containers.imageRegistryCredentials.username | Body | String | O | Private 레지스트리 아이디 |
 | template.containers.imageRegistryCredentials.password | Body | String | O | Private 레지스트리 비밀번호 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -1028,17 +1028,17 @@ x-nhn-authorization {token}
 | template.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | template.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | template.containers.postStart | Body | String List | X | 컨테이너 생성 직후 실행되는 명령어 |
-| template.containers.preStop | Body | String List | X | 컨테이너 종료되기 직전 실행되는 명령어 |
+| template.containers.preStop | Body | String List | X | 컨테이너 종료 직전 실행되는 명령어 |
 | template.containers.configs | Body | List | X | 컨테이너에서 사용하는 ConfigMap 정보 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | ConfigMap 정보를 가져오는 service type<br>obs: Object Storage |
 | template.containers.configs.value | Body | String | O | 오브젝트 URL |
 | template.containers.configs.mountPath | Body | String | O | 컨테이너 마운트 경로 |
-| template.containers.configs.changedAppKey | Body | Boolean | X | 기존 AppKey 사용 여부(default: false)<br>\* false: 기존 key 사용<br>\* true: 신규 key 사용 (AppKey가 필수로 전달되어야함) |
+| template.containers.configs.changedAppKey | Body | Boolean | X | 기존 AppKey 사용 여부(default: false)<br>\* false: 기존 key 사용<br>\* true: 신규 key 사용(AppKey가 필수로 전달되어야 함) |
 | template.containers.configs.appKey | Body | String | X | Object Storage AppKey |
-| template.containers.configs.changedUserAccessKeyId | Body | Boolean | X | 기존 UserAccessKeyId 사용 여부 default: false)<br>\* false: 기존 key 사용<br>\* true: 신규 key 사용 (UserAccessKeyId가 필수로 전달되어야함) |
+| template.containers.configs.changedUserAccessKeyId | Body | Boolean | X | 기존 UserAccessKeyId 사용 여부(default: false)<br>\* false: 기존 key 사용<br>\* true: 신규 key 사용(UserAccessKeyId가 필수로 전달되어야 함) |
 | template.containers.configs.userAccessKeyId | Body | String | X | Object Storage 서비스에 접근하는 사용자의 User Access Key |
-| template.containers.configs.changedSecretAccessKey | Body | Boolean | X | 기존 SecretAccessKey 사용 여부(default: false)<br>\* false: 기존 key 사용<br>\* true: 신규 key 사용 (SecretAccessKey가 필수로 전달되어야함) |
+| template.containers.configs.changedSecretAccessKey | Body | Boolean | X | 기존 SecretAccessKey 사용 여부(default: false)<br>\* false: 기존 key 사용<br>\* true: 신규 key 사용(SecretAccessKey가 필수로 전달되어야 함) |
 | template.containers.configs.secretAccessKey | Body | String | X | Object Storage 서비스에 접근하는 사용자의 Secret Access Key |
 | template.containers.secrets | Body | List | X | 컨테이너에서 사용하는 Secret 정보 |
 | template.containers.secrets.type | Body | String | O | Secret 정보를 가져오는 service type<br>skm: Secure Key Manager |
@@ -1117,7 +1117,7 @@ x-nhn-authorization {token}
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -1129,7 +1129,7 @@ x-nhn-authorization {token}
 | template.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | template.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | template.containers.postStart | Body | String List | X | 컨테이너 생성 직후 실행되는 명령어 |
-| template.containers.preStop | Body | String List | X | 컨테이너 종료되기 직전 실행되는 명령어 |
+| template.containers.preStop | Body | String List | X | 컨테이너 종료 직전 실행되는 명령어 |
 | template.containers.configs | Body | List | X | 컨테이너에서 사용하는 ConfigMap 정보 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | ConfigMap 정보를 가져오는 service type<br>obs: Object Storage |
@@ -1212,7 +1212,7 @@ x-nhn-authorization {token}
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1238,7 +1238,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1249,9 +1249,9 @@ x-nhn-authorization {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| q | Query | String | X | 워크로드 이름과 템플릿 ID, 템플릿 버전으로 필터링<br>e.x) q=templateId=${템플릿 ID}<br>       q=${워크로드 이름)<br>       q=templateId=${템플릿 ID}\&version=${템플릿 버전} |
+| q | Query | String | X | 워크로드 이름과 템플릿 ID, 템플릿 버전으로 필터링<br>예: q=templateId=${템플릿 ID}<br>       q=${워크로드 이름)<br>       q=templateId=${템플릿 ID}\&version=${템플릿 버전} |
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
 #### 응답
 
@@ -1268,10 +1268,10 @@ x-nhn-authorization {token}
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workloads.available | Body | Integer | O | 워크로드 작업 실행 수 |
 | workloads.status | Body | Integer | O | 워크로드 상태 |
-| workloads.url | Body | String | X | 워크로드 로드밸런서 URL |
-| workloads.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
+| workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workloads.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workloads.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -1279,28 +1279,28 @@ x-nhn-authorization {token}
 | workloads.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workloads.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workloads.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workloads.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workloads.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workloads.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workloads.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workloads.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workloads.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workloads.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workloads.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workloads.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workloads.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workloads.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workloads.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workloads.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workloads.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workloads.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workloads.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
 | workloads.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
-| workloads.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workloads.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workloads.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workloads.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workloads.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workloads.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workloads.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workloads.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workloads.privateDns | Body | Object | X | Private DNS에 워크로드 작업 IP 등록 여부 결정 |
 | workloads.privateDns.ttl | Body | Integer | O | 레코드 세트의 TTL 값 |
 | workloads.privateDns.zoneId | Body | String | O | 워크로드에서 사용하는 Private DNS Zone ID |
 | workloads.privateDns.domain | Body | String | O | Private DNS에 등록된 도메인 정보 |
 | workloads.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workloads.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workloads.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workloads.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workloads.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workloads.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -1310,7 +1310,7 @@ x-nhn-authorization {token}
 | workloads.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workloads.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workloads.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workloads.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workloads.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workloads.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -1318,10 +1318,10 @@ x-nhn-authorization {token}
 | workloads.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workloads.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workloads.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workloads.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workloads.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workloads.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workloads.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workloads.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workloads.securityGroups.id | Body | String | O | SecurityGroups ID |
 
 <details>
   <summary>예시</summary>
@@ -1381,7 +1381,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1408,10 +1408,10 @@ x-nhn-authorization {token}
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workload.available | Body | Integer | O | 워크로드 작업 실행 수 |
 | workload.status | Body | Integer | O | 워크로드 상태 |
-| workload.url | Body | String | X | 워크로드 로드밸런서 URL |
-| workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workload.url | Body | String | X | 워크로드 로드 밸런서 URL |
+| workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -1419,28 +1419,28 @@ x-nhn-authorization {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
 | workload.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
-| workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workload.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workload.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workload.privateDns | Body | Object | X | Private DNS에 워크로드 작업 IP 등록 여부 결정 |
 | workload.privateDns.ttl | Body | Integer | O | 레코드 세트의 TTL 값 |
 | workload.privateDns.zoneId | Body | String | O | 워크로드에서 사용하는 Private DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNS에 등록된 도메인 정보 |
 | workload.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workload.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workload.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -1450,7 +1450,7 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -1458,10 +1458,10 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workload.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 | workload.tasks | Body | Array | O | 워크로드의 작업 목록 |
 | workload.tasks.id | Body | UUID | O | 작업 ID |
 | workload.tasks.containers | Body | Array | O | 작업의 컨테이너 목록 |
@@ -1471,7 +1471,7 @@ x-nhn-authorization {token}
 | workload.tasks.containers.ip | Body | String | X | 컨테이너 IP |
 | workload.tasks.containers.cpus | Body | Float | O | 컨테이너에 할당된 CPU 수 |
 | workload.tasks.containers.memoryLimit | Body | Object | O | 컨테이너에 할당된 메모리 정보 |
-| workload.tasks.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당된 메모리 (MiB) |
+| workload.tasks.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당된 메모리(MiB) |
 | workload.tasks.containers.gpuFlavor | Body | String | X | 컨테이너에 할당된 GPU Flavor 정보 |
 | workload.tasks.containers.ports | Body | Array | X | 컨테이너의 포트 정보 |
 | workload.tasks.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -1483,7 +1483,7 @@ x-nhn-authorization {token}
 | workload.tasks.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | workload.tasks.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | workload.tasks.containers.postStart | Body | String List | X | 컨테이너 생성 직후 실행되는 명령어 |
-| workload.tasks.containers.preStop | Body | String List | X | 컨테이너 종료되기 직전 실행되는 명령어 |
+| workload.tasks.containers.preStop | Body | String List | X | 컨테이너 종료 직전 실행되는 명령어 |
 | workload.tasks.containers.configs | Body | List | X | 컨테이너에서 사용하는 ConfigMap 정보 |
 | workload.tasks.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | workload.tasks.containers.configs.type | Body | String | O | ConfigMap 정보를 가져오는 service type<br>obs: Object Storage |
@@ -1496,12 +1496,12 @@ x-nhn-authorization {token}
 | workload.tasks.containers.volumes | Body | Array | X | 컨테이너에서 사용하는 스토리지 정보 |
 | workload.tasks.containers.volumes.name | Body | String | O | 스토리지 이름 |
 | workload.tasks.containers.volumes.path | Body | String | O | NAS 스토리지 연결 경로 |
-| workload.tasks.containers.volumes.mountPath | body | String | X | 컨테이너의 연결 경로 (default: /mnt) |
+| workload.tasks.containers.volumes.mountPath | body | String | X | 컨테이너의 연결 경로(default: /mnt) |
 | workload.tasks.containers.probe | Body | List | X | 컨테이너 Probe 설정 |
 | workload.tasks.containers.probe.type | Body | String | O | 컨테이너 Probe 타입<br>\* startup<br>\* liveness |
 | workload.tasks.containers.probe.failureThreshold | Body | Integer | O | Probe 실패 기준 |
 | workload.tasks.containers.probe.initialDelaySeconds | Body | Integer | O | Probe 시작 대기 시간 |
-| workload.tasks.containers.probe.periodSeconds | Body | String | O | Probe 실행 j간격 |
+| workload.tasks.containers.probe.periodSeconds | Body | String | O | Probe 실행 간격 |
 | workload.tasks.containers.probe.timeoutSeconds | Body | String | O | Probe 실행 제한 시간 |
 | workload.tasks.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | workload.tasks.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
@@ -1628,7 +1628,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?container={ContainerName}&from={YYYY-MM-DDThh:mm:ssZ}&to={YYYY-MM-DDThh:mm:ssZ}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1642,10 +1642,10 @@ x-nhn-authorization {token}
 | taskId | URL | String | O | 작업 ID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | containerName | Query | String | O | 컨테이너 이름 |
-| from | Query | String | X | 로그 시작 시간<br>default: 현재로부터 5분전 |
+| from | Query | String | X | 로그 시작 시간<br>default: 현재로부터 5분 전 |
 | to | Query | String | X | 로그 종료 시간<br>default: 현재 시간 |
 | page | Query | String | X | 조회할 페이지 |
-| size | Query | String | X | 조회할 페이지 크기 (default: 100) |
+| size | Query | String | X | 조회할 페이지 크기(default: 100) |
 
 #### 응답
 
@@ -1653,7 +1653,7 @@ x-nhn-authorization {token}
 | --- | --- | --- | --- | --- |
 | logs | Body | Array | O | 컨테이너 로그 목록 |
 | log | Body | String | O | 로그 내용 |
-| time | Body | String | O | 로그 발생 시간 (UTC) |
+| time | Body | String | O | 로그 발생 시간(UTC) |
 
 <details>
   <summary>예시</summary>
@@ -1686,7 +1686,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1702,8 +1702,8 @@ x-nhn-authorization {token}
 | type | Query | Integer | X | 이벤트 타입<br>Normal<br>Warning |
 | q | Query | String | X | 이벤트 내용 필터링 |
 | page | Query | String | X | 조회할 페이지 |
-| size | Query | String | X | 조회할 페이지 크기 (default: 10) |
-| from | Query | String | X | 이벤트 마지막 발생 일시 시작 시간<br>default: 현재로부터 1시간전 |
+| size | Query | String | X | 조회할 페이지 크기(default: 10) |
+| from | Query | String | X | 이벤트 마지막 발생 일시 시작 시간<br>default: 현재로부터 1시간 전 |
 | to | Query | String | X | 이벤트 마지막 발생 일시 종료 시간<br>default: 현재 시간 |
 
 #### 응답
@@ -1714,8 +1714,8 @@ x-nhn-authorization {token}
 | type | Body | String | O | 이벤트 타입<br>Normal<br>Warning |
 | reason | Body | String | O | 이벤트 발생 원인 |
 | message | Body | String | O | 이벤트 내용 |
-| createTimestamp | Body | String | O | 이벤트 최초 발생 일시 (UTC) |
-| lastTimestamp | Body | String | O | 이벤트 마지막 발생 일시 (UTC) |
+| createTimestamp | Body | String | O | 이벤트 최초 발생 일시(UTC) |
+| lastTimestamp | Body | String | O | 이벤트 마지막 발생 일시(UTC) |
 | count | Body | Integer | O | 이벤트 발생 횟수 |
 
 <details>
@@ -1749,7 +1749,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1762,8 +1762,8 @@ x-nhn-authorization {token}
 | workloadId | URL | String | O | 워크로드 ID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
-| sort | Query | String | X | 정렬 기준이 될 필드 명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예) `sort=-id` |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
+| sort | Query | String | X | 정렬 기준이 될 필드명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예) `sort=-id` |
 
 #### 응답
 
@@ -1811,7 +1811,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -1856,7 +1856,7 @@ x-nhn-authorization {token}
 | template.containers.image | Body | String | O | 컨테이너 이미지 |
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
-| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리 (MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
 | template.containers.ports.containerPort | Body | Integer | O | 컨테이너 포트 |
@@ -1868,7 +1868,7 @@ x-nhn-authorization {token}
 | template.containers.env.name | Body | String | O | 컨테이너 환경 변수 이름 |
 | template.containers.env.value | Body | String | O | 컨테이너 환경 변수 값 |
 | template.containers.postStart | Body | String List | X | 컨테이너 생성 직후 실행되는 명령어 |
-| template.containers.preStop | Body | String List | X | 컨테이너 종료되기 직전 실행되는 명령어 |
+| template.containers.preStop | Body | String List | X | 컨테이너 종료 직전 실행되는 명령어 |
 | template.containers.configs | Body | List | X | 컨테이너에서 사용하는 ConfigMap 정보 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | ConfigMap 정보를 가져오는 service type<br>obs: Object Storage |
@@ -1987,7 +1987,7 @@ x-nhn-authorization {token}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2000,7 +2000,7 @@ x-nhn-authorization {token}
 | workloadId | URL | String | O | 워크로드 ID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 조회할 페이지 번호 |
-| size | Query | Integer | X | 조회할 페이지 크기 (default: 10) |
+| size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
 #### 응답
 
@@ -2043,7 +2043,7 @@ x-nhn-authorization {token}
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads
 Content-Type: application/json
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2054,13 +2054,13 @@ x-nhn-authorization {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | workload | Body | Object | O | 워크로드 정보 |
 | workload.name | Body | String | O | 워크로드 이름 |
-| workload.type | Body | String | X | 배포 컨트롤러 (default:deployment)<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | X | 배포 컨트롤러(default:deployment)<br>\* deployment<br>\* statefulset |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
-| workload.templateVersion | Body | String | X | 워크로드의 템플릿 버전 (default: 최신 버전) |
+| workload.templateVersion | Body | String | X | 워크로드의 템플릿 버전(default: 최신 버전) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2068,27 +2068,27 @@ x-nhn-authorization {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
-| workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workload.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workload.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workload.privateDns | Body | Object | X | Private DNS에 워크로드 작업 IP 등록 여부 결정 |
 | workload.privateDns.ttl | Body | Integer | O | 레코드 세트의 TTL 값 |
 | workload.privateDns.zoneId | Body | String | O | 워크로드에서 사용하는 Private DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNS에 등록된 도메인 정보 |
 | workload.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workload.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workload.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -2098,7 +2098,7 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -2106,10 +2106,10 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workload.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
 <details>
   <summary>예시</summary>
@@ -2145,9 +2145,9 @@ x-nhn-authorization {token}
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2155,28 +2155,28 @@ x-nhn-authorization {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
 | workload.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
-| workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workload.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workload.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workload.privateDns | Body | Object | X | Private DNS에 워크로드 작업 IP 등록 여부 결정 |
 | workload.privateDns.ttl | Body | Integer | O | 레코드 세트의 TTL 값 |
 | workload.privateDns.zoneId | Body | String | O | 워크로드에서 사용하는 Private DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNS에 등록된 도메인 정보 |
 | workload.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workload.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workload.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -2186,7 +2186,7 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -2194,10 +2194,10 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workload.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
 <details>
   <summary>예시</summary>
@@ -2240,7 +2240,7 @@ x-nhn-authorization {token}
 ```bash
 PUT /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2255,9 +2255,9 @@ x-nhn-authorization {token}
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2265,23 +2265,23 @@ x-nhn-authorization {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
-| workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workload.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workload.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workload.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workload.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workload.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -2291,7 +2291,7 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -2299,10 +2299,10 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workload.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
 <details>
   <summary>예시</summary>
@@ -2338,9 +2338,9 @@ x-nhn-authorization {token}
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2348,28 +2348,28 @@ x-nhn-authorization {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
 | workload.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
-| workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workload.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workload.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workload.privateDns | Body | Object | X | Private DNS에 워크로드 작업 IP 등록 여부 결정 |
 | workload.privateDns.ttl | Body | Integer | O | 레코드 세트의 TTL 값 |
 | workload.privateDns.zoneId | Body | String | O | 워크로드에서 사용하는 Private DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNS에 등록된 도메인 정보 |
 | workload.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workload.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workload.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -2379,7 +2379,7 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -2387,10 +2387,10 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workload.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
 <details>
   <summary>예시</summary>
@@ -2443,7 +2443,7 @@ x-nhn-authorization {token}
 ```bash
 PATCH /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json-patch+json
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2483,9 +2483,9 @@ x-nhn-authorization {token}
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
-| workload.loadBalancing | Body | Object | O | 워크로드 로드밸런서 정보 |
-| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드밸런서 사용 여부 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
+| workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
@@ -2493,28 +2493,28 @@ x-nhn-authorization {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP 메서드<br>\* GET |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP 상태 코드<br>\* 200<br>\* 200,202<br>\* 200-204 |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 인증서 |
-| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용시 로드 밸런서에서 사용하는 개인 키 |
-| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인키를 별도로 등록한 경우 사용 |
+| workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 인증서 |
+| workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS 사용 시 로드 밸런서에서 사용하는 개인 키 |
+| workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS 사용 시 TLS 버전<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | 시크릿 컨테이너 ID<br>Load Balancer API를 이용하여 TERMINATED\_HTTPS에서 사용할 인증서,개인 키를 별도로 등록한 경우 사용 |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | 로드 밸런서에 적용할 IP 접근 제어 그룹 목록 |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP 접근 제어 그룹 ID |
 | workload.schedule | Body | Object | X | 예약 실행 설정 정보 |
-| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* e.x) Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 예약 실행 기준 시간<br>\* 예: Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
 | workload.schedule.cron | Body | String | O | 예약 실행 Cron 표현식 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 예약 실행 히스토리 보관 수 |
 | workload.schedule.concurrencyPolicy | Body | String | O | 동시 실행 정책<br>\* Forbid, Replace |
 | workload.schedule.timeOffset | Body | String | O | 예약 실행 기준 시간 Offset |
-| workload.internalLoadBalancing | Body | Object | X | 내부 로드밸런서 정보 |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드밸런서 사용 여부 |
-| workload.internalLoadBalancing.type | Body | String | X | 내부 로드밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
-| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드밸런서 지정 IP |
+| workload.internalLoadBalancing | Body | Object | X | 내부 로드 밸런서 정보 |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | 내부 로드 밸런서 사용 여부 |
+| workload.internalLoadBalancing.type | Body | String | X | 내부 로드 밸런서 IP 할당 방법<br>\* dynamic: 자동 할당<br>\* static: IP 지정 |
+| workload.internalLoadBalancing.ip | Body | String | X | 내부 로드 밸런서 지정 IP |
 | workload.privateDns | Body | Object | X | Private DNS에 워크로드 작업 IP 등록 여부 결정 |
 | workload.privateDns.ttl | Body | Integer | O | 레코드 세트의 TTL 값 |
 | workload.privateDns.zoneId | Body | String | O | 워크로드에서 사용하는 Private DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNS에 등록된 도메인 정보 |
 | workload.activeDeadline | Body | Object | X | 워크로드 예약 종료 정보 |
-| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* e.x) Asia/Seoul, UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 예약 종료 기준 시간<br>\* 예: Asia/Seoul, UTC |
 | workload.activeDeadline.timeOffset | Body | String | O | 예약 종료 기준 시간 Offset |
 | workload.activeDeadline.time | Body | String | O | 예약 종료 시간 |
 | workload.autoScaler | Body | Object | X | AutoScaler 설정 정보 |
@@ -2524,7 +2524,7 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
 | workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | ScaleIn 사용 여부 |
@@ -2532,10 +2532,10 @@ x-nhn-authorization {token}
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
 | workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량 (1~100) |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
-| workload.securityGroups.id | Body | String | O | SecurityGroup ID |
+| workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
 <details>
   <summary>예시</summary>
@@ -2578,11 +2578,11 @@ x-nhn-authorization {token}
 </details>
 
 ### 워크로드 중지
-워크로드를 중지 합니다.
+워크로드를 중지합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2603,7 +2603,7 @@ x-nhn-authorization {token}
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2624,7 +2624,7 @@ x-nhn-authorization {token}
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/restart
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2647,7 +2647,7 @@ x-nhn-authorization {token}
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
-x-nhn-authorization {token}
+x-nhn-authorization: {token}
 ```
 
 #### 요청
@@ -2709,4 +2709,4 @@ x-nhn-authorization {token}
 |	10078 | The actions of all groups must be the same. | 그룹들의 action은 모두 동일해야 합니다. |
 |	10079 | Invalid Private DNS zone. | 유효하지 않은 Private DNS zone입니다. |
 |	10080 | Could not change the load balancer to Enabled while the workload is terminated. | 워크로드 종료 상태에서는 로드 밸런서를 사용으로 변경할 수 없습니다.  |
-|	10081 | not running task. | 작업이 재시작 가능한 상태가 아닙니다. |
+|	10081 | The task is not in a restartable state. | 작업이 재시작 가능한 상태가 아닙니다. |
