@@ -607,7 +607,7 @@ x-nhn-authorization: {token}
 
 이 API는 공통 정보만 응답합니다.
 
-### 템플릿 버전 목록 조회
+### 템플릿 버전 목록 보기
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
@@ -817,7 +817,7 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 버전 상세 조회
+### 템플릿 버전 보기
 
 개별 템플릿 버전 정보를 조회합니다.
 
@@ -1981,7 +1981,7 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 예약 실행 히스토리 조회
+### 워크로드 예약 실행 히스토리 보기
 
 예약 실행 히스토리를 조회합니다.
 
