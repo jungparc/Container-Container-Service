@@ -1,4 +1,12 @@
 ## Container > NHN Container Service(NCS) > 릴리스 노트
+### 2024. 11. 26.
+#### 기능 추가
+* 컨테이너에 접근할 수 있는 웹 터미널 기능이 추가되었습니다.
+* 워크로드 오토스케일링 기능이 추가되었습니다.
+* 워크로드 작업별 재시작 기능이 추가되었습니다.
+* NCS를 위한 Public API가 공개되었습니다.
+  * Public API에 대한 내용은 [API 가이드](Container/NCS/ko/public-api/)를 참고하세요.
+
 ### 2024. 08. 27.
 #### 기능 추가
 * NCS에서 발생한 이벤트를 Resource Watcher에서 확인할 수 있습니다.
