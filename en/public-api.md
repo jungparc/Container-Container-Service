@@ -35,8 +35,8 @@ Returns <strong>200 OK<strong> for all API requests. For more information on the
 
 </details>
 
-> [Caution}
-In each API response, you may find fields that are not specified within this guide. Those fields are for NHN Cloud internal usage, and as such refrain from using them since they may be changed without prior notice.
+> [Caution]
+> In each API response, you may find fields that are not specified within this guide. Those fields are for NHN Cloud internal usage, and as such refrain from using them since they may be changed without prior notice.
 
 ## Template
 
