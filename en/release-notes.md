@@ -5,7 +5,7 @@
 * Added workload autoscaling feature.
 * Added the feature to restart per workload task.
 * The Public API for NCS has been released.
-  * For information about the Public API, see the [API Guide](Container/NCS/ko/public-api/).
+    * For information about the Public API, see the [API Guide](/Container/NCS/en/public-api/).
   
 ### August 27, 2024
 #### Added Features
