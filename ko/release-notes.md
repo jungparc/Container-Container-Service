@@ -5,7 +5,7 @@
 * 워크로드 오토스케일링 기능이 추가되었습니다.
 * 워크로드 작업별 재시작 기능이 추가되었습니다.
 * NCS를 위한 Public API가 공개되었습니다.
-   * Public API에 대한 내용은 [API 가이드](/Container/NCS/ko/public-api/)를 참고하세요.
+    * Public API에 대한 내용은 [API 가이드](/Container/NCS/ko/public-api/)를 참고하세요.
 
 ### 2024. 08. 27.
 #### 기능 추가
