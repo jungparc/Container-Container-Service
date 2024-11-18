@@ -1,7 +1,7 @@
 ## Container > NHN Container Service(NCS) > API 가이드
 
 워크로드와 템플릿을 구성하기 위한 API를 기술합니다.
-API를 사용하려면 API 엔드포인트와 토큰이 필요합니다. [API 호출 및 인증](/nhncloud/ko/public-api/api-authentication)을 참고하여 API 사용에 토큰을 준비합니다.
+API를 사용하려면 API 엔드포인트와 토큰이 필요합니다. [API 호출 및 인증](/nhncloud/ko/public-api/api-authentication-gov)을 참고하여 API 사용에 토큰을 준비합니다.
 
 API 엔드포인트는 다음과 같습니다.
 
