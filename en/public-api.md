@@ -1,7 +1,7 @@
 ## Container > NHN Container Service(NCS) > API Guide
 
 This document explains the APIs required for configuring workloads and templates.
-To use the APIs, you need an API endpoint and a token. See [API Call and Authentication](/nhncloud/ko/public-api/api-authentication)to prepare a token to use the API.
+To use the APIs, you need an API endpoint and a token. See [API Call and Authentication](/nhncloud/en/public-api/api-authentication)to prepare a token to use the API.
 
 The API domain is as follows.
 
