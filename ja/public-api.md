@@ -2709,4 +2709,3 @@ x-nhn-authorization: {token}
 |	10079 | Invalid Private DNS zone. | 無効なPrivate DNS zoneです。 |
 |	10080 | Could not change the load balancer to Enabled while the workload is terminated. | ワークロードが終了状態の時は、ロードバランサーを使用に変更することはできません。 |
 |	10081 | The task is not in a restartable state. | 作業が再起動可能な状態ではありません。 |
-
