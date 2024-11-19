@@ -1773,6 +1773,7 @@ x-nhn-authorization: {token}
 | history.id | Body | Integer | O | ヒストリーID |
 | history.createdAt | Body | String | O | 配布時間 |
 | history.deletedAt | Body | String | O | 終了時間 |
+| history.templateId | Body | UUID | O | ワークロードが使用したテンプレートID |
 | history.templateVersion | Body | UUID | O | ワークロードが使用したテンプレートバージョン |
 | history.name | Body | String | O | テンプレート名 |
 | history.status | Body | String | O | 状態<br>Succeeded<br>Terminated<br>Pending |
