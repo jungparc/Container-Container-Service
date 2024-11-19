@@ -1,4 +1,12 @@
 ## Container > NHN Container Service(NCS)  > リリースノート
+### 2024. 11. 26.
+#### 機能追加
+* コンテナにアクセス可能なWebターミナル機能が追加されました。
+* ワークロードのオートスケーリング機能が追加されました。
+* ワークロードの作業別再起動機能が追加されました。
+* NCS用のPublic APIが公開されました。
+  * Public APIについては、[APIガイド](Container/NCS/ko/public-api/)を参照してください。
+
 ### 2024. 08. 27.
 #### 機能追加
 * NCSで発生したイベントをResource Watcherで確認できます。
