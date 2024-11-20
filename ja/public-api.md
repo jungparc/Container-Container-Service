@@ -1,7 +1,7 @@
 ## Container > NHN Container Service(NCS) > APIガイド
 
 ワークロードとテンプレートを構成するためのAPIを記述します。
-APIを使用するにはAPIエンドポイントとトークンが必要です。[APIの呼び出しおよび認証](ko/nhncloud/ko/public-api/api-authentication)を参照して、API使用のためのトークンを準備してください。
+APIを使用するにはAPIエンドポイントとトークンが必要です。[APIの呼び出しおよび認証](/nhncloud/ja/public-api/api-authentication)を参照して、API使用のためのトークンを準備してください。
 
 APIエンドポイントは次のとおりです。
 

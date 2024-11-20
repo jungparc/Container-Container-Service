@@ -1,4 +1,12 @@
 ## Container > NHN Container Service(NCS) > Release Notes
+### November 26, 2024
+#### Added Features
+* Added web terminal feature to access containers.
+* Added workload autoscaling feature.
+* Added the feature to restart per workload task.
+* The Public API for NCS has been released.
+    * For information about the Public API, see the [API Guide](/Container/NCS/zh/public-api/).
+  
 ### August 27, 2024
 #### Added Features
 * You can check the events occurred in the NCS from Resource Watcher.
