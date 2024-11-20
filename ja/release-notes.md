@@ -5,7 +5,7 @@
 * ワークロードのオートスケーリング機能が追加されました。
 * ワークロードの作業別再起動機能が追加されました。
 * NCS用のPublic APIが公開されました。
-  * Public APIについては、[APIガイド](Container/NCS/ko/public-api/)を参照してください。
+    * Public APIについては、[APIガイド](/Container/NCS/ja/public-api/)を参照してください。
 
 ### 2024. 08. 27.
 #### 機能追加
