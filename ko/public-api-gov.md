@@ -1259,6 +1259,7 @@ x-nhn-authorization: {token}
 | workloads.createdAt | Body | String | O | 생성 시간(UTC) |
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workloads.available | Body | Integer | O | 워크로드 작업 실행 수 |
+| workloads.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workloads.status | Body | Integer | O | 워크로드 상태 |
 | workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
@@ -1399,6 +1400,7 @@ x-nhn-authorization: {token}
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workload.available | Body | Integer | O | 워크로드 작업 실행 수 |
+| workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workload.status | Body | Integer | O | 워크로드 상태 |
 | workload.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
@@ -2048,6 +2050,7 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workload.templateVersion | Body | String | X | 워크로드의 템플릿 버전(default: 최신 버전) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
+| workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
@@ -2135,6 +2138,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
+| workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
@@ -2245,6 +2249,7 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
+| workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
@@ -2328,6 +2333,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
+| workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
@@ -2473,6 +2479,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | 워크로드의 템플릿 버전 |
 | workload.createdAt | Body | String | O | 생성 시간(UTC) |
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
+| workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
