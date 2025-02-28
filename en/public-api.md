@@ -1267,6 +1267,7 @@ This API does not require a request body.
 | workloads.createdAt | Body | String | O | Created time (UTC) |
 | workloads.desired | Body | Integer | O | Number of workload tasks requested |
 | workloads.available | Body | Integer | O | Number of workload tasks executed |
+| workloads.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workloads.status | Body | Integer | O | Workload status |
 | workloads.url | Body | String | X | URL of workload load balancer |
 | workloads.loadBalancing | Body | Object | O | Information on workload load balancer |
@@ -1407,6 +1408,7 @@ This API does not require a request body.
 | workload.createdAt | Body | String | O | Created time (UTC) |
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
 | workload.available | Body | Integer | O | Number of workload tasks executed |
+| workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.status | Body | Integer | O | Workload status |
 | workload.url | Body | String | X | URL of workload load balancer |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
@@ -2058,6 +2060,7 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | Template ID of workloads |
 | workload.templateVersion | Body | String | X | Template version of the workload (default: latest) |
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
+| workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
@@ -2145,6 +2148,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | Template version of the workload |
 | workload.createdAt | Body | String | O | Created time (UTC) |
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
+| workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
@@ -2255,6 +2259,7 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | Template ID of workloads |
 | workload.templateVersion | Body | String | O | Template version of the workload |
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
+| workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
@@ -2338,6 +2343,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | Template version of the workload |
 | workload.createdAt | Body | String | O | Created time (UTC) |
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
+| workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
@@ -2483,6 +2489,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | Template version of the workload |
 | workload.createdAt | Body | String | O | Created time (UTC) |
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
+| workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
